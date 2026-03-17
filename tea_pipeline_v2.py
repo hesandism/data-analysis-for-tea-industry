@@ -27,8 +27,14 @@ import pandas as pd
 import re
 import os
 import sys
+import time
+import requests
 from pathlib import Path
 from datetime import datetime
+from weather_pipeline import (
+    REGIONS, SALE_DATES, LOOKBACK_DAYS,
+    parse_region_weather_text, fetch_weekly_weather, add_lag_features,
+)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # HELPERS
@@ -505,11 +511,12 @@ def extract_pdf(pdf_path):
     sy       = header.get('sale_year')
     sid      = sale_id(sn, sy) if sn and sy else f"UNKNOWN_{os.path.basename(str(pdf_path))}"
 
-    market_rows   = extract_overall_market(page2)
-    totals, cat_rows = extract_auction_details(page2)
-    commentary    = extract_commentary(full)
-    weather       = extract_weather(full)
-    production    = extract_production(full)
+    market_rows         = extract_overall_market(page2)
+    totals, cat_rows    = extract_auction_details(page2)
+    commentary          = extract_commentary(full)
+    weather             = extract_weather(full)
+    text_weather_regions = parse_region_weather_text(full)
+    production          = extract_production(full)
     qty_sold      = extract_quantity_sold(full)
     gross_avg     = extract_gross_averages(full)
     hg_prices     = extract_hg_prices(price_pages)
@@ -524,8 +531,9 @@ def extract_pdf(pdf_path):
         'totals':      totals,
         'cat_rows':    cat_rows,
         'commentary':  commentary,
-        'weather':     weather,
-        'production':  production,
+        'weather':              weather,
+        'text_weather_regions': text_weather_regions,
+        'production':           production,
         'qty_sold':    qty_sold,
         'gross_avg':   gross_avg,
         'hg_prices':   hg_prices,
@@ -667,6 +675,62 @@ def build_top_prices(extractions):
     return pd.DataFrame(rows)
 
 
+def build_weather_features(extractions):
+    """
+    09_weather_features.csv
+    One row per (sale × region). Combines text-parsed weather summaries from
+    the PDF with actual meteorological data fetched from the Open-Meteo API.
+    Skips sales whose date is not in SALE_DATES.
+    """
+    rows = []
+    for e in extractions:
+        sid = e['sale_id']
+        if sid not in SALE_DATES:
+            print(f"  [WARN] No date mapping for {sid} — skipping weather API fetch")
+            continue
+        auction_date = SALE_DATES[sid][0]
+        text_weather = e.get('text_weather_regions', {})
+
+        for region_key, region_info in REGIONS.items():
+            row = {
+                'sale_id':      sid,
+                'auction_date': auction_date,
+                'region':       region_key,
+                'region_label': region_info['label'],
+                'lat':          region_info['lat'],
+                'lon':          region_info['lon'],
+                'pdf_source':   e['source_file'],
+            }
+            tw = text_weather.get(region_key, {})
+            row.update({
+                'text_condition_score': tw.get('condition_score'),
+                'text_crop_change':     tw.get('crop_change', 'unknown'),
+                'text_has_rain':        tw.get('has_rain'),
+                'text_has_mist':        tw.get('has_mist'),
+                'text_has_bright':      tw.get('has_bright'),
+                'text_has_thunder':     tw.get('has_thunder'),
+                'text_keywords':        tw.get('keywords_found', ''),
+                'text_raw_summary':     tw.get('raw_text', ''),
+            })
+            api_data = fetch_weekly_weather(
+                region_info['lat'], region_info['lon'], auction_date
+            )
+            row.update(api_data)
+            rows.append(row)
+            time.sleep(0.3)   # be polite to the free API
+
+    if not rows:
+        return pd.DataFrame()
+
+    df = pd.DataFrame(rows)
+    lag_targets = [
+        'precipitation_sum_total', 'rain_sum_total',
+        'temperature_2m_mean_mean', 'sunshine_duration_total',
+        'relative_humidity_2m_max_max', 'text_condition_score',
+    ]
+    return add_lag_features(df, lag_targets, lags=[1, 2, 3])
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # COLUMN DICTIONARY BUILDER
 # ─────────────────────────────────────────────────────────────────────────────
@@ -802,6 +866,7 @@ def run_pipeline(pdf_paths, output_dir='.'):
         '05_low_grown_prices':     build_lg_prices(extractions),
         '06_offgrade_dust_prices': build_offgrade_dust_prices(extractions),
         '07_top_prices':           build_top_prices(extractions),
+        '09_weather_features':     build_weather_features(extractions),
     }
     tables['08_column_dictionary'] = build_column_dictionary(tables)
 
@@ -815,6 +880,7 @@ def run_pipeline(pdf_paths, output_dir='.'):
         '06_offgrade_dust_prices': ['sale_id', 'category_type', 'category', 'elevation'],
         '07_top_prices':           ['sale_id', 'estate', 'grade'],
         '08_column_dictionary':    ['table', 'column'],
+        '09_weather_features':     ['sale_id', 'region'],
     }
 
     print(f"\n{'─'*55}")
@@ -834,7 +900,7 @@ def run_pipeline(pdf_paths, output_dir='.'):
         df_out.to_csv(fpath, index=False)
         print(f"  {name}.csv  →  {df_out.shape[0]:5d} rows × {df_out.shape[1]:3d} cols")
 
-    print(f"\n  Processed {len(extractions)} PDF(s) → 8 CSV files written.")
+    print(f"\n  Processed {len(extractions)} PDF(s) → 9 CSV files written.")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
