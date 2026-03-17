@@ -5,7 +5,7 @@ table,column,description,data_type,example_value
 01_sales_index,sale_year,Calendar year of the sale,integer,2026
 01_sales_index,sale_month,Month name of the sale,text,February
 01_sales_index,source_file,PDF filename this row was extracted from,text,Sale of 10 & 11 February 2026.pdf
-01_sales_index,extracted_at,ISO timestamp of extraction run,datetime,2026-03-17T19:30:25
+01_sales_index,extracted_at,ISO timestamp of extraction run,datetime,2026-03-17T21:11:09
 01_sales_index,total_lots,Total lots offered across all categories,integer,12252
 01_sales_index,total_kgs,Total kg offered across all categories,integer,5949847
 01_sales_index,reprint_lots,Number of re-print lots,integer,2604
@@ -170,3 +170,68 @@ table,column,description,data_type,example_value
 07_top_prices,fw_sold,"1 if the lot was brokered by Forbes & Walker, else 0",integer,1
 07_top_prices,price_lkr,Top price achieved (LKR per kg),integer,1750
 07_top_prices,region,Region header this record appeared under in the PDF,text,WESTERN HIGH
+09_weather_features,sale_id,Primary key: SALE_{number}_{year},text,SALE_01_2026
+09_weather_features,auction_date,,,2026-01-06
+09_weather_features,region,Region header this record appeared under in the PDF,text,low_grown
+09_weather_features,region_label,,,Low Grown (Matara / Galle belt)
+09_weather_features,lat,,,6.25
+09_weather_features,lon,,,80.3
+09_weather_features,pdf_source,,,Sale of 6 & 7 January 2026.pdf
+09_weather_features,text_condition_score,,,0
+09_weather_features,text_crop_change,,,decrease
+09_weather_features,text_has_rain,,,1
+09_weather_features,text_has_mist,,,0
+09_weather_features,text_has_bright,,,1
+09_weather_features,text_has_thunder,,,0
+09_weather_features,text_keywords,,,sunny|showers
+09_weather_features,text_raw_summary,,,"Low Grown
+Uva/Udapussellawa Regions regions reported a decrease.
+Both regions reported sunny mornings and evening showers
+throughout the week. According to the Department of
+Meteorology, showers are expected in the"
+09_weather_features,temperature_2m_max_mean,,,29.76
+09_weather_features,temperature_2m_max_max,,,31.4
+09_weather_features,temperature_2m_max_min,,,27.3
+09_weather_features,temperature_2m_min_mean,,,21.97
+09_weather_features,temperature_2m_min_max,,,22.6
+09_weather_features,temperature_2m_min_min,,,21.0
+09_weather_features,temperature_2m_mean_mean,,,25.03
+09_weather_features,temperature_2m_mean_max,,,25.7
+09_weather_features,temperature_2m_mean_min,,,24.4
+09_weather_features,precipitation_sum_total,,,16.5
+09_weather_features,precipitation_sum_max_day,,,5.1
+09_weather_features,rain_sum_total,,,16.5
+09_weather_features,rain_sum_max_day,,,5.1
+09_weather_features,windspeed_10m_max_mean,,,12.49
+09_weather_features,windspeed_10m_max_max,,,21.0
+09_weather_features,windspeed_10m_max_min,,,8.0
+09_weather_features,sunshine_duration_total,,,233157.27
+09_weather_features,sunshine_duration_max_day,,,40437.73
+09_weather_features,et0_fao_evapotranspiration_total,,,24.01
+09_weather_features,et0_fao_evapotranspiration_max_day,,,4.17
+09_weather_features,relative_humidity_2m_max_mean,,,98.43
+09_weather_features,relative_humidity_2m_max_max,,,100
+09_weather_features,relative_humidity_2m_max_min,,,97
+09_weather_features,relative_humidity_2m_min_mean,,,63.0
+09_weather_features,relative_humidity_2m_min_max,,,76
+09_weather_features,relative_humidity_2m_min_min,,,54
+09_weather_features,fetch_start,,,2025-12-30
+09_weather_features,fetch_end,,,2026-01-05
+09_weather_features,precipitation_sum_total_lag1,,,16.5
+09_weather_features,precipitation_sum_total_lag2,,,16.5
+09_weather_features,precipitation_sum_total_lag3,,,16.5
+09_weather_features,rain_sum_total_lag1,,,16.5
+09_weather_features,rain_sum_total_lag2,,,16.5
+09_weather_features,rain_sum_total_lag3,,,16.5
+09_weather_features,temperature_2m_mean_mean_lag1,,,25.03
+09_weather_features,temperature_2m_mean_mean_lag2,,,25.03
+09_weather_features,temperature_2m_mean_mean_lag3,,,25.03
+09_weather_features,sunshine_duration_total_lag1,,,233157.27
+09_weather_features,sunshine_duration_total_lag2,,,233157.27
+09_weather_features,sunshine_duration_total_lag3,,,233157.27
+09_weather_features,relative_humidity_2m_max_max_lag1,,,100.0
+09_weather_features,relative_humidity_2m_max_max_lag2,,,100.0
+09_weather_features,relative_humidity_2m_max_max_lag3,,,100.0
+09_weather_features,text_condition_score_lag1,,,0.0
+09_weather_features,text_condition_score_lag2,,,0.0
+09_weather_features,text_condition_score_lag3,,,0.0
