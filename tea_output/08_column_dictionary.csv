@@ -5,7 +5,7 @@ table,column,description,data_type,example_value
 01_sales_index,sale_year,Calendar year of the sale,integer,2026
 01_sales_index,sale_month,Month name of the sale,text,February
 01_sales_index,source_file,PDF filename this row was extracted from,text,Sale of 10 & 11 February 2026.pdf
-01_sales_index,extracted_at,ISO timestamp of extraction run,datetime,2026-03-18T21:03:26
+01_sales_index,extracted_at,ISO timestamp of extraction run,datetime,2026-03-18T21:12:49
 01_sales_index,total_lots,Total lots offered across all categories,integer,12252
 01_sales_index,total_kgs,Total kg offered across all categories,integer,5949847
 01_sales_index,reprint_lots,Number of re-print lots,integer,2604
