@@ -43,8 +43,8 @@ warnings.filterwarnings("ignore", category=pd.errors.DtypeWarning)
 # CONFIG
 # ---------------------------------------------------------------------------
 
-DEFAULT_DATA_DIR = Path("D:/Projects/data-analysis-for-tea-industry/tea_output")
-DEFAULT_OUT      = Path("D:/Projects/data-analysis-for-tea-industry/tea_output/master_tea_prices.csv")
+DEFAULT_DATA_DIR = Path(r"D:\Projects\data-analysis-for-tea-industry\tea_output")
+DEFAULT_OUT      = Path(r"D:\Projects\data-analysis-for-tea-industry\outputs\master_tea_prices.csv")
 
 # Columns from 01_sales_index we want as sale-level context.
 # Excludes: source_file, extracted_at (pipeline metadata), raw commentary text (too long),

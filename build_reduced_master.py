@@ -63,8 +63,8 @@ warnings.filterwarnings("ignore", category=pd.errors.DtypeWarning)
 # ---------------------------------------------------------------------------
 # PATHS
 # ---------------------------------------------------------------------------
-DEFAULT_DATA_DIR = Path("D:/Projects/data-analysis-for-tea-industry/tea_output")
-DEFAULT_OUT      = Path("D:/Projects/data-analysis-for-tea-industry/tea_output/reduced_master_tea_prices.csv")
+DEFAULT_DATA_DIR = Path(r"D:\Projects\data-analysis-for-tea-industry\tea_output")
+DEFAULT_OUT      =  Path(r"D:\Projects\data-analysis-for-tea-industry\outputs\reduced_master_tea_prices.csv")
 
 # ---------------------------------------------------------------------------
 # STAGE 1 CONFIG  (identical to build_master_table.py)
