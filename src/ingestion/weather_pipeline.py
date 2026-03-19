@@ -66,24 +66,80 @@ METEO_VARIABLES = [
 ]
 
 # ── Sale date lookup ─────────────────────────────────────────────────────────
-# Map sale IDs to their auction date range so we can fetch the correct week.
-# Extend this dict as you add more sales.
-SALE_DATES = {
-    "SALE_01_2026": ("2026-01-06", "2026-01-07"),
-    "SALE_02_2026": ("2026-01-12", "2026-01-13"),
-    "SALE_03_2026": ("2026-01-20", "2026-01-21"),
-    "SALE_04_2026": ("2026-01-27", "2026-01-28"),
-    "SALE_05_2026": ("2026-02-03", "2026-02-04"),
-    "SALE_06_2026": ("2026-02-10", "2026-02-11"),
-    "SALE_07_2026": ("2026-02-17", "2026-02-18"),
-    "SALE_08_2026": ("2026-02-24", "2026-02-25"),
-    "SALE_09_2026": ("2026-03-03", "2026-03-04"),
-    "SALE_10_2026": ("2026-03-10", "2026-03-11"),
-}
+# Auto-generated from PDFs in data/Raw folder. Updates dynamically.
+SALE_DATES = {}  # Will be populated by build_sale_dates()
 
 # For each sale we fetch the 7-day window BEFORE the auction date
 # (that's the crop week that influenced the teas on offer).
 LOOKBACK_DAYS = 7
+
+
+# ── Auto-generate SALE_DATES from PDF folder ─────────────────────────────────
+
+def extract_dates_from_filename(filename: str) -> tuple[str, str] | None:
+    """
+    Extract auction dates from PDF filename pattern:
+    'Sale of DD & DD Month YYYY.pdf' → ('YYYY-MM-DD', 'YYYY-MM-DD')
+    """
+    name = filename.strip()
+
+    # Match "Sale of DD & DD Month YYYY" (allow extra spaces)
+    m = re.search(
+        r"Sale\s+of\s+(\d{1,2})\s*&\s*(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})",
+        name,
+        re.IGNORECASE,
+    )
+
+    # Fallback for one-day filenames, e.g. "Sale of 30 December 2025.pdf"
+    if not m:
+        m = re.search(
+            r"Sale\s+of\s+(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})",
+            name,
+            re.IGNORECASE,
+        )
+        if not m:
+            return None
+        day1, month_str, year = m.groups()
+        day2 = day1
+    else:
+        day1, day2, month_str, year = m.groups()
+    
+    month_map = {
+        "january": "01", "february": "02", "march": "03", "april": "04",
+        "may": "05", "june": "06", "july": "07", "august": "08",
+        "september": "09", "october": "10", "november": "11", "december": "12",
+    }
+    month = month_map.get(month_str.lower())
+    if not month:
+        return None
+    
+    date1 = f"{year}-{month}-{int(day1):02d}"
+    date2 = f"{year}-{month}-{int(day2):02d}"
+    return (date1, date2)
+
+
+def build_sale_dates(data_raw_dir: Path) -> dict[str, tuple[str, str]]:
+    """
+    Scan data/Raw folder and auto-generate SALE_DATES dictionary.
+    Reads sale number from PDF cover page, dates from filename.
+    
+    Returns: {"SALE_NN_YYYY": ("YYYY-MM-DD", "YYYY-MM-DD"), ...}
+    """
+    sale_dates = {}
+    pdfs = sorted(data_raw_dir.glob("*.pdf"))
+    
+    for pdf_path in pdfs:
+        # Extract dates from filename
+        dates = extract_dates_from_filename(pdf_path.name)
+        if not dates:
+            continue
+        
+        # Extract sale number from PDF cover page
+        sale_id = parse_sale_id_from_cover(pdf_path)
+        if sale_id:
+            sale_dates[sale_id] = dates
+    
+    return dict(sorted(sale_dates.items()))
 
 
 # ── PDF text extraction ──────────────────────────────────────────────────────
@@ -321,8 +377,15 @@ def add_lag_features(df: pd.DataFrame,
 
 # ── Main pipeline ────────────────────────────────────────────────────────────
 
-def run_pipeline(pdf_dir: str, output_path: str):
+def run_pipeline_weather(pdf_dir: str, output_path: str):
+    global SALE_DATES
     pdf_dir = Path(pdf_dir)
+    
+    # Auto-populate SALE_DATES from PDFs in the directory
+    print("Building SALE_DATES from PDFs...")
+    SALE_DATES = build_sale_dates(pdf_dir)
+    print(f"   Found {len(SALE_DATES)} sales\n")
+    
     rows = []
 
     pdfs = sorted(pdf_dir.glob("*.pdf"))
@@ -434,4 +497,4 @@ if __name__ == "__main__":
         help="Output CSV path"
     )
     args = parser.parse_args()
-    run_pipeline(args.pdf_dir, args.output)
+    run_pipeline_weather(args.pdf_dir, args.output)
