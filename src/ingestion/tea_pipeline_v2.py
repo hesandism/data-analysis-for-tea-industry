@@ -911,7 +911,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         paths = sys.argv[1:]
     else:
-        paths = ['reports']
+        paths = [Path(__file__).parent.parent.parent / 'data' / 'raw']
 
     pdf_files = []
     for p in paths:
@@ -926,4 +926,4 @@ if __name__ == '__main__':
         sys.exit(1)
 
     print(f"\nForbes & Walker Tea Pipeline  –  {len(pdf_files)} PDF(s) found\n")
-    run_pipeline(pdf_files, output_dir='tea_output')
+    run_pipeline(pdf_files, output_dir=Path(__file__).parent.parent.parent / 'data' / 'interim')

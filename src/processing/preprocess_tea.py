@@ -10,12 +10,17 @@ Output: tea_preprocessed.csv
 
 import pandas as pd
 import numpy as np
+from pathlib import Path
 from sklearn.preprocessing import LabelEncoder
 
 # ──────────────────────────────────────────────────────────
 # LOAD
 # ──────────────────────────────────────────────────────────
-df = pd.read_csv(r"D:\Projects\data-analysis-for-tea-industry\outputs\reduced_master_tea_prices.csv")
+_ROOT       = Path(__file__).parent.parent.parent
+INPUT_FILE  = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
+OUTPUT_FILE = _ROOT / "data" / "processed" / "tea_preprocessed.csv"
+
+df = pd.read_csv(INPUT_FILE)
 print(f"Loaded: {df.shape[0]} rows × {df.shape[1]} cols")
 
 # ══════════════════════════════════════════════════════════
@@ -184,9 +189,8 @@ print(f"{'='*55}")
 # ──────────────────────────────────────────────────────────
 # SAVE
 # ──────────────────────────────────────────────────────────
-output_path = "tea_preprocessed.csv"
-df.to_csv(output_path, index=False)
-print(f"\nSaved: {output_path}")
+df.to_csv(OUTPUT_FILE, index=False)
+print(f"\nSaved: {OUTPUT_FILE}")
 
 # ══════════════════════════════════════════════════════════
 # REFERENCE: Feature column lists for modelling

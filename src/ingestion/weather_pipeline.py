@@ -420,15 +420,17 @@ def run_pipeline(pdf_dir: str, output_path: str):
 # ── CLI entry point ──────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
+    _root = Path(__file__).parent.parent.parent
+
     parser = argparse.ArgumentParser(
         description="Extract weather data from F&W tea auction PDFs + Open-Meteo API"
     )
     parser.add_argument(
-        "--pdf_dir", default="./pdfs",
+        "--pdf_dir", default=str(_root / "data" / "raw"),
         help="Directory containing the weekly PDF reports"
     )
     parser.add_argument(
-        "--output", default="weather_features.csv",
+        "--output", default=str(_root / "data" / "interim" / "09_weather_features.csv"),
         help="Output CSV path"
     )
     args = parser.parse_args()
