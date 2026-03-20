@@ -56,6 +56,7 @@ reports/figures/*.jpg
 !reports/figures/fig14_missingness_audit.png
 !reports/figures/fig15_supply_demand_lags.png
 !reports/figures/fig16_fx_sentiment_interactions.png
+!reports/figures/fig17_outlier_volatility.png
 
 # Logs
 *.log
