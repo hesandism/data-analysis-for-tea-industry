@@ -96,7 +96,23 @@ Generated figures:
 Secondary notebook (experimental/scratch):
 - [notebooks/test.ipynb](notebooks/test.ipynb)
 
----
+### 2.6 Extended EDA Notebook and Figures 
+Implemented in:
+
+ - [notebooks/eda_extended.ipynb]
+
+This notebook extends the primary EDA with five additional analyses targeting the
+dual-market hypothesis — that High Grown and Low Grown tea prices respond to
+fundamentally different drivers (weather vs geopolitical/export demand).
+
+Generated figures:
+
+- [reports/figures/fig8_weather_heatmap.png] — Weekly weather condition and crop intake direction by region across all auction weeks
+- [reports/figures/fig9_rainfall_vs_price_by_segment.png] — Rainfall vs mid-price scatter comparing High Grown and Low Grown sensitivity
+- [reports/figures/fig10_rainfall_lag_effect.png] — Lag effect analysis identifying optimal forecasting horizon for High Grown prices
+- [reports/figures/fig11_lkr_vs_usd_price.png] — LKR vs USD price trend comparison exposing inflationary illusion
+- [reports/figures/fig12_top_estates.png] — Top estate consistency analysis revealing brand immunity to market shocks
+
 
 ## 3. Current Data Inventory (Observed)
 
@@ -112,9 +128,9 @@ Secondary notebook (experimental/scratch):
 - `09_weather_features.csv`: 100 rows x 61 cols
 
 ### 3.2 Processed Layer
-- `master_tea_prices.csv`: 1154 rows x 270 cols
-- `reduced_master_tea_prices.csv`: 1154 rows x 173 cols
-- `tea_preprocessed.csv`: 1154 rows x 182 cols
+- `master_tea_prices.csv`: 3034 rows x 270 cols
+- `reduced_master_tea_prices.csv`: 3034 rows x 173 cols
+- `tea_preprocessed.csv`: 3034 rows x 182 cols
 
 ---
 
@@ -224,6 +240,13 @@ Interpretation:
 Interpretation:
 - Interaction effects (grade x weather, category x weather) likely matter more than simple linear weather coefficients.
 
+### 5.5 Extended EDA Findings 
+
+- Rainfall-price sensitivity (Fig 9): Preliminary correlation analysis shows High Grown prices exhibit a measurably different rainfall response compared to Low Grown, consistent with the dual-market hypothesis.
+- Lag effect (Fig 10): Rainfall lagged by 1–2 weeks shows stronger correlation with High Grown prices than current-week rainfall, supporting the 14-day supply lag hypothesis central to the forecasting framework.
+- Inflationary illusion (Fig 11): LKR and USD price trajectories diverge across the auction series, indicating that LKR-denominated broker sentiment signals can be misleading when currency depreciation is present.
+- Estate consistency (Fig 12): A small number of estates appear repeatedly in weekly top-price lists regardless of broader market conditions, suggesting a brand-immunity effect in the premium segment.
+- Volume contraction: 2026 auction volumes are running approximately 5.4% below 2025 levels, providing important supply-side context for price trend interpretation.
 ---
 
 ## 6. Technical Validation Status
