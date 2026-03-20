@@ -92,6 +92,7 @@ Generated figures:
 - [reports/figures/fig5_context.png](reports/figures/fig5_context.png)
 - [reports/figures/fig6_tier_range.png](reports/figures/fig6_tier_range.png)
 - [notebooks/fig7_weather_grade_impact.png](notebooks/fig7_weather_grade_impact.png)
+- [reports/figures/fig13_data_refresh_coverage.png](reports/figures/fig13_data_refresh_coverage.png)
 
 Secondary notebook (experimental/scratch):
 - [notebooks/test.ipynb](notebooks/test.ipynb)
@@ -204,30 +205,30 @@ In [notebooks/tea_eda.ipynb](notebooks/tea_eda.ipynb):
 
 From [data/Processed/tea_preprocessed.csv](data/Processed/tea_preprocessed.csv) and EDA figures:
 
-### 5.1 Target Distribution
-- Price observations with target: 1088
-- Mean mid-price: 1239.38 LKR
-- Median mid-price: 1100.00 LKR
-- Range: 290.00 to 5700.00 LKR
-- Skewness before transform: 2.485
-- Skewness after `log1p` transform: 0.550
+### 5.1 Target Distribution (Refreshed 2026-03-21)
+- Price observations with target: 2,886 (95.1% of rows)
+- Mean mid-price: 1,255.79 LKR
+- Median mid-price: 1,120.00 LKR
+- Range: 290.00 to 5,700.00 LKR
+- Skewness before transform: 2.869
+- Skewness after `log1p` transform: 0.587
 
 Interpretation:
-- Distribution is strongly right-skewed; transformed target is more suitable for regression assumptions.
+- Distribution remains right-skewed, but the refreshed coverage and log transform continue to yield a modeling-friendly target.
 
 ### 5.2 Price Structure by Elevation
-- Low Grown: mean 1418.43 (n=635)
-- High Grown: mean 1050.92 (n=316)
-- Medium Grown: mean 844.23 (n=137)
+- Low Grown: mean 1,446.8 (n=1,659)
+- High Grown: mean 1,057.6 (n=854)
+- Medium Grown: mean 859.9 (n=373)
 
 Interpretation:
 - Elevation is a major structural determinant of price.
 
 ### 5.3 Price Structure by Category Type
-- Low Grown: mean 1545.94 (n=516)
-- High Grown: mean 1137.95 (n=188)
-- Dust: mean 976.75 (n=194)
-- Off Grade: mean 775.37 (n=190)
+- Low Grown: mean 1,578.7 (n=1,348)
+- High Grown: mean 1,135.6 (n=516)
+- Dust: mean 984.4 (n=523)
+- Off Grade: mean 792.2 (n=499)
 
 Interpretation:
 - Large spread across category types supports category-aware modeling.
@@ -240,13 +241,14 @@ Interpretation:
 Interpretation:
 - Interaction effects (grade x weather, category x weather) likely matter more than simple linear weather coefficients.
 
-### 5.5 Extended EDA Findings 
+### 5.5 Extended EDA & Coverage Findings 
 
 - Rainfall-price sensitivity (Fig 9): Preliminary correlation analysis shows High Grown prices exhibit a measurably different rainfall response compared to Low Grown, consistent with the dual-market hypothesis.
 - Lag effect (Fig 10): Rainfall lagged by 1–2 weeks shows stronger correlation with High Grown prices than current-week rainfall, supporting the 14-day supply lag hypothesis central to the forecasting framework.
 - Inflationary illusion (Fig 11): LKR and USD price trajectories diverge across the auction series, indicating that LKR-denominated broker sentiment signals can be misleading when currency depreciation is present.
 - Estate consistency (Fig 12): A small number of estates appear repeatedly in weekly top-price lists regardless of broader market conditions, suggesting a brand-immunity effect in the premium segment.
 - Volume contraction: 2026 auction volumes are running approximately 5.4% below 2025 levels, providing important supply-side context for price trend interpretation.
+- Data refresh coverage (Fig 13): Processed datasets now cover 26 sales (up from 10) with 95.1% of rows retaining a usable mid-price target, ensuring downstream models and figures reflect the full interim inventory.
 ---
 
 ## 6. Technical Validation Status
@@ -263,20 +265,16 @@ Interpretation:
 4. Structural null strategy documented (grade/tier not globally imputed).
 5. Reduced table performs explicit + dynamic feature audit.
 
-### 6.3 Current Consistency Gap (Important for Paper)
+### 6.3 Freshness Status (2026-03-21)
 Observed artifact freshness:
-- Interim CSVs updated on 2026-03-20 (latest pipeline run).
-- Processed CSVs were last built on 2026-03-19.
+- Interim CSVs (01–09) and processed outputs (master/reduced/preprocessed) were all regenerated on 2026-03-21 from the latest ingestion run.
+- [notebooks/tea_eda.ipynb](notebooks/tea_eda.ipynb) was re-executed end-to-end, refreshing Figures 1–7 and exporting the new Figure 13 coverage check.
 
 Implication:
-- EDA/preliminary modeling tables currently reflect the earlier 10-sale processed subset, while interim ingestion has expanded to broader coverage.
+- Baseline EDA, processed datasets, and published figures now align with the full 26-sale interim inventory.
 
-Action needed before final paper numbers:
-1. Rebuild processed layer from latest interim:
-   - `build_master_table.py`
-   - `build_reduced_master.py`
-   - `preprocess_tea.py`
-2. Re-run [notebooks/tea_eda.ipynb](notebooks/tea_eda.ipynb) to refresh figures/statistics.
+Next validation step:
+- Mirror the refresh in the extended notebook (`notebooks/tea_eda_extended.ipynb`) so that Figures 8–12 also reference the expanded dataset.
 
 ---
 
@@ -316,8 +314,7 @@ Action needed before final paper numbers:
 
 ## 9. Immediate Next Steps for Team
 
-1. Rebuild processed datasets from the latest interim outputs.
-2. Re-run EDA notebook to refresh all figures with current data coverage.
-3. Freeze a versioned snapshot of CSVs and figures for the short paper submission.
-4. Start model benchmarking using leakage-safe feature matrix.
-5. Add an experiment log (metrics + feature set + train/validation split) for reproducible reporting.
+1. Re-run the extended EDA notebook so advanced figures (8–12) share the refreshed coverage.
+2. Freeze a versioned snapshot of refreshed processed CSVs and Figures 1–13 for paper-ready handoff.
+3. Start model benchmarking using the leakage-safe `tea_preprocessed.csv` (2,886 targets) and track results in an experiment log.
+4. Document any additional diagnostics (e.g., feature drift, incremental weather signals) uncovered while scaling beyond the initial 10-sale subset.
