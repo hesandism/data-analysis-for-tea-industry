@@ -53,6 +53,7 @@ data/Interim/*.csv
 data/Processed/*.csv
 reports/figures/*.png
 reports/figures/*.jpg
+!reports/figures/fig14_missingness_audit.png
 
 # Logs
 *.log
