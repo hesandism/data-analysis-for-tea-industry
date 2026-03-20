@@ -864,7 +864,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         paths = sys.argv[1:]
     else:
-        paths = [Path(__file__).parent.parent.parent / 'data' / 'raw']
+        paths = [Path(__file__).parent.parent.parent / 'data' / 'Raw']
 
     pdf_files = []
     for p in paths:
