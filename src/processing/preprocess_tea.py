@@ -39,9 +39,24 @@ print("\n[C1] Leakage cols identified — exclude from model features:", LEAKAGE
 # ── C2: Sale 3 volume anomaly ─────────────────────────────
 # The master_tea_prices.csv (full version) had a year-to-date
 # figure (257M kg) in the weekly column for SALE_03_2026.
-# This is already corrected in reduced_master_tea_prices.csv.
+# Repair any inconsistent weekly totals using component weekly columns.
+weekly_components = (
+    df["private_sales_weekly_2026"]
+    + df["public_auction_weekly_2026"]
+    + df["forward_contracts_weekly_2026"]
+)
+weekly_mismatch = (
+    df["total_sold_weekly_2026"].notna()
+    & weekly_components.notna()
+    & (df["total_sold_weekly_2026"] != weekly_components)
+)
+num_weekly_fixes = int(weekly_mismatch.sum())
+if num_weekly_fixes > 0:
+    df.loc[weekly_mismatch, "total_sold_weekly_2026"] = weekly_components[weekly_mismatch]
+    print(f"\n[C2] Corrected weekly totals from components for {num_weekly_fixes} row(s)")
+
 val_s3 = df.loc[df["sale_id"] == "SALE_03_2026", "total_sold_weekly_2026"].iloc[0]
-assert val_s3 < 10_000_000, f"C2 anomaly still present! Value: {val_s3}"
+assert val_s3 < 10_000_000, f"C2 anomaly still present after correction! Value: {val_s3}"
 print(f"\n[C2] SALE_03_2026 total_sold_weekly_2026 = {val_s3:,} kg  ✓ sane")
 
 # ── C3: Harmonise elevation encoding ─────────────────────
