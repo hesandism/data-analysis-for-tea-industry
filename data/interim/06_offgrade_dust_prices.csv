@@ -1,4 +1,94 @@
 sale_id,category_type,category,elevation,price_lo_lkr,price_hi_lkr
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_orthodox_better,high,850.0,1220.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_orthodox_better,medium,920.0,
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_orthodox_better,low,850.0,940.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_ctc_better,high,,
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_ctc_better,medium,,
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_ctc_better,low,,
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_orthodox_other,high,600.0,840.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_orthodox_other,medium,610.0,820.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_orthodox_other,low,530.0,830.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_ctc_other,high,,
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_ctc_other,medium,680.0,750.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,fannings_ctc_other,low,600.0,680.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,brokens_good,high,780.0,1060.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,brokens_good,medium,780.0,1140.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,brokens_good,low,780.0,1420.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,brokens_other,high,600.0,720.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,brokens_other,medium,500.0,730.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,brokens_other,low,,
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,bop1a_better,high,760.0,900.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,bop1a_better,medium,750.0,1080.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,bop1a_better,low,,
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,bop1a_other,high,650.0,750.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,bop1a_other,medium,650.0,730.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,bop1a_other,low,620.0,750.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_orth_better,high,1260.0,1700.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_orth_better,medium,1140.0,1260.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_orth_better,low,980.0,1000.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_ctc_better,high,1140.0,
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_ctc_better,medium,1140.0,1240.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_ctc_better,low,1150.0,1460.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_orth_below_best,high,1060.0,1240.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_orth_below_best,medium,890.0,1120.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_orth_below_best,low,770.0,960.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_ctc_other,high,,
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_ctc_other,medium,750.0,1120.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_ctc_other,low,810.0,1140.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_orth_other,high,820.0,1040.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_orth_other,medium,810.0,880.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,primary_orth_other,low,630.0,760.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,secondary_better,high,1100.0,1300.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,secondary_better,medium,1000.0,1120.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,secondary_better,low,1000.0,1100.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,secondary_other,high,820.0,1080.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,secondary_other,medium,570.0,980.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,secondary_other,low,600.0,980.0
+SALE_38_2025,off_grade,fannings_orthodox_better,high,840.0,1320.0
+SALE_38_2025,off_grade,fannings_orthodox_better,medium,800.0,1120.0
+SALE_38_2025,off_grade,fannings_orthodox_better,low,800.0,900.0
+SALE_38_2025,off_grade,fannings_ctc_better,high,,
+SALE_38_2025,off_grade,fannings_ctc_better,medium,880.0,920.0
+SALE_38_2025,off_grade,fannings_ctc_better,low,820.0,1320.0
+SALE_38_2025,off_grade,fannings_orthodox_other,high,600.0,830.0
+SALE_38_2025,off_grade,fannings_orthodox_other,medium,600.0,790.0
+SALE_38_2025,off_grade,fannings_orthodox_other,low,590.0,790.0
+SALE_38_2025,off_grade,fannings_ctc_other,high,620.0,730.0
+SALE_38_2025,off_grade,fannings_ctc_other,medium,600.0,740.0
+SALE_38_2025,off_grade,fannings_ctc_other,low,500.0,790.0
+SALE_38_2025,off_grade,brokens_good,high,780.0,900.0
+SALE_38_2025,off_grade,brokens_good,medium,780.0,1140.0
+SALE_38_2025,off_grade,brokens_good,low,,
+SALE_38_2025,off_grade,brokens_other,high,680.0,770.0
+SALE_38_2025,off_grade,brokens_other,medium,640.0,770.0
+SALE_38_2025,off_grade,brokens_other,low,610.0,780.0
+SALE_38_2025,off_grade,bop1a_better,high,770.0,960.0
+SALE_38_2025,off_grade,bop1a_better,medium,780.0,1300.0
+SALE_38_2025,off_grade,bop1a_better,low,,
+SALE_38_2025,off_grade,bop1a_other,high,760.0,770.0
+SALE_38_2025,off_grade,bop1a_other,medium,700.0,760.0
+SALE_38_2025,off_grade,bop1a_other,low,620.0,760.0
+SALE_38_2025,dust,primary_orth_better,high,1220.0,1650.0
+SALE_38_2025,dust,primary_orth_better,medium,1040.0,1240.0
+SALE_38_2025,dust,primary_orth_better,low,940.0,980.0
+SALE_38_2025,dust,primary_ctc_better,high,1120.0,1160.0
+SALE_38_2025,dust,primary_ctc_better,medium,1140.0,1260.0
+SALE_38_2025,dust,primary_ctc_better,low,1100.0,1380.0
+SALE_38_2025,dust,primary_orth_below_best,high,1000.0,1200.0
+SALE_38_2025,dust,primary_orth_below_best,medium,920.0,1020.0
+SALE_38_2025,dust,primary_orth_below_best,low,860.0,920.0
+SALE_38_2025,dust,primary_ctc_other,high,,
+SALE_38_2025,dust,primary_ctc_other,medium,1080.0,1120.0
+SALE_38_2025,dust,primary_ctc_other,low,840.0,1080.0
+SALE_38_2025,dust,primary_orth_other,high,730.0,980.0
+SALE_38_2025,dust,primary_orth_other,medium,630.0,900.0
+SALE_38_2025,dust,primary_orth_other,low,560.0,850.0
+SALE_38_2025,dust,secondary_better,high,1040.0,1200.0
+SALE_38_2025,dust,secondary_better,medium,880.0,1080.0
+SALE_38_2025,dust,secondary_better,low,900.0,920.0
+SALE_38_2025,dust,secondary_other,high,710.0,1000.0
+SALE_38_2025,dust,secondary_other,medium,640.0,860.0
+SALE_38_2025,dust,secondary_other,low,560.0,880.0
 SALE_34_2025,off_grade,fannings_orthodox_better,high,800.0,1280.0
 SALE_34_2025,off_grade,fannings_orthodox_better,medium,790.0,1060.0
 SALE_34_2025,off_grade,fannings_orthodox_better,low,,
@@ -809,51 +899,6 @@ SALE_42_2025,dust,secondary_better,low,920.0,980.0
 SALE_42_2025,dust,secondary_other,high,750.0,1020.0
 SALE_42_2025,dust,secondary_other,medium,560.0,900.0
 SALE_42_2025,dust,secondary_other,low,550.0,900.0
-SALE_38_2025,off_grade,fannings_orthodox_better,high,840.0,1320.0
-SALE_38_2025,off_grade,fannings_orthodox_better,medium,800.0,1120.0
-SALE_38_2025,off_grade,fannings_orthodox_better,low,800.0,900.0
-SALE_38_2025,off_grade,fannings_ctc_better,high,,
-SALE_38_2025,off_grade,fannings_ctc_better,medium,880.0,920.0
-SALE_38_2025,off_grade,fannings_ctc_better,low,820.0,1320.0
-SALE_38_2025,off_grade,fannings_orthodox_other,high,600.0,830.0
-SALE_38_2025,off_grade,fannings_orthodox_other,medium,600.0,790.0
-SALE_38_2025,off_grade,fannings_orthodox_other,low,590.0,790.0
-SALE_38_2025,off_grade,fannings_ctc_other,high,620.0,730.0
-SALE_38_2025,off_grade,fannings_ctc_other,medium,600.0,740.0
-SALE_38_2025,off_grade,fannings_ctc_other,low,500.0,790.0
-SALE_38_2025,off_grade,brokens_good,high,780.0,900.0
-SALE_38_2025,off_grade,brokens_good,medium,780.0,1140.0
-SALE_38_2025,off_grade,brokens_good,low,,
-SALE_38_2025,off_grade,brokens_other,high,680.0,770.0
-SALE_38_2025,off_grade,brokens_other,medium,640.0,770.0
-SALE_38_2025,off_grade,brokens_other,low,610.0,780.0
-SALE_38_2025,off_grade,bop1a_better,high,770.0,960.0
-SALE_38_2025,off_grade,bop1a_better,medium,780.0,1300.0
-SALE_38_2025,off_grade,bop1a_better,low,,
-SALE_38_2025,off_grade,bop1a_other,high,760.0,770.0
-SALE_38_2025,off_grade,bop1a_other,medium,700.0,760.0
-SALE_38_2025,off_grade,bop1a_other,low,620.0,760.0
-SALE_38_2025,dust,primary_orth_better,high,1220.0,1650.0
-SALE_38_2025,dust,primary_orth_better,medium,1040.0,1240.0
-SALE_38_2025,dust,primary_orth_better,low,940.0,980.0
-SALE_38_2025,dust,primary_ctc_better,high,1120.0,1160.0
-SALE_38_2025,dust,primary_ctc_better,medium,1140.0,1260.0
-SALE_38_2025,dust,primary_ctc_better,low,1100.0,1380.0
-SALE_38_2025,dust,primary_orth_below_best,high,1000.0,1200.0
-SALE_38_2025,dust,primary_orth_below_best,medium,920.0,1020.0
-SALE_38_2025,dust,primary_orth_below_best,low,860.0,920.0
-SALE_38_2025,dust,primary_ctc_other,high,,
-SALE_38_2025,dust,primary_ctc_other,medium,1080.0,1120.0
-SALE_38_2025,dust,primary_ctc_other,low,840.0,1080.0
-SALE_38_2025,dust,primary_orth_other,high,730.0,980.0
-SALE_38_2025,dust,primary_orth_other,medium,630.0,900.0
-SALE_38_2025,dust,primary_orth_other,low,560.0,850.0
-SALE_38_2025,dust,secondary_better,high,1040.0,1200.0
-SALE_38_2025,dust,secondary_better,medium,880.0,1080.0
-SALE_38_2025,dust,secondary_better,low,900.0,920.0
-SALE_38_2025,dust,secondary_other,high,710.0,1000.0
-SALE_38_2025,dust,secondary_other,medium,640.0,860.0
-SALE_38_2025,dust,secondary_other,low,560.0,880.0
 SALE_09_2026,off_grade,fannings_orthodox_better,high,820.0,1260.0
 SALE_09_2026,off_grade,fannings_orthodox_better,medium,790.0,1140.0
 SALE_09_2026,off_grade,fannings_orthodox_better,low,,
