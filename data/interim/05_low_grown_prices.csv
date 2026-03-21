@@ -1,4 +1,108 @@
 sale_id,elevation,grade,tier,price_lo_lkr,price_hi_lkr
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf_tippy,select_best,5200.0,6200.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf_tippy,best,3550.0,4500.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf_tippy,below_best,2750.0,3000.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf_tippy,others,1000.0,1100.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf1,select_best,1650.0,1850.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf1,best,1500.0,1550.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf1,below_best,1300.0,1350.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf1,others,1000.0,1100.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf,select_best,1700.0,1900.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf,best,1450.0,1550.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf,below_best,1250.0,1300.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbopf,others,900.0,950.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbop1,select_best,1700.0,1900.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbop1,best,1450.0,1500.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbop1,below_best,1250.0,1300.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbop1,others,950.0,1000.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbop,select_best,1800.0,2500.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbop,best,1550.0,1600.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbop,below_best,1300.0,1350.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,fbop,others,1000.0,1100.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bop1,select_best,2400.0,3000.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bop1,best,1800.0,2300.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bop1,below_best,1360.0,1600.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bop1,others,900.0,1300.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bopf,select_best,1400.0,1700.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bopf,best,950.0,1000.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bopf,below_best,850.0,900.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bopf,others,800.0,850.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bop,select_best,1800.0,2100.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bop,best,1500.0,1550.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bop,below_best,1250.0,1300.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,bop,others,950.0,1050.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,op1,select_best,2950.0,3600.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,op1,best,2600.0,2900.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,op1,below_best,1650.0,2550.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,op1,others,900.0,1600.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,opa,select_best,1440.0,2100.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,opa,best,1300.0,1420.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,opa,below_best,1200.0,1280.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,opa,others,850.0,1180.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,op,select_best,1500.0,1750.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,op,best,1400.0,1480.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,op,below_best,1220.0,1380.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,op,others,850.0,1200.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,pekoe,select_best,1460.0,2700.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,pekoe,best,1300.0,1440.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,pekoe,below_best,1200.0,1280.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,pekoe,others,850.0,1180.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,pek1,select_best,1800.0,2400.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,pek1,best,1500.0,1750.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,pek1,below_best,1300.0,1480.0
+UNKNOWN_Sale of 30 December 2025.pdf,low_grown,pek1,others,900.0,1280.0
+SALE_38_2025,low_grown,fbopf_tippy,select_best,3800.0,4600.0
+SALE_38_2025,low_grown,fbopf_tippy,best,3000.0,3400.0
+SALE_38_2025,low_grown,fbopf_tippy,below_best,2000.0,2200.0
+SALE_38_2025,low_grown,fbopf_tippy,others,1000.0,
+SALE_38_2025,low_grown,fbopf1,select_best,1600.0,1700.0
+SALE_38_2025,low_grown,fbopf1,best,1400.0,1500.0
+SALE_38_2025,low_grown,fbopf1,below_best,1250.0,1300.0
+SALE_38_2025,low_grown,fbopf1,others,900.0,950.0
+SALE_38_2025,low_grown,fbopf,select_best,1500.0,1700.0
+SALE_38_2025,low_grown,fbopf,best,1300.0,1400.0
+SALE_38_2025,low_grown,fbopf,below_best,1100.0,1150.0
+SALE_38_2025,low_grown,fbopf,others,900.0,950.0
+SALE_38_2025,low_grown,fbop1,select_best,1650.0,1800.0
+SALE_38_2025,low_grown,fbop1,best,1400.0,1450.0
+SALE_38_2025,low_grown,fbop1,below_best,1200.0,1300.0
+SALE_38_2025,low_grown,fbop1,others,900.0,1000.0
+SALE_38_2025,low_grown,fbop,select_best,1700.0,2400.0
+SALE_38_2025,low_grown,fbop,best,1480.0,1500.0
+SALE_38_2025,low_grown,fbop,below_best,1200.0,1300.0
+SALE_38_2025,low_grown,fbop,others,900.0,950.0
+SALE_38_2025,low_grown,bop1,select_best,2350.0,2900.0
+SALE_38_2025,low_grown,bop1,best,1800.0,2300.0
+SALE_38_2025,low_grown,bop1,below_best,1160.0,1500.0
+SALE_38_2025,low_grown,bop1,others,850.0,1140.0
+SALE_38_2025,low_grown,bopf,select_best,1400.0,1500.0
+SALE_38_2025,low_grown,bopf,best,950.0,1000.0
+SALE_38_2025,low_grown,bopf,below_best,850.0,900.0
+SALE_38_2025,low_grown,bopf,others,800.0,850.0
+SALE_38_2025,low_grown,bop,select_best,1800.0,2400.0
+SALE_38_2025,low_grown,bop,best,1400.0,1450.0
+SALE_38_2025,low_grown,bop,below_best,1150.0,1250.0
+SALE_38_2025,low_grown,bop,others,900.0,1000.0
+SALE_38_2025,low_grown,op1,select_best,2450.0,3200.0
+SALE_38_2025,low_grown,op1,best,2200.0,2400.0
+SALE_38_2025,low_grown,op1,below_best,1320.0,2150.0
+SALE_38_2025,low_grown,op1,others,900.0,1300.0
+SALE_38_2025,low_grown,opa,select_best,1480.0,1850.0
+SALE_38_2025,low_grown,opa,best,1340.0,1460.0
+SALE_38_2025,low_grown,opa,below_best,1240.0,1320.0
+SALE_38_2025,low_grown,opa,others,920.0,1220.0
+SALE_38_2025,low_grown,op,select_best,1480.0,1650.0
+SALE_38_2025,low_grown,op,best,1420.0,1460.0
+SALE_38_2025,low_grown,op,below_best,1280.0,1400.0
+SALE_38_2025,low_grown,op,others,900.0,1260.0
+SALE_38_2025,low_grown,pekoe,select_best,1550.0,2600.0
+SALE_38_2025,low_grown,pekoe,best,1440.0,1500.0
+SALE_38_2025,low_grown,pekoe,below_best,1300.0,1420.0
+SALE_38_2025,low_grown,pekoe,others,900.0,1280.0
+SALE_38_2025,low_grown,pek1,select_best,1850.0,2700.0
+SALE_38_2025,low_grown,pek1,best,1700.0,1800.0
+SALE_38_2025,low_grown,pek1,below_best,1460.0,1650.0
+SALE_38_2025,low_grown,pek1,others,1000.0,1440.0
 SALE_34_2025,low_grown,fbopf_tippy,select_best,4300.0,5500.0
 SALE_34_2025,low_grown,fbopf_tippy,best,3600.0,4000.0
 SALE_34_2025,low_grown,fbopf_tippy,below_best,2400.0,2800.0
@@ -931,58 +1035,6 @@ SALE_42_2025,low_grown,pek1,select_best,1850.0,2500.0
 SALE_42_2025,low_grown,pek1,best,1550.0,1800.0
 SALE_42_2025,low_grown,pek1,below_best,1360.0,1500.0
 SALE_42_2025,low_grown,pek1,others,1000.0,1340.0
-SALE_38_2025,low_grown,fbopf_tippy,select_best,3800.0,4600.0
-SALE_38_2025,low_grown,fbopf_tippy,best,3000.0,3400.0
-SALE_38_2025,low_grown,fbopf_tippy,below_best,2000.0,2200.0
-SALE_38_2025,low_grown,fbopf_tippy,others,1000.0,
-SALE_38_2025,low_grown,fbopf1,select_best,1600.0,1700.0
-SALE_38_2025,low_grown,fbopf1,best,1400.0,1500.0
-SALE_38_2025,low_grown,fbopf1,below_best,1250.0,1300.0
-SALE_38_2025,low_grown,fbopf1,others,900.0,950.0
-SALE_38_2025,low_grown,fbopf,select_best,1500.0,1700.0
-SALE_38_2025,low_grown,fbopf,best,1300.0,1400.0
-SALE_38_2025,low_grown,fbopf,below_best,1100.0,1150.0
-SALE_38_2025,low_grown,fbopf,others,900.0,950.0
-SALE_38_2025,low_grown,fbop1,select_best,1650.0,1800.0
-SALE_38_2025,low_grown,fbop1,best,1400.0,1450.0
-SALE_38_2025,low_grown,fbop1,below_best,1200.0,1300.0
-SALE_38_2025,low_grown,fbop1,others,900.0,1000.0
-SALE_38_2025,low_grown,fbop,select_best,1700.0,2400.0
-SALE_38_2025,low_grown,fbop,best,1480.0,1500.0
-SALE_38_2025,low_grown,fbop,below_best,1200.0,1300.0
-SALE_38_2025,low_grown,fbop,others,900.0,950.0
-SALE_38_2025,low_grown,bop1,select_best,2350.0,2900.0
-SALE_38_2025,low_grown,bop1,best,1800.0,2300.0
-SALE_38_2025,low_grown,bop1,below_best,1160.0,1500.0
-SALE_38_2025,low_grown,bop1,others,850.0,1140.0
-SALE_38_2025,low_grown,bopf,select_best,1400.0,1500.0
-SALE_38_2025,low_grown,bopf,best,950.0,1000.0
-SALE_38_2025,low_grown,bopf,below_best,850.0,900.0
-SALE_38_2025,low_grown,bopf,others,800.0,850.0
-SALE_38_2025,low_grown,bop,select_best,1800.0,2400.0
-SALE_38_2025,low_grown,bop,best,1400.0,1450.0
-SALE_38_2025,low_grown,bop,below_best,1150.0,1250.0
-SALE_38_2025,low_grown,bop,others,900.0,1000.0
-SALE_38_2025,low_grown,op1,select_best,2450.0,3200.0
-SALE_38_2025,low_grown,op1,best,2200.0,2400.0
-SALE_38_2025,low_grown,op1,below_best,1320.0,2150.0
-SALE_38_2025,low_grown,op1,others,900.0,1300.0
-SALE_38_2025,low_grown,opa,select_best,1480.0,1850.0
-SALE_38_2025,low_grown,opa,best,1340.0,1460.0
-SALE_38_2025,low_grown,opa,below_best,1240.0,1320.0
-SALE_38_2025,low_grown,opa,others,920.0,1220.0
-SALE_38_2025,low_grown,op,select_best,1480.0,1650.0
-SALE_38_2025,low_grown,op,best,1420.0,1460.0
-SALE_38_2025,low_grown,op,below_best,1280.0,1400.0
-SALE_38_2025,low_grown,op,others,900.0,1260.0
-SALE_38_2025,low_grown,pekoe,select_best,1550.0,2600.0
-SALE_38_2025,low_grown,pekoe,best,1440.0,1500.0
-SALE_38_2025,low_grown,pekoe,below_best,1300.0,1420.0
-SALE_38_2025,low_grown,pekoe,others,900.0,1280.0
-SALE_38_2025,low_grown,pek1,select_best,1850.0,2700.0
-SALE_38_2025,low_grown,pek1,best,1700.0,1800.0
-SALE_38_2025,low_grown,pek1,below_best,1460.0,1650.0
-SALE_38_2025,low_grown,pek1,others,1000.0,1440.0
 SALE_09_2026,low_grown,fbopf_tippy,select_best,3500.0,4000.0
 SALE_09_2026,low_grown,fbopf_tippy,best,3000.0,3450.0
 SALE_09_2026,low_grown,fbopf_tippy,below_best,2500.0,2800.0
