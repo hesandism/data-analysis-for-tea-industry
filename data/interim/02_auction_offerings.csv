@@ -1,4 +1,22 @@
 sale_id,category,qty_mkgs,demand_label,demand_score,lots,kgs
+UNKNOWN_Sale of 30 December 2025.pdf,ex_estate,0.76,easier,3,775.0,756978.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_medium,0.57,fair,3,1324.0,574804.0
+UNKNOWN_Sale of 30 December 2025.pdf,leafy,0.6,fair,3,1574.0,602183.0
+UNKNOWN_Sale of 30 December 2025.pdf,semi_leafy,0.46,fair,3,1144.0,464025.0
+UNKNOWN_Sale of 30 December 2025.pdf,tippy,0.62,fair,3,1372.0,620735.0
+UNKNOWN_Sale of 30 December 2025.pdf,premium_flowery,0.05,fair,3,402.0,51610.0
+UNKNOWN_Sale of 30 December 2025.pdf,off_grade,0.75,irregular,3,1471.0,755715.0
+UNKNOWN_Sale of 30 December 2025.pdf,dust,0.37,less,2,448.0,375366.0
+UNKNOWN_Sale of 30 December 2025.pdf,total,4.2,bearish,3,,
+SALE_38_2025,ex_estate,0.68,good,4,705.0,676440.0
+SALE_38_2025,high_medium,0.59,irregular,3,1391.0,593333.0
+SALE_38_2025,leafy,0.68,fair,3,1825.0,678446.0
+SALE_38_2025,semi_leafy,0.61,fair,3,1479.0,610871.0
+SALE_38_2025,tippy,0.85,fair,3,1802.0,853777.0
+SALE_38_2025,premium_flowery,0.06,fair,3,433.0,57887.0
+SALE_38_2025,off_grade,0.99,fair,3,1948.0,998553.0
+SALE_38_2025,dust,0.4,less,2,456.0,396629.0
+SALE_38_2025,total,4.86,fair_general,3,,
 SALE_34_2025,ex_estate,0.64,good,4,672.0,644791.0
 SALE_34_2025,high_medium,0.57,good,4,1381.0,575134.0
 SALE_34_2025,leafy,0.74,fair,3,1947.0,744017.0
@@ -161,15 +179,6 @@ SALE_42_2025,premium_flowery,0.06,fair,3,432.0,58442.0
 SALE_42_2025,off_grade,1.07,fair,3,2030.0,1067634.0
 SALE_42_2025,dust,0.44,fair,3,502.0,441734.0
 SALE_42_2025,total,4.98,fair,3,,
-SALE_38_2025,ex_estate,0.68,good,4,705.0,676440.0
-SALE_38_2025,high_medium,0.59,irregular,3,1391.0,593333.0
-SALE_38_2025,leafy,0.68,fair,3,1825.0,678446.0
-SALE_38_2025,semi_leafy,0.61,fair,3,1479.0,610871.0
-SALE_38_2025,tippy,0.85,fair,3,1802.0,853777.0
-SALE_38_2025,premium_flowery,0.06,fair,3,433.0,57887.0
-SALE_38_2025,off_grade,0.99,fair,3,1948.0,998553.0
-SALE_38_2025,dust,0.4,less,2,456.0,396629.0
-SALE_38_2025,total,4.86,fair_general,3,,
 SALE_09_2026,ex_estate,0.76,good,4,789.0,760627.0
 SALE_09_2026,high_medium,0.44,easier,3,1084.0,437979.0
 SALE_09_2026,leafy,0.73,good,4,2027.0,733484.0

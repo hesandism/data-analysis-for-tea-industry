@@ -1,4 +1,28 @@
 sale_id,elevation,segment,grade,price_lo_lkr,price_hi_lkr
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,best_western,bop,1260.0,1360.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,best_western,bopf,1260.0,1320.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,best_western,pekoe_fbop,1240.0,1550.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,best_western,op,1080.0,1160.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,below_best_western,bop,1200.0,1240.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,below_best_western,bopf,1220.0,1240.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,below_best_western,pekoe_fbop,1120.0,1220.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,below_best_western,op,1020.0,1060.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,plainer_western,bop,1100.0,1180.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,plainer_western,bopf,1120.0,1200.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,plainer_western,pekoe_fbop,1080.0,
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,plainer_western,op,960.0,
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,brighter_udapussellawa,bop,1120.0,1140.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,brighter_udapussellawa,bopf,1160.0,1200.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,brighter_udapussellawa,pekoe_fbop,1340.0,1800.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,brighter_udapussellawa,op,1060.0,
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,other_udapussellawa,bop,1100.0,
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,other_udapussellawa,bopf,1100.0,1140.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,other_udapussellawa,pekoe_fbop,1140.0,
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,other_udapussellawa,op,1000.0,
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,best_uva,bop,1160.0,1220.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,best_uva,bopf,1160.0,1220.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,best_uva,pekoe_fbop,1260.0,1550.0
+UNKNOWN_Sale of 30 December 2025.pdf,high_grown,best_uva,op,1040.0,1240.0
 SALE_34_2025,high_grown,best_western,bop,1300.0,1440.0
 SALE_34_2025,high_grown,best_western,bopf,1360.0,1550.0
 SALE_34_2025,high_grown,best_western,pekoe_fbop,1320.0,1950.0
