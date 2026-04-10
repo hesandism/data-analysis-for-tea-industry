@@ -1,0 +1,66 @@
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Project specific
+data/Raw/*.pdf
+data/Interim/*.csv
+data/Processed/*.csv
+reports/figures/*.png
+reports/figures/*.jpg
+!reports/figures/fig14_missingness_audit.png
+!reports/figures/fig15_supply_demand_lags.png
+!reports/figures/fig16_fx_sentiment_interactions.png
+!reports/figures/fig17_outlier_volatility.png
+
+# Logs
+*.log
+
+.venv
+
+.vscode
