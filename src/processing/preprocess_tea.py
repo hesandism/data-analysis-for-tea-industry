@@ -13,6 +13,137 @@ import numpy as np
 from pathlib import Path
 from sklearn.preprocessing import LabelEncoder
 
+
+def _first_existing(columns: list[str], candidates: list[str]) -> str | None:
+    """Return the first candidate column that exists in the DataFrame."""
+    for candidate in candidates:
+        if candidate in columns:
+            return candidate
+    return None
+
+
+def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, str]]:
+    """
+    Add market-structure features using only past observations:
+      - supply_pressure_index
+      - demand_intensity_ratio
+      - market_tightness_indicator
+
+    Historical baselines are built from shifted expanding means so the current
+    sale never contributes to its own denominator.
+    """
+    df_local = frame.copy()
+
+    if "sale_id" not in df_local.columns:
+        raise ValueError("sale_id is required to build market-structure features")
+
+    # Prefer sale-level total offered quantity when available.
+    supply_col = _first_existing(
+        df_local.columns.tolist(),
+        ["total__qty_mkgs", "qty_mkgs", "total_kgs", "total_lots"],
+    )
+    demand_cols = [c for c in df_local.columns if c.endswith("__demand_score")]
+    total_demand_col = _first_existing(
+        df_local.columns.tolist(),
+        ["total__demand_score", "demand_score", "market_demand_score"],
+    )
+
+    if supply_col is None:
+        raise ValueError("Could not detect an offered-volume column")
+    if not demand_cols and total_demand_col is None:
+        raise ValueError("Could not detect any demand-score columns")
+
+    # Build historical baselines within the main segment axis when available.
+    if "category_type" in df_local.columns:
+        group_cols = ["category_type"]
+    elif "table_source" in df_local.columns:
+        group_cols = ["table_source"]
+    else:
+        group_cols = []
+
+    # Stable sale ordering for time-aware historical averages.
+    if "sale_date_raw" in df_local.columns:
+        df_local["_sale_date_parsed"] = pd.to_datetime(
+            df_local["sale_date_raw"], errors="coerce", dayfirst=True
+        )
+    else:
+        df_local["_sale_date_parsed"] = pd.NaT
+    if "sale_number" in df_local.columns:
+        df_local["_sale_number_numeric"] = pd.to_numeric(df_local["sale_number"], errors="coerce")
+    else:
+        df_local["_sale_number_numeric"] = np.nan
+
+    df_local = df_local.sort_values(
+        ["_sale_date_parsed", "_sale_number_numeric", "sale_id"], kind="mergesort"
+    ).reset_index(drop=True)
+    df_local["_sale_order"] = np.arange(len(df_local))
+
+    key_cols = ["sale_id"] + group_cols
+    keep_cols = key_cols + ["_sale_order", supply_col]
+    if total_demand_col is not None:
+        keep_cols.append(total_demand_col)
+    else:
+        keep_cols.extend(demand_cols)
+
+    sale_level = df_local[keep_cols].drop_duplicates(subset=key_cols).copy()
+    sort_cols = group_cols + ["_sale_order"] if group_cols else ["_sale_order"]
+    sale_level = sale_level.sort_values(sort_cols, kind="mergesort").reset_index(drop=True)
+
+    sale_level["_current_supply_proxy"] = pd.to_numeric(sale_level[supply_col], errors="coerce")
+    if total_demand_col is not None:
+        sale_level["_current_demand_proxy"] = pd.to_numeric(
+            sale_level[total_demand_col], errors="coerce"
+        )
+    else:
+        sale_level["_current_demand_proxy"] = (
+            sale_level[demand_cols].apply(pd.to_numeric, errors="coerce").mean(axis=1)
+        )
+
+    if group_cols:
+        sale_level["_historical_supply_avg"] = sale_level.groupby(group_cols, sort=False)[
+            "_current_supply_proxy"
+        ].transform(lambda s: s.expanding(min_periods=1).mean().shift(1))
+        sale_level["_historical_demand_avg"] = sale_level.groupby(group_cols, sort=False)[
+            "_current_demand_proxy"
+        ].transform(lambda s: s.expanding(min_periods=1).mean().shift(1))
+    else:
+        sale_level["_historical_supply_avg"] = (
+            sale_level["_current_supply_proxy"].expanding(min_periods=1).mean().shift(1)
+        )
+        sale_level["_historical_demand_avg"] = (
+            sale_level["_current_demand_proxy"].expanding(min_periods=1).mean().shift(1)
+        )
+
+    sale_level["supply_pressure_index"] = np.divide(
+        sale_level["_current_supply_proxy"],
+        sale_level["_historical_supply_avg"].replace(0, np.nan),
+    )
+    sale_level["demand_intensity_ratio"] = np.divide(
+        sale_level["_current_demand_proxy"],
+        sale_level["_historical_demand_avg"].replace(0, np.nan),
+    )
+    sale_level["market_tightness_indicator"] = np.divide(
+        sale_level["demand_intensity_ratio"],
+        sale_level["supply_pressure_index"].replace(0, np.nan),
+    )
+
+    feature_cols = key_cols + [
+        "supply_pressure_index",
+        "demand_intensity_ratio",
+        "market_tightness_indicator",
+    ]
+    df_local = df_local.merge(sale_level[feature_cols], on=key_cols, how="left")
+
+    # Remove internal helper columns used for construction.
+    df_local = df_local.drop(columns=["_sale_date_parsed", "_sale_number_numeric", "_sale_order"])
+
+    mapping = {
+        "supply_column": supply_col,
+        "demand_columns": total_demand_col if total_demand_col is not None else ", ".join(demand_cols),
+        "history_group_columns": ", ".join(group_cols) if group_cols else "global",
+    }
+    return df_local, mapping
+
 # ──────────────────────────────────────────────────────────
 # LOAD
 # ──────────────────────────────────────────────────────────
@@ -133,6 +264,20 @@ print(f"\n[M3] price_mid_usd derived (mean = {df['price_mid_usd'].mean():.2f} US
 # momentum/cumulative signal if needed — not interchangeable.
 print("\n[M4] Todate cols retained. Use weekly cols as primary volume features.")
 
+# ── M5: Supply-demand market structure indices ──────────
+# Build three pooled-model features required by the paper hypothesis:
+#   supply_pressure_index      = current offered volume / historical avg offered volume
+#   demand_intensity_ratio     = current demand score / historical avg demand score
+#   market_tightness_indicator = demand_intensity_ratio / supply_pressure_index
+df, market_feature_mapping = add_market_structure_features(df)
+print("\n[M5] Market-structure features added:")
+print(f"     supply column: {market_feature_mapping['supply_column']}")
+print(f"     demand column(s): {market_feature_mapping['demand_columns']}")
+print(f"     history grouping: {market_feature_mapping['history_group_columns']}")
+for col in ["supply_pressure_index", "demand_intensity_ratio", "market_tightness_indicator"]:
+    non_null = int(df[col].notna().sum())
+    print(f"     {col}: non-null={non_null:,}  mean={df[col].mean():.4f}")
+
 # ══════════════════════════════════════════════════════════
 # STEP 3: ENCODING
 # ══════════════════════════════════════════════════════════
@@ -191,6 +336,7 @@ print(f"         has_price_target flag: {missing_target} rows lack target (exclu
 # ══════════════════════════════════════════════════════════
 new_cols = [
     "is_production_known", "price_mid_usd",
+    "supply_pressure_index", "demand_intensity_ratio", "market_tightness_indicator",
     "sale_month_enc", "tier_enc", "elevation_enc",
     "category_type_enc", "table_source_enc",
     "price_mid_lkr_log", "has_price_target",
