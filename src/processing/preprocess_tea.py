@@ -63,8 +63,21 @@ def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, di
 
     # Stable sale ordering for time-aware historical averages.
     if "sale_date_raw" in df_local.columns:
+        # Parse values like "01ST/02ND September 2025" using the first sale day.
+        sale_date_parts = (
+            df_local["sale_date_raw"]
+            .astype("string")
+            .str.extract(r"^(\d{1,2})(?:ST|ND|RD|TH)/\d{1,2}(?:ST|ND|RD|TH)\s+([A-Za-z]+)\s+(\d{4})$")
+        )
+        sale_date_str = (
+            sale_date_parts[0].str.zfill(2)
+            + " "
+            + sale_date_parts[1]
+            + " "
+            + sale_date_parts[2]
+        )
         df_local["_sale_date_parsed"] = pd.to_datetime(
-            df_local["sale_date_raw"], errors="coerce", dayfirst=True
+            sale_date_str, format="%d %B %Y", errors="coerce"
         )
     else:
         df_local["_sale_date_parsed"] = pd.NaT
@@ -152,7 +165,7 @@ INPUT_FILE  = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
 OUTPUT_FILE = _ROOT / "data" / "processed" / "tea_preprocessed.csv"
 
 df = pd.read_csv(INPUT_FILE)
-print(f"Loaded: {df.shape[0]} rows × {df.shape[1]} cols")
+print(f"Loaded: {df.shape[0]} rows x {df.shape[1]} cols")
 
 # ══════════════════════════════════════════════════════════
 # CRITICAL FIXES (C1–C3)
