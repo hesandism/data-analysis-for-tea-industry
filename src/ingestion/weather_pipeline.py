@@ -1,3 +1,4 @@
+# flake8: noqa
 """
 Tea Auction Weather Data Pipeline
 ==================================
@@ -489,7 +490,7 @@ if __name__ == "__main__":
         description="Extract weather data from F&W tea auction PDFs + Open-Meteo API"
     )
     parser.add_argument(
-        "--pdf_dir", default=str(_root / "data" / "Raw"),
+        "--pdf_dir", default=str(_root / "data" / "raw"),
         help="Directory containing the weekly PDF reports"
     )
     parser.add_argument(

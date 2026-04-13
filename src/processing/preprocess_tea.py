@@ -13,15 +13,160 @@ import numpy as np
 from pathlib import Path
 from sklearn.preprocessing import LabelEncoder
 
+
+def _first_existing(columns: list[str], candidates: list[str]) -> str | None:
+    """Return the first candidate column that exists in the DataFrame."""
+    for candidate in candidates:
+        if candidate in columns:
+            return candidate
+    return None
+
+
+def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, str]]:
+    """
+    Add market-structure features using only past observations:
+      - supply_pressure_index
+      - demand_intensity_ratio
+      - market_tightness_indicator
+
+    Historical baselines are built from shifted expanding means so the current
+    sale never contributes to its own denominator.
+    """
+    df_local = frame.copy()
+
+    if "sale_id" not in df_local.columns:
+        raise ValueError("sale_id is required to build market-structure features")
+
+    # Prefer sale-level total offered quantity when available.
+    supply_col = _first_existing(
+        df_local.columns.tolist(),
+        ["total__qty_mkgs", "qty_mkgs", "total_kgs", "total_lots"],
+    )
+    demand_cols = [c for c in df_local.columns if c.endswith("__demand_score")]
+    total_demand_col = _first_existing(
+        df_local.columns.tolist(),
+        ["total__demand_score", "demand_score", "market_demand_score"],
+    )
+
+    if supply_col is None:
+        raise ValueError("Could not detect an offered-volume column")
+    if not demand_cols and total_demand_col is None:
+        raise ValueError("Could not detect any demand-score columns")
+
+    # Build historical baselines within the main segment axis when available.
+    if "category_type" in df_local.columns:
+        group_cols = ["category_type"]
+    elif "table_source" in df_local.columns:
+        group_cols = ["table_source"]
+    else:
+        group_cols = []
+
+    # Stable sale ordering for time-aware historical averages.
+    if "sale_date_raw" in df_local.columns:
+        # Parse values like "01ST/02ND September 2025" using the first sale day.
+        sale_date_parts = (
+            df_local["sale_date_raw"]
+            .astype("string")
+            .str.extract(r"^(\d{1,2})(?:ST|ND|RD|TH)/\d{1,2}(?:ST|ND|RD|TH)\s+([A-Za-z]+)\s+(\d{4})$")
+        )
+        sale_date_str = (
+            sale_date_parts[0].str.zfill(2)
+            + " "
+            + sale_date_parts[1]
+            + " "
+            + sale_date_parts[2]
+        )
+        df_local["_sale_date_parsed"] = pd.to_datetime(
+            sale_date_str, format="%d %B %Y", errors="coerce"
+        )
+    else:
+        df_local["_sale_date_parsed"] = pd.NaT
+    if "sale_number" in df_local.columns:
+        df_local["_sale_number_numeric"] = pd.to_numeric(df_local["sale_number"], errors="coerce")
+    else:
+        df_local["_sale_number_numeric"] = np.nan
+
+    df_local = df_local.sort_values(
+        ["_sale_date_parsed", "_sale_number_numeric", "sale_id"], kind="mergesort"
+    ).reset_index(drop=True)
+    df_local["_sale_order"] = np.arange(len(df_local))
+
+    key_cols = ["sale_id"] + group_cols
+    keep_cols = key_cols + ["_sale_order", supply_col]
+    if total_demand_col is not None:
+        keep_cols.append(total_demand_col)
+    else:
+        keep_cols.extend(demand_cols)
+
+    sale_level = df_local[keep_cols].drop_duplicates(subset=key_cols).copy()
+    sort_cols = group_cols + ["_sale_order"] if group_cols else ["_sale_order"]
+    sale_level = sale_level.sort_values(sort_cols, kind="mergesort").reset_index(drop=True)
+
+    sale_level["_current_supply_proxy"] = pd.to_numeric(sale_level[supply_col], errors="coerce")
+    if total_demand_col is not None:
+        sale_level["_current_demand_proxy"] = pd.to_numeric(
+            sale_level[total_demand_col], errors="coerce"
+        )
+    else:
+        sale_level["_current_demand_proxy"] = (
+            sale_level[demand_cols].apply(pd.to_numeric, errors="coerce").mean(axis=1)
+        )
+
+    if group_cols:
+        sale_level["_historical_supply_avg"] = sale_level.groupby(group_cols, sort=False)[
+            "_current_supply_proxy"
+        ].transform(lambda s: s.expanding(min_periods=1).mean().shift(1))
+        sale_level["_historical_demand_avg"] = sale_level.groupby(group_cols, sort=False)[
+            "_current_demand_proxy"
+        ].transform(lambda s: s.expanding(min_periods=1).mean().shift(1))
+    else:
+        sale_level["_historical_supply_avg"] = (
+            sale_level["_current_supply_proxy"].expanding(min_periods=1).mean().shift(1)
+        )
+        sale_level["_historical_demand_avg"] = (
+            sale_level["_current_demand_proxy"].expanding(min_periods=1).mean().shift(1)
+        )
+
+    sale_level["supply_pressure_index"] = np.divide(
+        sale_level["_current_supply_proxy"],
+        sale_level["_historical_supply_avg"].replace(0, np.nan),
+    )
+    sale_level["demand_intensity_ratio"] = np.divide(
+        sale_level["_current_demand_proxy"],
+        sale_level["_historical_demand_avg"].replace(0, np.nan),
+    )
+    sale_level["market_tightness_indicator"] = np.divide(
+        sale_level["demand_intensity_ratio"],
+        sale_level["supply_pressure_index"].replace(0, np.nan),
+    )
+
+    feature_cols = key_cols + [
+        "supply_pressure_index",
+        "demand_intensity_ratio",
+        "market_tightness_indicator",
+    ]
+    df_local = df_local.merge(sale_level[feature_cols], on=key_cols, how="left")
+
+    # Remove internal helper columns used for construction.
+    df_local = df_local.drop(columns=["_sale_date_parsed", "_sale_number_numeric", "_sale_order"])
+
+    mapping = {
+        "supply_column": supply_col,
+        "demand_columns": total_demand_col if total_demand_col is not None else ", ".join(demand_cols),
+        "history_group_columns": ", ".join(group_cols) if group_cols else "global",
+    }
+    return df_local, mapping
+
+
 # ──────────────────────────────────────────────────────────
 # LOAD
 # ──────────────────────────────────────────────────────────
-_ROOT       = Path(__file__).parent.parent.parent
-INPUT_FILE  = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
+_ROOT = Path(__file__).parent.parent.parent
+INPUT_FILE = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
 OUTPUT_FILE = _ROOT / "data" / "processed" / "tea_preprocessed.csv"
 
 df = pd.read_csv(INPUT_FILE)
-print(f"Loaded: {df.shape[0]} rows × {df.shape[1]} cols")
+print(f"Loaded: {df.shape[0]} rows x {df.shape[1]} cols")
 
 # ══════════════════════════════════════════════════════════
 # CRITICAL FIXES (C1–C3)
@@ -66,7 +211,7 @@ ELEVATION_MAP = {"high": "high_grown", "low": "low_grown", "medium": "medium_gro
 before = df["elevation"].value_counts().to_dict()
 df["elevation"] = df["elevation"].replace(ELEVATION_MAP)
 after = df["elevation"].value_counts().to_dict()
-print(f"\n[C3] Elevation normalised:")
+print("\n[C3] Elevation normalised:")
 print(f"     Before: {before}")
 print(f"     After:  {after}")
 
@@ -86,7 +231,7 @@ print(f"     After:  {after}")
 # grade and tier ONLY apply to 05_low_grown rows.
 # DO NOT impute. Use table_source to subset first.
 pct_grade_null = df["grade"].isna().mean() * 100
-pct_tier_null  = df["tier"].isna().mean() * 100
+pct_tier_null = df["tier"].isna().mean() * 100
 print(f"\n[H3] grade null = {pct_grade_null:.1f}%  |  tier null = {pct_tier_null:.1f}%")
 print("     Structural nulls — NOT imputed. Subset by table_source='05_low_grown' first.")
 
@@ -119,7 +264,7 @@ df["is_production_known"] = df["sl_production_mkgs"].notna().astype(int)
 prod_mean = df.loc[df["is_production_known"] == 1, "sl_production_mkgs"].mean()
 df["sl_production_mkgs"] = df["sl_production_mkgs"].fillna(prod_mean)
 print(f"\n[M2] sl_production_mkgs imputed with mean = {prod_mean:.2f} mkgs")
-print(f"     is_production_known flag column added")
+print("     is_production_known flag column added")
 
 # ── M3: FX — derive USD price ────────────────────────────
 # FX barely varies across 10 sales (CV < 0.3–1%), so it has
@@ -132,6 +277,20 @@ print(f"\n[M3] price_mid_usd derived (mean = {df['price_mid_usd'].mean():.2f} US
 # Use *_weekly_* cols for EDA. Keep *_todate_* as a separate
 # momentum/cumulative signal if needed — not interchangeable.
 print("\n[M4] Todate cols retained. Use weekly cols as primary volume features.")
+
+# ── M5: Supply-demand market structure indices ──────────
+# Build three pooled-model features required by the paper hypothesis:
+#   supply_pressure_index      = current offered volume / historical avg offered volume
+#   demand_intensity_ratio     = current demand score / historical avg demand score
+#   market_tightness_indicator = demand_intensity_ratio / supply_pressure_index
+df, market_feature_mapping = add_market_structure_features(df)
+print("\n[M5] Market-structure features added:")
+print(f"     supply column: {market_feature_mapping['supply_column']}")
+print(f"     demand column(s): {market_feature_mapping['demand_columns']}")
+print(f"     history grouping: {market_feature_mapping['history_group_columns']}")
+for col in ["supply_pressure_index", "demand_intensity_ratio", "market_tightness_indicator"]:
+    non_null = int(df[col].notna().sum())
+    print(f"     {col}: non-null={non_null:,}  mean={df[col].mean():.4f}")
 
 # ══════════════════════════════════════════════════════════
 # STEP 3: ENCODING
@@ -163,10 +322,10 @@ le_src = LabelEncoder()
 df["table_source_enc"] = le_src.fit_transform(df["table_source"].fillna("unknown"))
 TABLE_SOURCE_MAP = dict(zip(le_src.classes_, le_src.transform(le_src.classes_).tolist()))
 
-print(f"\n[ENC] Encodings applied:")
-print(f"      sale_month_enc  (ordinal Jan=1 … Dec=12)")
-print(f"      tier_enc        (0=N/A, 1=others, 2=below_best, 3=best, 4=select_best)")
-print(f"      elevation_enc   (1=low_grown, 2=medium_grown, 3=high_grown)")
+print("\n[ENC] Encodings applied:")
+print("      sale_month_enc  (ordinal Jan=1 ... Dec=12)")
+print("      tier_enc        (0=N/A, 1=others, 2=below_best, 3=best, 4=select_best)")
+print("      elevation_enc   (1=low_grown, 2=medium_grown, 3=high_grown)")
 print(f"      category_type_enc {CATEGORY_TYPE_MAP}")
 print(f"      table_source_enc  {TABLE_SOURCE_MAP}")
 
@@ -177,8 +336,8 @@ print(f"      table_source_enc  {TABLE_SOURCE_MAP}")
 # Log transform to address right skew (skew 2.49 → ~0.55)
 df["price_mid_lkr_log"] = np.log1p(df["price_mid_lkr"])
 skew_orig = df["price_mid_lkr"].skew()
-skew_log  = df["price_mid_lkr_log"].skew()
-print(f"\n[TARGET] price_mid_lkr_log derived")
+skew_log = df["price_mid_lkr_log"].skew()
+print("\n[TARGET] price_mid_lkr_log derived")
 print(f"         Skew before: {skew_orig:.3f}  →  after log1p: {skew_log:.3f}")
 
 # Flag rows without a price target
@@ -191,6 +350,7 @@ print(f"         has_price_target flag: {missing_target} rows lack target (exclu
 # ══════════════════════════════════════════════════════════
 new_cols = [
     "is_production_known", "price_mid_usd",
+    "supply_pressure_index", "demand_intensity_ratio", "market_tightness_indicator",
     "sale_month_enc", "tier_enc", "elevation_enc",
     "category_type_enc", "table_source_enc",
     "price_mid_lkr_log", "has_price_target",
