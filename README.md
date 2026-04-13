@@ -1,4 +1,5 @@
-# Data Analysis for the Tea Industry  
+# Data Analysis for the Tea Industry
+
 ## A Reproducible Research Workflow for Sri Lanka Tea Auction Price Analysis
 
 ## Overview
@@ -31,6 +32,7 @@ This repository supports the following research tasks:
 - assembly of master and reduced analytical tables
 - preprocessing for exploratory analysis and downstream modeling
 - generation of figures and descriptive findings
+- unified cross-validated modeling across 4 tea market segments (High Grown, Low Grown, Off-Grade, Dust)
 
 ## Repository Structure
 
@@ -71,6 +73,7 @@ data-analysis-for-tea-industry/
 The project is based on weekly Sri Lanka tea auction market reports and derived datasets.
 
 ### Primary Inputs
+
 - weekly Forbes & Walker tea auction PDF reports
 - extracted auction price and quantity tables
 - textual market commentary from the reports
@@ -79,9 +82,11 @@ The project is based on weekly Sri Lanka tea auction market reports and derived 
 ### Data Layers
 
 #### Raw Data
+
 The raw layer contains the original PDF auction reports.
 
 #### Interim Data
+
 The interim layer contains structured tables extracted from the raw reports, including:
 
 - sales index data
@@ -95,6 +100,7 @@ The interim layer contains structured tables extracted from the raw reports, inc
 - weather feature tables
 
 #### Processed Data
+
 The processed layer contains merged and transformed datasets used for analysis:
 
 - full master analytical table
@@ -106,21 +112,27 @@ The processed layer contains merged and transformed datasets used for analysis:
 The workflow follows a staged research pipeline.
 
 ### 1. Data Ingestion
+
 Auction PDFs are parsed into structured sale-level and category-level tables.
 
 ### 2. Weather Enrichment
+
 Report-derived weather text and archived meteorological data are combined into region-based weather features.
 
 ### 3. Master Table Construction
+
 Interim datasets are merged into a single analytical dataset.
 
 ### 4. Feature Reduction
+
 Redundant, sparse, and high-collinearity variables are removed from the full master table.
 
 ### 5. Preprocessing
+
 The reduced dataset is cleaned, transformed, and prepared for exploratory analysis and modeling.
 
 ### 6. Exploratory Analysis
+
 Jupyter notebooks are used to evaluate price distributions, structural differences across tea groups, and possible relationships between weather and market behavior.
 
 ## Main Analytical Target
