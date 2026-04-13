@@ -157,6 +157,7 @@ def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, di
     }
     return df_local, mapping
 
+
 # ──────────────────────────────────────────────────────────
 # LOAD
 # ──────────────────────────────────────────────────────────
