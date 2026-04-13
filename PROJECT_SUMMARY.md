@@ -92,7 +92,6 @@ Generated figures:
 - [reports/figures/fig5_context.png](reports/figures/fig5_context.png)
 - [reports/figures/fig6_tier_range.png](reports/figures/fig6_tier_range.png)
 - [notebooks/fig7_weather_grade_impact.png](notebooks/fig7_weather_grade_impact.png)
-- [reports/figures/fig13_data_refresh_coverage.png](reports/figures/fig13_data_refresh_coverage.png)
 
 Secondary notebook (experimental/scratch):
 - [notebooks/test.ipynb](notebooks/test.ipynb)
@@ -100,7 +99,7 @@ Secondary notebook (experimental/scratch):
 ### 2.6 Extended EDA Notebook and Figures 
 Implemented in:
 
- - [notebooks/tea_eda_extended.ipynb](notebooks/tea_eda_extended.ipynb)
+ - [notebooks/eda_extended.ipynb]
 
 This notebook extends the primary EDA with five additional analyses targeting the
 dual-market hypothesis — that High Grown and Low Grown tea prices respond to
@@ -113,18 +112,6 @@ Generated figures:
 - [reports/figures/fig10_rainfall_lag_effect.png] — Lag effect analysis identifying optimal forecasting horizon for High Grown prices
 - [reports/figures/fig11_lkr_vs_usd_price.png] — LKR vs USD price trend comparison exposing inflationary illusion
 - [reports/figures/fig12_top_estates.png] — Top estate consistency analysis revealing brand immunity to market shocks
-
-### 2.7 Segment Modeling Notebook (Baseline Benchmark)
-Implemented in:
-- [notebooks/model.ipynb](notebooks/model.ipynb)
-
-Current capabilities:
-1. Builds segment-specific modeling datasets for High Grown, Low Grown, Off-Grade, and Dust.
-2. Engineers segment-aware structural and weather interaction features (for example, region-routed precipitation and quality x weather interactions).
-3. Uses a time-aware split by sale rank (last 5 unique sales for test) per segment.
-4. Trains two tree-based baselines per segment: Random Forest and Gradient Boosting.
-5. Evaluates in original LKR scale using MAE, RMSE, R2, and MAPE.
-6. Produces comparable test-set benchmark tables across all four segments.
 
 
 ## 3. Current Data Inventory (Observed)
@@ -211,44 +198,36 @@ In [notebooks/tea_eda.ipynb](notebooks/tea_eda.ipynb):
 5. Weather-context and weather-grade sensitivity analysis.
 6. Figure export for paper-ready visuals.
 
-## Step H - Baseline Segment Modeling
-In [notebooks/model.ipynb](notebooks/model.ipynb):
-1. Constructs per-segment feature sets combining sale context, gross revenue signals, structural attributes, and weather features.
-2. Creates log-target (`price_log = log1p(price_mid_lkr)`) for model training.
-3. Applies chronological split by sale rank (holdout = latest 5 sales).
-4. Trains Random Forest and Gradient Boosting regressors inside imputation pipelines.
-5. Converts predictions back to LKR and reports MAE/RMSE/R2/MAPE for segment-level comparison.
-
 ---
 
 ## 5. Preliminary Results (Current)
 
 From [data/Processed/tea_preprocessed.csv](data/Processed/tea_preprocessed.csv) and EDA figures:
 
-### 5.1 Target Distribution (Refreshed 2026-03-21)
-- Price observations with target: 2,886 (95.1% of rows)
-- Mean mid-price: 1,255.79 LKR
-- Median mid-price: 1,120.00 LKR
-- Range: 290.00 to 5,700.00 LKR
-- Skewness before transform: 2.869
-- Skewness after `log1p` transform: 0.587
+### 5.1 Target Distribution
+- Price observations with target: 1088
+- Mean mid-price: 1239.38 LKR
+- Median mid-price: 1100.00 LKR
+- Range: 290.00 to 5700.00 LKR
+- Skewness before transform: 2.485
+- Skewness after `log1p` transform: 0.550
 
 Interpretation:
-- Distribution remains right-skewed, but the refreshed coverage and log transform continue to yield a modeling-friendly target.
+- Distribution is strongly right-skewed; transformed target is more suitable for regression assumptions.
 
 ### 5.2 Price Structure by Elevation
-- Low Grown: mean 1,446.8 (n=1,659)
-- High Grown: mean 1,057.6 (n=854)
-- Medium Grown: mean 859.9 (n=373)
+- Low Grown: mean 1418.43 (n=635)
+- High Grown: mean 1050.92 (n=316)
+- Medium Grown: mean 844.23 (n=137)
 
 Interpretation:
 - Elevation is a major structural determinant of price.
 
 ### 5.3 Price Structure by Category Type
-- Low Grown: mean 1,578.7 (n=1,348)
-- High Grown: mean 1,135.6 (n=516)
-- Dust: mean 984.4 (n=523)
-- Off Grade: mean 792.2 (n=499)
+- Low Grown: mean 1545.94 (n=516)
+- High Grown: mean 1137.95 (n=188)
+- Dust: mean 976.75 (n=194)
+- Off Grade: mean 775.37 (n=190)
 
 Interpretation:
 - Large spread across category types supports category-aware modeling.
@@ -261,42 +240,13 @@ Interpretation:
 Interpretation:
 - Interaction effects (grade x weather, category x weather) likely matter more than simple linear weather coefficients.
 
-### 5.5 Extended EDA & Coverage Findings 
+### 5.5 Extended EDA Findings 
 
 - Rainfall-price sensitivity (Fig 9): Preliminary correlation analysis shows High Grown prices exhibit a measurably different rainfall response compared to Low Grown, consistent with the dual-market hypothesis.
 - Lag effect (Fig 10): Rainfall lagged by 1–2 weeks shows stronger correlation with High Grown prices than current-week rainfall, supporting the 14-day supply lag hypothesis central to the forecasting framework.
 - Inflationary illusion (Fig 11): LKR and USD price trajectories diverge across the auction series, indicating that LKR-denominated broker sentiment signals can be misleading when currency depreciation is present.
 - Estate consistency (Fig 12): A small number of estates appear repeatedly in weekly top-price lists regardless of broader market conditions, suggesting a brand-immunity effect in the premium segment.
 - Volume contraction: 2026 auction volumes are running approximately 5.4% below 2025 levels, providing important supply-side context for price trend interpretation.
-- Data refresh coverage (Fig 13): Processed datasets now cover 26 sales (up from 10) with 95.1% of rows retaining a usable mid-price target, ensuring downstream models and figures reflect the full interim inventory.
-
-### 5.6 Segment Modeling Baseline Results (`notebooks/model.ipynb`)
-
-Test split used in notebook:
-- High Grown: train=1,564, test=262
-- Low Grown: train=4,332, test=856
-- Off-Grade: train=1,572, test=313
-- Dust: train=1,648, test=335
-
-Observed benchmark metrics (test set):
-- High Grown:
-	- Random Forest: RMSE=124.42, MAE=77.42, R2=0.74, MAPE=6.72%
-	- Gradient Boosting: RMSE=135.37, MAE=85.69, R2=0.71, MAPE=7.36%
-- Low Grown:
-	- Random Forest: RMSE=347.94, MAE=215.54, R2=0.73, MAPE=12.70%
-	- Gradient Boosting: RMSE=349.99, MAE=213.71, R2=0.73, MAPE=12.56%
-- Off-Grade:
-	- Random Forest: RMSE=34.88, MAE=27.81, R2=0.95, MAPE=3.83%
-	- Gradient Boosting: RMSE=34.99, MAE=28.39, R2=0.95, MAPE=3.94%
-- Dust:
-	- Random Forest: RMSE=49.78, MAE=38.11, R2=0.93, MAPE=4.06%
-	- Gradient Boosting: RMSE=48.86, MAE=35.99, R2=0.94, MAPE=3.81%
-
-Interpretation:
-- Segment-wise baselines are strong for Off-Grade and Dust (R2 >= 0.93), moderate for High Grown and Low Grown (R2 around 0.73-0.74).
-- High Grown currently favors Random Forest on all reported metrics.
-- Dust currently favors Gradient Boosting.
-- Low Grown is mixed: Random Forest slightly lower RMSE, while Gradient Boosting slightly lower MAE/MAPE.
 ---
 
 ## 6. Technical Validation Status
@@ -313,17 +263,20 @@ Interpretation:
 4. Structural null strategy documented (grade/tier not globally imputed).
 5. Reduced table performs explicit + dynamic feature audit.
 
-### 6.3 Freshness Status (2026-03-21)
+### 6.3 Current Consistency Gap (Important for Paper)
 Observed artifact freshness:
-- Interim CSVs (01–09) and processed outputs (master/reduced/preprocessed) were all regenerated on 2026-03-21 from the latest ingestion run.
-- [notebooks/tea_eda.ipynb](notebooks/tea_eda.ipynb) was re-executed end-to-end, refreshing Figures 1–7 and exporting the new Figure 13 coverage check.
-- [notebooks/model.ipynb](notebooks/model.ipynb) contains the latest baseline segment benchmark outputs for High Grown, Low Grown, Off-Grade, and Dust.
+- Interim CSVs updated on 2026-03-20 (latest pipeline run).
+- Processed CSVs were last built on 2026-03-19.
 
 Implication:
-- Baseline EDA, processed datasets, and published figures now align with the full 26-sale interim inventory.
+- EDA/preliminary modeling tables currently reflect the earlier 10-sale processed subset, while interim ingestion has expanded to broader coverage.
 
-Next validation step:
-- Mirror the refresh in the extended notebook (`notebooks/tea_eda_extended.ipynb`) so that Figures 8–12 also reference the expanded dataset.
+Action needed before final paper numbers:
+1. Rebuild processed layer from latest interim:
+   - `build_master_table.py`
+   - `build_reduced_master.py`
+   - `preprocess_tea.py`
+2. Re-run [notebooks/tea_eda.ipynb](notebooks/tea_eda.ipynb) to refresh figures/statistics.
 
 ---
 
@@ -340,7 +293,6 @@ Next validation step:
 
 ### Notebooks
 - [notebooks/tea_eda.ipynb](notebooks/tea_eda.ipynb): Main EDA notebook for preliminary results and publication figures.
-- [notebooks/model.ipynb](notebooks/model.ipynb): Segment-wise baseline modeling notebook (feature engineering, time split, RF/GB benchmark evaluation).
 - [notebooks/test.ipynb](notebooks/test.ipynb): Experimental notebook; not the canonical EDA artifact.
 
 ### Outputs
@@ -364,7 +316,8 @@ Next validation step:
 
 ## 9. Immediate Next Steps for Team
 
-1. Re-run the extended EDA notebook so advanced figures (8–12) share the refreshed coverage.
-2. Freeze a versioned snapshot of refreshed processed CSVs and Figures 1–13 for paper-ready handoff.
-3. Extend the current segment benchmark by adding leakage-safe ablations and a unified experiment log (features, split, metrics, seed).
-4. Add robustness checks: rolling-origin validation, per-sale error diagnostics, and segment-specific feature importance stability.
+1. Rebuild processed datasets from the latest interim outputs.
+2. Re-run EDA notebook to refresh all figures with current data coverage.
+3. Freeze a versioned snapshot of CSVs and figures for the short paper submission.
+4. Start model benchmarking using leakage-safe feature matrix.
+5. Add an experiment log (metrics + feature set + train/validation split) for reproducible reporting.
