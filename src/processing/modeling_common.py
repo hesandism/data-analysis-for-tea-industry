@@ -22,7 +22,19 @@ RANK_COL = "sale_rank"
 DEFAULT_EXCLUDE_COLS = {
     "sale_id", "sale_date_raw", "sale_month", "table_source", "category_type", "grade", "tier", "category",
     "price_mid_lkr", "price_mid_lkr_log", "has_price_target", "price_lo_lkr", "price_hi_lkr", "price_range_lkr",
+    "price_mid_usd",
 }
+
+
+LEAKAGE_PATTERNS = (
+    "price_mid_lkr",
+    "price_lo_lkr",
+    "price_hi_lkr",
+    "price_range_lkr",
+    "price_mid_usd",
+    "roll3_mean__price",
+    "roll3_std__price",
+)
 
 
 def resolve_project_root(start_path=None):
@@ -45,19 +57,32 @@ def resolve_data_path(root, filename):
 
 
 def resolve_preprocessed_path(root):
-    return resolve_data_path(root, "tea_preprocessed.csv")
+    candidates = [
+        root / "data" / "processed" / "tea_preprocessed_v2.csv",
+        root / "data" / "Processed" / "tea_preprocessed_v2.csv",
+        root / "data" / "processed" / "tea_preprocessed.csv",
+        root / "data" / "Processed" / "tea_preprocessed.csv",
+    ]
+    path = next((p for p in candidates if p.exists()), None)
+    if path is None:
+        raise FileNotFoundError(f"Could not find tea_preprocessed_v2.csv or tea_preprocessed.csv in: {candidates}")
+    return path
 
 
 def resolve_unified_summary_path(root):
     return resolve_data_path(root, "unified_model_cv_results.csv")
 
 
-def load_preprocessed_df(root, keep_target_only=True, filename="tea_preprocessed.csv"):
-    data_path = resolve_data_path(root, filename)
+def load_preprocessed_df(root, keep_target_only=True, filename=None):
+    data_path = resolve_preprocessed_path(root) if filename is None else resolve_data_path(root, filename)
     df = pd.read_csv(data_path)
     if keep_target_only and "has_price_target" in df.columns:
         df = df[df["has_price_target"] == 1].copy()
     return df, data_path
+
+
+def is_leakage_feature(column_name):
+    return any(pattern in column_name for pattern in LEAKAGE_PATTERNS)
 
 
 def build_segment_filters(df):
@@ -78,7 +103,7 @@ def get_segment_data(df, target=TARGET, rank_col=RANK_COL, exclude_cols=None):
     for seg, mask in filters.items():
         sdf = df[mask].copy()
         numeric_cols = [c for c in sdf.columns if pd.api.types.is_numeric_dtype(sdf[c])]
-        feature_cols = [c for c in numeric_cols if c not in excludes and c != target]
+        feature_cols = [c for c in numeric_cols if c not in excludes and c != target and not is_leakage_feature(c)]
         if rank_col in sdf.columns:
             sdf = sdf.sort_values(rank_col).reset_index(drop=True)
         segment_data[seg] = (sdf, feature_cols)
@@ -93,8 +118,8 @@ def build_model_registry(seed=SEED):
         "Random Forest": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", RandomForestRegressor(n_estimators=400, min_samples_leaf=3, random_state=seed, n_jobs=-1))]),
         "Gradient Boosting": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", GradientBoostingRegressor(random_state=seed))]),
         "SVR (RBF)": Pipeline([("impute", SimpleImputer(strategy="median")), ("scale", StandardScaler()), ("model", SVR(kernel="rbf", C=10.0, epsilon=0.05, gamma="scale"))]),
-        "XGBoost": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", XGBRegressor(n_estimators=400, learning_rate=0.05, max_depth=5, subsample=0.8, colsample_bytree=0.8, random_state=seed, n_jobs=-1))]),
-        "LightGBM": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", LGBMRegressor(n_estimators=400, learning_rate=0.05, num_leaves=31, random_state=seed, n_jobs=-1))]),
+        "XGBoost": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", XGBRegressor(n_estimators=400, learning_rate=0.05, max_depth=5, subsample=0.8, colsample_bytree=0.8, random_state=seed, n_jobs=-1, verbosity=0))]),
+        "LightGBM": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", LGBMRegressor(n_estimators=400, learning_rate=0.05, num_leaves=31, random_state=seed, n_jobs=-1, verbosity=-1))]),
     }
 
 
