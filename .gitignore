@@ -1,18 +1,28 @@
-# Virtual Environments
+# -----------------------------
+# Virtual environments
+# -----------------------------
 .venv/
 venv/
 env/
 ENV/
 
-# Python
+# -----------------------------
+# Python cache / compiled files
+# -----------------------------
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
+*.pyo
+*.pyd
+*.pyc
+
+# -----------------------------
+# Python packaging / build
+# -----------------------------
 .Python
 build/
-develop-eggs/
 dist/
+develop-eggs/
 downloads/
 eggs/
 .eggs/
@@ -22,37 +32,73 @@ parts/
 sdist/
 var/
 wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Jupyter Notebook
+# -----------------------------
+# Testing / coverage / tooling
+# -----------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.hypothesis/
+
+# -----------------------------
+# Jupyter
+# -----------------------------
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
-# Environment variables
+# -----------------------------
+# Environment files
+# -----------------------------
 .env
 .env.local
 .env.*.local
 
-# IDE
+# -----------------------------
+# IDE / editor files
+# -----------------------------
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-.DS_Store
+*.code-workspace
 
-# OS
+# -----------------------------
+# OS files
+# -----------------------------
+.DS_Store
 Thumbs.db
-.DS_Store
 
-# Project specific
-data/Raw/*.pdf
-data/Interim/*.csv
-data/Processed/*.csv
+# -----------------------------
+# Logs
+# -----------------------------
+*.log
+
+# -----------------------------
+# Project-specific generated data
+# -----------------------------
+data/raw/*.pdf
+data/interim/*.csv
+data/processed/*.csv
 reports/figures/*.png
 reports/figures/*.jpg
+reports/figures/*.jpeg
 
-# Logs
-*.log
+# -----------------------------
+# Optional: local database / temp files
+# -----------------------------
+*.sqlite3
+*.tmp
+*.temp
