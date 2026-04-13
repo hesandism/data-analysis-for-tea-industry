@@ -92,28 +92,18 @@ def extract_header(full_text):
     m = re.search(r'SALE\s+NO\s*[:\-]?\s*(\d+)', full_text, re.I)
     meta['sale_number'] = int(m.group(1)) if m else None
 
-    MONTHS = (r'JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|'
-              r'JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER')
-
-    # Try multi-day first: "3 & 4 November 2025" or "3/4 November 2025"
     m = re.search(
-        rf'(\d+\w*(?:\s*[&/]\s*\d+\w*)+)\s+({MONTHS})\s+(\d{{4}})',
+        r'(\d+\w*/\d+\w*)\s+(JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|'
+        r'JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)\s+(\d{4})',
         full_text, re.I)
-
-    # Fall back to single day: "30 December 2025"
-    if not m:
-        m = re.search(
-            rf'(\d+\w*)\s+({MONTHS})\s+(\d{{4}})',
-            full_text, re.I)
-
     if m:
-        meta['sale_date_raw'] = f"{m.group(1).strip()} {m.group(2).capitalize()} {m.group(3)}"
+        meta['sale_date_raw'] = f"{m.group(1)} {m.group(2).capitalize()} {m.group(3)}"
         meta['sale_year']  = int(m.group(3))
         meta['sale_month'] = m.group(2).capitalize()
     else:
         meta['sale_date_raw'] = meta['sale_year'] = meta['sale_month'] = None
-
     return meta
+
 
 # ── MODULE 2 : Overall Market + Auction Details (Page 2) ────────────────────
 CATEGORY_MAP = {
@@ -874,7 +864,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         paths = sys.argv[1:]
     else:
-        paths = [Path(__file__).parent.parent.parent / 'data' / 'Raw']
+        paths = [Path(__file__).parent.parent.parent / 'data' / 'raw']
 
     pdf_files = []
     for p in paths:
