@@ -9,13 +9,13 @@ This script builds three groups of engineered features on top of tea_preprocesse
 Output: tea_preprocessed_v2.csv  (+new feature columns appended)
 """
 
-import warnings
-warnings.filterwarnings("ignore")
-
 import numpy as np
 import pandas as pd
 from pathlib import Path
+import warnings
 from sklearn.preprocessing import PolynomialFeatures
+
+warnings.filterwarnings("ignore")
 
 # ─────────────────────────────────────────────
 # 0. LOAD DATA
