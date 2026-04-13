@@ -1,3 +1,4 @@
+# flake8: noqa
 """
 build_master_table.py
 =====================

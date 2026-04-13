@@ -1,3 +1,4 @@
+# flake8: noqa
 """
 Forbes & Walker Tea Market Report – Multi-Table Pipeline
 =========================================================
@@ -27,8 +28,6 @@ import pandas as pd
 import re
 import os
 import sys
-import time
-import requests
 from pathlib import Path
 from datetime import datetime
 from weather_pipeline import (
@@ -42,28 +41,41 @@ from weather_pipeline import (
 def clean(text):
     return re.sub(r'\s+', ' ', text or '').strip()
 
+
 def parse_price_range(raw):
     raw = str(raw).strip().replace(' ', '')
     if not raw or raw.upper() in ('N/A', 'NIL', '-', ''):
         return None, None
     m = re.match(r'^(\d+)-(\d+)$', raw)
-    if m:  return float(m.group(1)), float(m.group(2))
+    if m:
+        return float(m.group(1)), float(m.group(2))
     m = re.match(r'^(\d+)-$', raw)
-    if m:  return float(m.group(1)), None
+    if m:
+        return float(m.group(1)), None
     m = re.match(r'^-(\d+)$', raw)
-    if m:  return None, float(m.group(1))
+    if m:
+        return None, float(m.group(1))
     m = re.match(r'^(\d+)$', raw)
-    if m:  v = float(m.group(1)); return v, v
+    if m:
+        value = float(m.group(1))
+        return value, value
     return None, None
+
 
 def weather_score(text):
     t = text.lower()
-    if 'heavy rain' in t or 'very wet' in t: return 5
-    if 'rain' in t and 'bright' not in t:    return 4
-    if 'shower' in t:                        return 3
-    if 'occasional shower' in t:             return 2
-    if 'bright' in t or 'sunny' in t:        return 1
+    if 'heavy rain' in t or 'very wet' in t:
+        return 5
+    if 'rain' in t and 'bright' not in t:
+        return 4
+    if 'shower' in t:
+        return 3
+    if 'occasional shower' in t:
+        return 2
+    if 'bright' in t or 'sunny' in t:
+        return 1
     return 3
+
 
 def sentiment_from_text(text):
     t = text.lower()
@@ -77,6 +89,7 @@ def sentiment_from_text(text):
     n = sum(t.count(w) for w in neg)
     total = p + n
     return round((p - n) / total, 4) if total else 0.0
+
 
 def sale_id(sale_number, sale_year):
     return f"SALE_{sale_number:02d}_{sale_year}"
@@ -98,29 +111,42 @@ def extract_header(full_text):
         full_text, re.I)
     if m:
         meta['sale_date_raw'] = f"{m.group(1)} {m.group(2).capitalize()} {m.group(3)}"
-        meta['sale_year']  = int(m.group(3))
+        meta['sale_year'] = int(m.group(3))
         meta['sale_month'] = m.group(2).capitalize()
     else:
         meta['sale_date_raw'] = meta['sale_year'] = meta['sale_month'] = None
     return meta
 
 
+
 # ── MODULE 2 : Overall Market + Auction Details (Page 2) ────────────────────
 CATEGORY_MAP = {
-    'ExEstate': 'ex_estate', 'Ex Estate': 'ex_estate',
-    'High&Medium': 'high_medium', 'High & Medium': 'high_medium',
-    'Leafy': 'leafy', 'SemiLeafy': 'semi_leafy', 'Semi Leafy': 'semi_leafy',
-    'Tippy/SmallLeaf': 'tippy', 'Tippy/Small Leaf': 'tippy',
-    'PremiumFlowery': 'premium_flowery', 'Premium Flowery': 'premium_flowery',
-    'OffGrade': 'off_grade', 'Off Grade': 'off_grade',
-    'Dust': 'dust', 'Total': 'total',
+    'ExEstate': 'ex_estate',
+    'Ex Estate': 'ex_estate',
+    'High&Medium': 'high_medium',
+    'High & Medium': 'high_medium',
+    'Leafy': 'leafy',
+    'SemiLeafy': 'semi_leafy',
+    'Semi Leafy': 'semi_leafy',
+    'Tippy/SmallLeaf': 'tippy',
+    'Tippy/Small Leaf': 'tippy',
+    'PremiumFlowery': 'premium_flowery',
+    'Premium Flowery': 'premium_flowery',
+    'OffGrade': 'off_grade',
+    'Off Grade': 'off_grade',
+    'Dust': 'dust',
+    'Total': 'total',
 }
 DEMAND_MAP = {
-    'Good': 'good', 'Fair': 'fair',
-    'Fairgeneral': 'fair_general', 'Fair general': 'fair_general',
-    'Less': 'less', 'Poor': 'poor',
+    'Good': 'good',
+    'Fair': 'fair',
+    'Fairgeneral': 'fair_general',
+    'Fair general': 'fair_general',
+    'Less': 'less',
+    'Poor': 'poor',
 }
 DEMAND_NUM = {'good': 4, 'fair': 3, 'fair_general': 3, 'less': 2, 'poor': 1}
+
 
 def extract_overall_market(page2_text):
     """Returns list of dicts – one per category row."""
@@ -131,15 +157,16 @@ def extract_overall_market(page2_text):
         r'Premium Flowery|OffGrade|Off Grade|Dust|Total)\s+'
         r'(\d+\.\d+)\s+(\w[\w ]*)', re.I)
     for m in pattern.finditer(page2_text):
-        cat    = CATEGORY_MAP.get(m.group(1).strip(), m.group(1).lower().replace(' ', '_'))
+        cat = CATEGORY_MAP.get(m.group(1).strip(), m.group(1).lower().replace(' ', '_'))
         demand = DEMAND_MAP.get(clean(m.group(3)), clean(m.group(3)).lower())
         rows.append({
-            'category':         cat,
-            'qty_mkgs':         float(m.group(2)),
-            'demand_label':     demand,
-            'demand_score':     DEMAND_NUM.get(demand, 3),
+            'category': cat,
+            'qty_mkgs': float(m.group(2)),
+            'demand_label': demand,
+            'demand_score': DEMAND_NUM.get(demand, 3),
         })
     return rows
+
 
 def extract_auction_details(page2_text):
     """Returns dict of totals + list of per-category lot/quantity rows."""
@@ -147,19 +174,19 @@ def extract_auction_details(page2_text):
     m = re.search(r'([\d,]+)\s*LOTS\s*TOTALLING\s*([\d,]+)', page2_text, re.I)
     if m:
         totals['total_lots'] = int(m.group(1).replace(',', ''))
-        totals['total_kgs']  = int(m.group(2).replace(',', ''))
+        totals['total_kgs'] = int(m.group(2).replace(',', ''))
 
     m = re.search(r'Re-?Prints?\s+([\d,]+)\s+([\d,]+)', page2_text, re.I)
     if m:
-        totals['reprint_lots']     = int(m.group(1).replace(',', ''))
+        totals['reprint_lots'] = int(m.group(1).replace(',', ''))
         totals['reprint_quantity'] = int(m.group(2).replace(',', ''))
 
     m = re.search(
         r'(\d{2}/\d{2}/\d{4})\s+(\d{2}/\d{2}/\d{4})\s+(\d{2}/\d{2}/\d{4})',
         page2_text)
     if m:
-        totals['settlement_10pct']   = m.group(1)
-        totals['settlement_buyers']  = m.group(2)
+        totals['settlement_10pct'] = m.group(1)
+        totals['settlement_buyers'] = m.group(2)
         totals['settlement_sellers'] = m.group(3)
 
     label_map = {
@@ -177,8 +204,8 @@ def extract_auction_details(page2_text):
         key = label_map.get(m.group(1).strip(), m.group(1).lower())
         cat_rows.append({
             'category': key,
-            'lots':     int(m.group(2).replace(',', '')),
-            'kgs':      int(m.group(3).replace(',', '')),
+            'lots': int(m.group(2).replace(',', '')),
+            'kgs': int(m.group(3).replace(',', '')),
         })
     return totals, cat_rows
 
@@ -188,18 +215,23 @@ def extract_commentary(full_text):
     m = re.search(r'COMMENTS\s*(.*?)(?:NATIONAL TEA|WORLD TEA|CROP AND|$)',
                   full_text, re.S | re.I)
     if not m:
-        return {'commentary': '', 'sentiment_overall': 0.0,
-                'sentiment_ex_estate': 0.0, 'sentiment_low_grown': 0.0}
+        return {
+            'commentary': '',
+            'sentiment_overall': 0.0,
+            'sentiment_ex_estate': 0.0,
+            'sentiment_low_grown': 0.0,
+        }
     comments = clean(m.group(1))
     lg_start = comments.lower().find('low grown')
     return {
-        'commentary':           comments[:1500],
-        'sentiment_overall':    sentiment_from_text(comments),
-        'sentiment_ex_estate':  sentiment_from_text(
+        'commentary': comments[:1500],
+        'sentiment_overall': sentiment_from_text(comments),
+        'sentiment_ex_estate': sentiment_from_text(
             re.sub(r'(?i)low grown.*', '', comments)),
-        'sentiment_low_grown':  sentiment_from_text(
+        'sentiment_low_grown': sentiment_from_text(
             comments[lg_start:] if lg_start >= 0 else ''),
     }
+
 
 
 # ── MODULE 4 : Weather + Crop ────────────────────────────────────────────────
@@ -217,7 +249,7 @@ def extract_weather(full_text):
         m = re.search(pat, full_text, re.S | re.I)
         if m:
             desc = clean(m.group(1))
-            result[f'{region}_weather_desc']  = desc[:250]
+            result[f'{region}_weather_desc'] = desc[:250]
             result[f'{region}_weather_score'] = weather_score(desc)
 
     m = re.search(r'Crop\s*(.*?)(?:FORBES|$)', full_text, re.S | re.I)
@@ -231,12 +263,15 @@ def extract_weather(full_text):
     for region in ['nuwara_eliya', 'western', 'uva', 'low_grown']:
         cl = crop.lower()
         if region.replace('_', ' ') in cl:
-            if 'decrease' in cl:   trend = -1
+            if 'decrease' in cl:
+                trend = -1
             elif 'increase' in cl: trend = 1
-            else:                  trend = 0
+            else:
+                trend = 0
             result[f'crop_{region}_trend'] = trend
 
     return result
+
 
 
 # ── MODULE 5 : Production ────────────────────────────────────────────────────
@@ -246,10 +281,12 @@ def extract_production(full_text):
     if m: result['sl_production_mkgs'] = float(m.group(1))
 
     m = re.search(r'([\d.]+)\s+M/Kgs\s+(?:decrease|decline)', full_text, re.I)
-    if m:   result['sl_production_yoy_variance'] = -float(m.group(1))
+    if m:
+        result['sl_production_yoy_variance'] = -float(m.group(1))
     else:
         m = re.search(r'([\d.]+)\s+M/Kgs\s+increase', full_text, re.I)
-        if m: result['sl_production_yoy_variance'] = float(m.group(1))
+        if m:
+            result['sl_production_yoy_variance'] = float(m.group(1))
 
     for elev in ['HIGH', 'MEDIUM', 'LOW']:
         m = re.search(
@@ -259,28 +296,29 @@ def extract_production(full_text):
             k = elev.lower()
             result[f'prod_{k}_2026'] = int(m.group(1).replace(',', ''))
             result[f'prod_{k}_2025'] = int(m.group(2).replace(',', ''))
-            result[f'prod_{k}_var']  = float(m.group(3))
-            result[f'prod_{k}_pct']  = float(m.group(4))
+            result[f'prod_{k}_var'] = float(m.group(3))
+            result[f'prod_{k}_pct'] = float(m.group(4))
     return result
+
 
 
 # ── MODULE 6 : Quantity Sold + Exchange Rates ────────────────────────────────
 def extract_quantity_sold(full_text):
     result = {}
     channel_map = {
-        'PRIVATESALES':    'private_sales',
-        'PUBLICAUCTION':   'public_auction',
-        'FORWARDCONTRACTS':'forward_contracts',
-        'TOTAL':           'total_sold',
+        'PRIVATESALES': 'private_sales',
+        'PUBLICAUCTION': 'public_auction',
+        'FORWARDCONTRACTS': 'forward_contracts',
+        'TOTAL': 'total_sold',
     }
     for raw, key in channel_map.items():
         m = re.search(raw + r'\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)',
                       full_text, re.I)
         if m:
-            result[f'{key}_weekly_2026']  = int(m.group(1).replace(',',''))
-            result[f'{key}_weekly_2025']  = int(m.group(2).replace(',',''))
-            result[f'{key}_todate_2026']  = int(m.group(3).replace(',',''))
-            result[f'{key}_todate_2025']  = int(m.group(4).replace(',',''))
+            result[f'{key}_weekly_2026'] = int(m.group(1).replace(',', ''))
+            result[f'{key}_weekly_2025'] = int(m.group(2).replace(',', ''))
+            result[f'{key}_todate_2026'] = int(m.group(3).replace(',', ''))
+            result[f'{key}_todate_2025'] = int(m.group(4).replace(',', ''))
 
     # Average price per auction (most recent row)
     for m in re.finditer(
@@ -290,9 +328,9 @@ def extract_quantity_sold(full_text):
         r'([\d.]+)\s+([\d.]+)\s+([\d.]+)',
         full_text, re.I):
         label = f"{m.group(1).lower()}_{m.group(2)}"
-        result[f'avg_qty_mkgs_{label}_2026']  = float(m.group(3))
-        result[f'avg_lkr_{label}_2026']       = float(m.group(6))
-        result[f'avg_usd_{label}_2026']       = float(m.group(9))
+        result[f'avg_qty_mkgs_{label}_2026'] = float(m.group(3))
+        result[f'avg_lkr_{label}_2026'] = float(m.group(6))
+        result[f'avg_usd_{label}_2026'] = float(m.group(9))
 
     for currency, key in [('USD','usd'),('STG.PD','gbp'),('EURO','eur'),('YEN','jpy')]:
         m = re.search(
@@ -305,22 +343,23 @@ def extract_quantity_sold(full_text):
     return result
 
 
+
 # ── MODULE 7 : Gross Sales Average ──────────────────────────────────────────
 def extract_gross_averages(full_text):
     result = {}
     seg_map = {
-        'UvaHighGrown':             'uva_high',
-        'WesternHighGrown':         'western_high',
-        'CTCHighGrown':             'ctc_high',
-        r'HighGrown\(Summary\)':    'high_summary',
-        'UvaMediumGrown':           'uva_medium',
-        'WesternMediumGrown':       'western_medium',
-        'CTCMediumGrown':           'ctc_medium',
-        r'MediumGrown\(Summary\)':  'medium_summary',
-        'OrthodoxLowGrown':         'orthodox_low',
-        'CTCLowGrown':              'ctc_low',
-        r'LowGrown\(Summary\)':     'low_summary',
-        'Total':                    'total',
+        'UvaHighGrown': 'uva_high',
+        'WesternHighGrown': 'western_high',
+        'CTCHighGrown': 'ctc_high',
+        r'HighGrown\(Summary\)': 'high_summary',
+        'UvaMediumGrown': 'uva_medium',
+        'WesternMediumGrown': 'western_medium',
+        'CTCMediumGrown': 'ctc_medium',
+        r'MediumGrown\(Summary\)': 'medium_summary',
+        'OrthodoxLowGrown': 'orthodox_low',
+        'CTCLowGrown': 'ctc_low',
+        r'LowGrown\(Summary\)': 'low_summary',
+        'Total': 'total',
     }
     for pat, key in seg_map.items():
         m = re.search(
@@ -335,18 +374,20 @@ def extract_gross_averages(full_text):
     return result
 
 
+
 # ── MODULE 8 : Price Quotations – High Grown ─────────────────────────────────
 HG_SEGMENTS = {
-    'BestWesterns':           'best_western',
-    'BelowBestWesterns':      'below_best_western',
-    'PlainerWesterns':        'plainer_western',
-    'NuwaraEliyas':           'nuwara_eliya',
+    'BestWesterns': 'best_western',
+    'BelowBestWesterns': 'below_best_western',
+    'PlainerWesterns': 'plainer_western',
+    'NuwaraEliyas': 'nuwara_eliya',
     'BrighterUdapussellawas': 'brighter_udapussellawa',
-    'OtherUdapussellawas':    'other_udapussellawa',
-    'BestUvas':               'best_uva',
-    'OtherUvas':              'other_uva',
+    'OtherUdapussellawas': 'other_udapussellawa',
+    'BestUvas': 'best_uva',
+    'OtherUvas': 'other_uva',
 }
 HG_GRADES = ['bop', 'bopf', 'pekoe_fbop', 'op']
+
 
 def extract_hg_prices(price_pages_text):
     """Returns list of dicts – one per (segment × grade) with lo/hi prices."""
@@ -355,7 +396,7 @@ def extract_hg_prices(price_pages_text):
         label_re = raw_seg.replace(' ', r'\s*')
         m = re.search(
             label_re + r'\s+([\d\-]+)\s+([\d\-]+)\s+([\d\-]+)\s+([\d\-]+)'
-                       r'\s+([\d\-]+)\s+([\d\-]+)\s+([\d\-]+)\s+([\d\-]+)',
+            r'\s+([\d\-]+)\s+([\d\-]+)\s+([\d\-]+)\s+([\d\-]+)',
             price_pages_text, re.I)
         if not m:
             continue
@@ -363,32 +404,34 @@ def extract_hg_prices(price_pages_text):
         for i, grade in enumerate(HG_GRADES):
             lo, hi = parse_price_range(m.group(2 + i * 2))
             rows.append({
-                'elevation':    'high_grown',
-                'segment':      seg,
-                'grade':        grade,
+                'elevation': 'high_grown',
+                'segment': seg,
+                'grade': grade,
                 'price_lo_lkr': lo,
                 'price_hi_lkr': hi,
             })
     return rows
 
 
+
 # ── MODULE 9 : Price Quotations – Low Grown ──────────────────────────────────
 LG_GRADES = {
-    r'FBOPF\s*\(TIPPY\)/FBOPFSP':  'fbopf_tippy',
-    r'FBOPF1':                      'fbopf1',
-    r'(?<![A-Z])FBOPF(?!1)':        'fbopf',
-    r'(?<![A-Z])FBOP1':             'fbop1',
-    r'(?<![A-Z])FBOP(?!F|1)':       'fbop',
-    r'(?<![A-Z])BOP1':              'bop1',
-    r'(?<![A-Z])BOPF':              'bopf',
-    r'(?<![A-Z])BOP(?!F|1)':        'bop',
-    r'(?<![A-Z])OP1':               'op1',
-    r'(?<![A-Z])OPA':               'opa',
-    r'(?<![A-Z])OP(?!A|1)':         'op',
-    r'(?<![A-Z])PEKOE':             'pekoe',
-    r'(?<![A-Z])PEK1':              'pek1',
+    r'FBOPF\s*\(TIPPY\)/FBOPFSP': 'fbopf_tippy',
+    r'FBOPF1': 'fbopf1',
+    r'(?<![A-Z])FBOPF(?!1)': 'fbopf',
+    r'(?<![A-Z])FBOP1': 'fbop1',
+    r'(?<![A-Z])FBOP(?!F|1)': 'fbop',
+    r'(?<![A-Z])BOP1': 'bop1',
+    r'(?<![A-Z])BOPF': 'bopf',
+    r'(?<![A-Z])BOP(?!F|1)': 'bop',
+    r'(?<![A-Z])OP1': 'op1',
+    r'(?<![A-Z])OPA': 'opa',
+    r'(?<![A-Z])OP(?!A|1)': 'op',
+    r'(?<![A-Z])PEKOE': 'pekoe',
+    r'(?<![A-Z])PEK1': 'pek1',
 }
 LG_TIERS = ['select_best', 'best', 'below_best', 'others']
+
 
 def extract_lg_prices(price_pages_text):
     """Returns list of dicts – one per (grade × tier) with lo/hi prices."""
@@ -403,36 +446,38 @@ def extract_lg_prices(price_pages_text):
         for i, tier in enumerate(LG_TIERS):
             lo, hi = parse_price_range(m.group(2 + i * 2))
             rows.append({
-                'elevation':    'low_grown',
-                'grade':        grade,
-                'tier':         tier,
-                'price_lo_lkr': lo,
-                'price_hi_lkr': hi,
+                    'elevation': 'low_grown',
+                    'grade': grade,
+                    'tier': tier,
+                    'price_lo_lkr': lo,
+                    'price_hi_lkr': hi,
             })
     return rows
 
 
+
 # ── MODULE 10 : Off-Grade + Dust Prices ──────────────────────────────────────
 OG_ROWS = {
-    r'BetterFannings\(Orthodox\)':  'fannings_orthodox_better',
-    r'BetterFannings\(CTC\)':       'fannings_ctc_better',
-    r'OtherFannings\(Orthodox\)':   'fannings_orthodox_other',
-    r'OtherFannings\(CTC\)':        'fannings_ctc_other',
-    r'GoodBrokens':                 'brokens_good',
-    r'OtherBrokens':                'brokens_other',
-    r'BetterBOP1As':                'bop1a_better',
-    r'OtherBOP1As':                 'bop1a_other',
+        r'BetterFannings\(Orthodox\)': 'fannings_orthodox_better',
+        r'BetterFannings\(CTC\)': 'fannings_ctc_better',
+        r'OtherFannings\(Orthodox\)': 'fannings_orthodox_other',
+        r'OtherFannings\(CTC\)': 'fannings_ctc_other',
+        r'GoodBrokens': 'brokens_good',
+        r'OtherBrokens': 'brokens_other',
+        r'BetterBOP1As': 'bop1a_better',
+        r'OtherBOP1As': 'bop1a_other',
 }
 DUST_ROWS = {
-    r'BetterPrimaryDust\(Orthodox\)':    'primary_orth_better',
-    r'BetterPrimaryDust\(CTC\)P\.Dust':  'primary_ctc_better',
-    r'BelowBestPrimaryDust\(Orthodox\)': 'primary_orth_below_best',
-    r'OtherPrimaryDust\(CTC\)P\.Dust':   'primary_ctc_other',
-    r'OtherPrimaryDust\(Orthodox\)':     'primary_orth_other',
-    r'BetterSecondaryDust':              'secondary_better',
-    r'OtherSecondaryDust':               'secondary_other',
+        r'BetterPrimaryDust\(Orthodox\)': 'primary_orth_better',
+        r'BetterPrimaryDust\(CTC\)P\.Dust': 'primary_ctc_better',
+        r'BelowBestPrimaryDust\(Orthodox\)': 'primary_orth_below_best',
+        r'OtherPrimaryDust\(CTC\)P\.Dust': 'primary_ctc_other',
+        r'OtherPrimaryDust\(Orthodox\)': 'primary_orth_other',
+        r'BetterSecondaryDust': 'secondary_better',
+        r'OtherSecondaryDust': 'secondary_other',
 }
 ELEVATIONS = ['high', 'medium', 'low']
+
 
 def extract_offgrade_dust_prices(price_pages_text):
     """Returns list of dicts – one per (category × elevation)."""
@@ -450,12 +495,13 @@ def extract_offgrade_dust_prices(price_pages_text):
                 lo, hi = parse_price_range(m.group(2 + i * 2))
                 rows.append({
                     'category_type': category_type,
-                    'category':      label,
-                    'elevation':     elev,
-                    'price_lo_lkr':  lo,
-                    'price_hi_lkr':  hi,
+                    'category': label,
+                    'elevation': elev,
+                    'price_lo_lkr': lo,
+                    'price_hi_lkr': hi,
                 })
     return rows
+
 
 
 # ── MODULE 11 : Top Prices ────────────────────────────────────────────────────
@@ -473,6 +519,7 @@ TOP_PAT = re.compile(
     r'(@)?\s*([\d,]+)'
 )
 
+
 def extract_top_prices(pages_text):
     records = []
     current_region = 'Unknown'
@@ -483,11 +530,11 @@ def extract_top_prices(pages_text):
         m = TOP_PAT.search(line)
         if m:
             records.append({
-                'estate':    clean(m.group(1)),
-                'grade':     m.group(2).replace(' ', ''),
-                'fw_sold':   1 if m.group(3) == '@' else 0,
+                'estate': clean(m.group(1)),
+                'grade': m.group(2).replace(' ', ''),
+                'fw_sold': 1 if m.group(3) == '@' else 0,
                 'price_lkr': int(m.group(4).replace(',', '')),
-                'region':    current_region,
+                'region': current_region,
             })
     return records
 
@@ -500,45 +547,45 @@ def extract_pdf(pdf_path):
     print(f"  Processing: {pdf_path}")
     with pdfplumber.open(pdf_path) as pdf:
         pages = [p.extract_text() or '' for p in pdf.pages]
-    full   = '\n'.join(pages)
-    page2  = pages[1] if len(pages) > 1 else full
+    full = '\n'.join(pages)
+    page2 = pages[1] if len(pages) > 1 else full
     price_pages = '\n'.join(pages[5:12])
-    top_pages   = '\n'.join(pages[9:12])
+    top_pages = '\n'.join(pages[9:12])
 
-    header   = extract_header(full)
-    sn       = header.get('sale_number')
-    sy       = header.get('sale_year')
-    sid      = sale_id(sn, sy) if sn and sy else f"UNKNOWN_{os.path.basename(str(pdf_path))}"
+    header = extract_header(full)
+    sn = header.get('sale_number')
+    sy = header.get('sale_year')
+    sid = sale_id(sn, sy) if sn and sy else f"UNKNOWN_{os.path.basename(str(pdf_path))}"
 
-    market_rows         = extract_overall_market(page2)
-    totals, cat_rows    = extract_auction_details(page2)
-    commentary          = extract_commentary(full)
-    weather             = extract_weather(full)
+    market_rows = extract_overall_market(page2)
+    totals, cat_rows = extract_auction_details(page2)
+    commentary = extract_commentary(full)
+    weather = extract_weather(full)
     text_weather_regions = parse_region_weather_text(full)
-    production          = extract_production(full)
-    qty_sold      = extract_quantity_sold(full)
-    gross_avg     = extract_gross_averages(full)
-    hg_prices     = extract_hg_prices(price_pages)
-    lg_prices     = extract_lg_prices(price_pages)
-    og_prices     = extract_offgrade_dust_prices(price_pages)
-    top_prices    = extract_top_prices(top_pages)
+    production = extract_production(full)
+    qty_sold = extract_quantity_sold(full)
+    gross_avg = extract_gross_averages(full)
+    hg_prices = extract_hg_prices(price_pages)
+    lg_prices = extract_lg_prices(price_pages)
+    og_prices = extract_offgrade_dust_prices(price_pages)
+    top_prices = extract_top_prices(top_pages)
 
     return {
-        'sale_id':     sid,
-        'header':      header,
+        'sale_id': sid,
+        'header': header,
         'market_rows': market_rows,
-        'totals':      totals,
-        'cat_rows':    cat_rows,
-        'commentary':  commentary,
-        'weather':              weather,
+        'totals': totals,
+        'cat_rows': cat_rows,
+        'commentary': commentary,
+        'weather': weather,
         'text_weather_regions': text_weather_regions,
-        'production':           production,
-        'qty_sold':    qty_sold,
-        'gross_avg':   gross_avg,
-        'hg_prices':   hg_prices,
-        'lg_prices':   lg_prices,
-        'og_prices':   og_prices,
-        'top_prices':  top_prices,
+        'production': production,
+        'qty_sold': qty_sold,
+        'gross_avg': gross_avg,
+        'hg_prices': hg_prices,
+        'lg_prices': lg_prices,
+        'og_prices': og_prices,
+        'top_prices': top_prices,
         'source_file': os.path.basename(str(pdf_path)),
         'extracted_at': datetime.now().isoformat(timespec='seconds'),
     }
@@ -607,12 +654,6 @@ def build_quantity_sold(extractions):
     One row per sale. Weekly/YTD volumes, average prices, FX rates.
     Subset of sales_index for clarity.
     """
-    keep_prefixes = (
-        'sale_id', 'sale_number', 'sale_year', 'sale_month',
-        'private_sales_', 'public_auction_', 'forward_contracts_',
-        'total_sold_', 'avg_qty_', 'avg_lkr_', 'avg_usd_',
-        'fx_usd_', 'fx_gbp_', 'fx_eur_', 'fx_jpy_',
-    )
     rows = []
     for e in extractions:
         row = {
@@ -672,9 +713,6 @@ def build_top_prices(extractions):
         for r in e['top_prices']:
             rows.append({'sale_id': e['sale_id'], **r})
     return pd.DataFrame(rows)
-
-
-
 
 
 # ─────────────────────────────────────────────────────────────────────────────

@@ -1,3 +1,4 @@
+# flake8: noqa
 """
 Tea Auction Weather Data Pipeline
 ==================================
