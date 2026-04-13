@@ -497,26 +497,26 @@ def build_reduced_master(
                                           "sale_date_raw","table_source","elevation",
                                           "category_type","grade","tier","category"]],
             "Price (target)"         : [c for c in master_reduced.columns if "price_" in c],
-            "Auction totals"         : [c for c in master_reduced.columns if c in
-                                         ["total_lots","total_kgs","reprint_lots","reprint_quantity"]],
-            "Sentiment"              : [c for c in master_reduced.columns if "sentiment" in c],
+            "Auction totals": [c for c in master_reduced.columns if c in
+                               ["total_lots", "total_kgs", "reprint_lots", "reprint_quantity"]],
+            "Sentiment": [c for c in master_reduced.columns if "sentiment" in c],
             "Weather severity (text)": [c for c in master_reduced.columns if "weather_score" in c or "avg_weather" in c],
-            "Crop trends"            : [c for c in master_reduced.columns if "crop_" in c],
-            "FX rates"               : [c for c in master_reduced.columns if "fx_" in c],
-            "Volume sold"            : [c for c in master_reduced.columns if any(
-                                         k in c for k in ["sold","auction_weekly","auction_todate",
-                                                           "private_sales","forward_contracts"])],
-            "Demand (pivot)"         : [c for c in master_reduced.columns if "__demand_score" in c],
-            "Qty offered (pivot)"    : [c for c in master_reduced.columns if "__qty_mkgs" in c],
-            "Production"             : [c for c in master_reduced.columns if "sl_production" in c],
-            "Derived signals"        : [c for c in master_reduced.columns if c in
-                                         ["volume_yoy_change_pct","all_regions__avg_precipitation"]],
-            "Weather API (current)"  : [c for c in master_reduced.columns if
-                                         any(r+"__" in c for r in REGIONS) and "lag" not in c],
-            "Weather API (lags)"     : [c for c in master_reduced.columns if
-                                         any(r+"__" in c for r in REGIONS) and "lag" in c],
+            "Crop trends": [c for c in master_reduced.columns if "crop_" in c],
+            "FX rates": [c for c in master_reduced.columns if "fx_" in c],
+            "Volume sold": [c for c in master_reduced.columns if any(
+                               k in c for k in ["sold", "auction_weekly", "auction_todate",
+                                                 "private_sales", "forward_contracts"])],
+            "Demand (pivot)": [c for c in master_reduced.columns if "__demand_score" in c],
+            "Qty offered (pivot)": [c for c in master_reduced.columns if "__qty_mkgs" in c],
+            "Production": [c for c in master_reduced.columns if "sl_production" in c],
+            "Derived signals": [c for c in master_reduced.columns if c in
+                                 ["volume_yoy_change_pct", "all_regions__avg_precipitation"]],
+            "Weather API (current)": [c for c in master_reduced.columns if
+                                      any(r + "__" in c for r in REGIONS) and "lag" not in c],
+            "Weather API (lags)": [c for c in master_reduced.columns if
+                                    any(r + "__" in c for r in REGIONS) and "lag" in c],
         }
-        print(f"\n  Column group breakdown:")
+        print("\n  Column group breakdown:")
         total_accounted = 0
         for grp, cols in groups.items():
             cols = [c for c in cols if c in master_reduced.columns]
@@ -525,9 +525,9 @@ def build_reduced_master(
             print(f"    {grp:28s}: {len(cols):3d} cols  avg_null={avg_null:5.1f}%")
         unaccounted = master_reduced.shape[1] - total_accounted
         if unaccounted:
-            print(f"    {'(other)':28s}: {unaccounted:3d} cols")
+            print("    {'(other)':28s}: {unaccounted:3d} cols")
 
-    print(f"\n  Sample — first 3 rows, identity + price cols:")
+    print("\n  Sample — first 3 rows, identity + price cols:")
     sample_cols = [c for c in identity_cols if c in master_reduced.columns]
     print(master_reduced[sample_cols].head(3).to_string(index=False))
 
