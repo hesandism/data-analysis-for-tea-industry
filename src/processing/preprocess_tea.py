@@ -160,8 +160,8 @@ def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, di
 # ──────────────────────────────────────────────────────────
 # LOAD
 # ──────────────────────────────────────────────────────────
-_ROOT       = Path(__file__).parent.parent.parent
-INPUT_FILE  = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
+_ROOT = Path(__file__).parent.parent.parent
+INPUT_FILE = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
 OUTPUT_FILE = _ROOT / "data" / "processed" / "tea_preprocessed.csv"
 
 df = pd.read_csv(INPUT_FILE)
@@ -210,7 +210,7 @@ ELEVATION_MAP = {"high": "high_grown", "low": "low_grown", "medium": "medium_gro
 before = df["elevation"].value_counts().to_dict()
 df["elevation"] = df["elevation"].replace(ELEVATION_MAP)
 after = df["elevation"].value_counts().to_dict()
-print(f"\n[C3] Elevation normalised:")
+print("\n[C3] Elevation normalised:")
 print(f"     Before: {before}")
 print(f"     After:  {after}")
 
@@ -230,7 +230,7 @@ print(f"     After:  {after}")
 # grade and tier ONLY apply to 05_low_grown rows.
 # DO NOT impute. Use table_source to subset first.
 pct_grade_null = df["grade"].isna().mean() * 100
-pct_tier_null  = df["tier"].isna().mean() * 100
+pct_tier_null = df["tier"].isna().mean() * 100
 print(f"\n[H3] grade null = {pct_grade_null:.1f}%  |  tier null = {pct_tier_null:.1f}%")
 print("     Structural nulls — NOT imputed. Subset by table_source='05_low_grown' first.")
 
@@ -263,7 +263,7 @@ df["is_production_known"] = df["sl_production_mkgs"].notna().astype(int)
 prod_mean = df.loc[df["is_production_known"] == 1, "sl_production_mkgs"].mean()
 df["sl_production_mkgs"] = df["sl_production_mkgs"].fillna(prod_mean)
 print(f"\n[M2] sl_production_mkgs imputed with mean = {prod_mean:.2f} mkgs")
-print(f"     is_production_known flag column added")
+print("     is_production_known flag column added")
 
 # ── M3: FX — derive USD price ────────────────────────────
 # FX barely varies across 10 sales (CV < 0.3–1%), so it has
@@ -321,10 +321,10 @@ le_src = LabelEncoder()
 df["table_source_enc"] = le_src.fit_transform(df["table_source"].fillna("unknown"))
 TABLE_SOURCE_MAP = dict(zip(le_src.classes_, le_src.transform(le_src.classes_).tolist()))
 
-print(f"\n[ENC] Encodings applied:")
-print(f"      sale_month_enc  (ordinal Jan=1 … Dec=12)")
-print(f"      tier_enc        (0=N/A, 1=others, 2=below_best, 3=best, 4=select_best)")
-print(f"      elevation_enc   (1=low_grown, 2=medium_grown, 3=high_grown)")
+print("\n[ENC] Encodings applied:")
+print("      sale_month_enc  (ordinal Jan=1 ... Dec=12)")
+print("      tier_enc        (0=N/A, 1=others, 2=below_best, 3=best, 4=select_best)")
+print("      elevation_enc   (1=low_grown, 2=medium_grown, 3=high_grown)")
 print(f"      category_type_enc {CATEGORY_TYPE_MAP}")
 print(f"      table_source_enc  {TABLE_SOURCE_MAP}")
 
@@ -335,8 +335,8 @@ print(f"      table_source_enc  {TABLE_SOURCE_MAP}")
 # Log transform to address right skew (skew 2.49 → ~0.55)
 df["price_mid_lkr_log"] = np.log1p(df["price_mid_lkr"])
 skew_orig = df["price_mid_lkr"].skew()
-skew_log  = df["price_mid_lkr_log"].skew()
-print(f"\n[TARGET] price_mid_lkr_log derived")
+skew_log = df["price_mid_lkr_log"].skew()
+print("\n[TARGET] price_mid_lkr_log derived")
 print(f"         Skew before: {skew_orig:.3f}  →  after log1p: {skew_log:.3f}")
 
 # Flag rows without a price target
