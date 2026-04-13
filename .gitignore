@@ -29,6 +29,8 @@ wheels/
 # Jupyter Notebook
 .ipynb_checkpoints/
 *.ipynb_checkpoints
+src/processing/unified_modeling_pipeline.ipynb
+src/processing/hyperparameter_tuning_pipeline.ipynb
 
 # Environment variables
 .env
