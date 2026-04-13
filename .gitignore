@@ -1,4 +1,6 @@
-# Virtual Environments
+# -----------------------------
+# Virtual environments
+# -----------------------------
 .venv/
 venv/
 env/
@@ -6,23 +8,95 @@ ENV/
 final_plan.md
 # Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.pyc
 
+# -----------------------------
+# Python packaging / build
+# -----------------------------
+.Python
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
+# -----------------------------
+# Testing / coverage / tooling
+# -----------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.hypothesis/
 
-# Environment variables
+# -----------------------------
+# Jupyter
+# -----------------------------
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# -----------------------------
+# Environment files
+# -----------------------------
 .env
 .env.local
 .env.*.local
 
+# -----------------------------
+# IDE / editor files
+# -----------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.code-workspace
 
-# Project specific
-data/Raw/*.pdf
-data/Interim/*.csv
-data/Processed/*.csv
+# -----------------------------
+# OS files
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# Logs
+# -----------------------------
+*.log
+
+# -----------------------------
+# Project-specific generated data
+# -----------------------------
+data/raw/*.pdf
+data/interim/*.csv
+data/processed/*.csv
 reports/figures/*.png
 reports/figures/*.jpg
-!reports/figures/fig14_missingness_audit.png
-!reports/figures/fig15_supply_demand_lags.png
-!reports/figures/fig16_fx_sentiment_interactions.png
-!reports/figures/fig17_outlier_volatility.png
+reports/figures/*.jpeg
 
+# -----------------------------
+# Optional: local database / temp files
+# -----------------------------
+*.sqlite3
+*.tmp
+*.temp
