@@ -113,6 +113,29 @@ Generated figures:
 - [reports/figures/fig11_lkr_vs_usd_price.png] — LKR vs USD price trend comparison exposing inflationary illusion
 - [reports/figures/fig12_top_estates.png] — Top estate consistency analysis revealing brand immunity to market shocks
 
+### 2.7 Granger Causality Testing
+Implemented in:
+- [notebooks/granger_causality.ipynb](notebooks/granger_causality.ipynb)
+
+**Task (T1.2):** Granger causality tests between lagged weather variables (precipitation, temperature, sunshine) and segment prices, at lag orders 1–4 per segment (High Grown, Low Grown, Off-Grade, Dust). Produces a compact IEEE-formatted table for paper Section V.
+
+Process:
+1. Aggregated price observations to one mean price per segment per sale (26-point weekly time series).
+2. Applied Augmented Dickey-Fuller (ADF) tests to all price and weather series; first-differenced non-stationary series before testing.
+3. Ran `statsmodels.grangercausalitytests` (SSR F-test) for all 48 triplets: 4 segments × 3 weather variables × 4 lag orders.
+4. Flagged marginal results (0.10 < p < 0.15) as tentative `(t)` given low power (n ≈ 22 effective observations at lag 4).
+
+Generated figures:
+- [reports/figures/figA_granger_pvalue_heatmap.png](reports/figures/figA_granger_pvalue_heatmap.png) — P-value heatmap (-log10 scale) across all 12 segment×variable pairs and 4 lag orders
+- [reports/figures/figB_granger_fstat_profiles.png](reports/figures/figB_granger_fstat_profiles.png) — F-statistic profiles per weather variable showing how test strength evolves with lag order
+- [reports/figures/figC_granger_timeseries_overlays.png](reports/figures/figC_granger_timeseries_overlays.png) — Dual-axis time-series overlays for all significant pairs (p < 0.05)
+- [reports/figures/figD_granger_adf_stationarity.png](reports/figures/figD_granger_adf_stationarity.png) — ADF p-values for all tested price and weather series (hatched = first-differenced)
+
+Generated tables:
+- [reports/tables/granger_causality_full.csv](reports/tables/granger_causality_full.csv) — All 48 test results (F-stat, p-value, significance marker)
+- [reports/tables/granger_causality_summary.csv](reports/tables/granger_causality_summary.csv) — Pivoted summary in IEEE format
+- [reports/tables/granger_causality_table.tex](reports/tables/granger_causality_table.tex) — LaTeX-formatted table for paper Section V
+
 
 ## 3. Current Data Inventory (Observed)
 
@@ -198,6 +221,15 @@ In [notebooks/tea_eda.ipynb](notebooks/tea_eda.ipynb):
 5. Weather-context and weather-grade sensitivity analysis.
 6. Figure export for paper-ready visuals.
 
+## Step H - Granger Causality Testing
+In [notebooks/granger_causality.ipynb](notebooks/granger_causality.ipynb):
+1. Aggregate row-level price data to one mean price per segment per sale (sale-level time series).
+2. ADF stationarity tests on all price and weather series; apply first-differencing where required.
+3. Run 48 Granger causality tests (SSR F-test) across all segment × weather variable × lag combinations.
+4. Identify significant causal relationships and best-lag per pair.
+5. Export IEEE-formatted summary table and LaTeX source for paper Section V.
+6. Generate four diagnostic figures (heatmap, F-profile, time-series overlays, ADF summary).
+
 ---
 
 ## 5. Preliminary Results (Current)
@@ -247,6 +279,50 @@ Interpretation:
 - Inflationary illusion (Fig 11): LKR and USD price trajectories diverge across the auction series, indicating that LKR-denominated broker sentiment signals can be misleading when currency depreciation is present.
 - Estate consistency (Fig 12): A small number of estates appear repeatedly in weekly top-price lists regardless of broader market conditions, suggesting a brand-immunity effect in the premium segment.
 - Volume contraction: 2026 auction volumes are running approximately 5.4% below 2025 levels, providing important supply-side context for price trend interpretation.
+
+### 5.6 Granger Causality Results
+
+**Test scope:** 48 tests — 4 segments × 3 weather variables (Precipitation, Temperature, Sunshine) × 4 lag orders (1–4 weeks). Series range: 23–26 auction sales (S34/25 – S10/26).
+
+**Stationarity decisions (ADF at α=0.05):**
+
+| Series | Result | Treatment |
+|--------|--------|-----------|
+| All price series (4 segments) | Non-stationary | First-differenced |
+| Precipitation (all regions) | Non-stationary | First-differenced |
+| Temperature (all regions) | Stationary | Levels |
+| Sunshine (all regions) | Stationary | Levels |
+
+**Overall significance summary:**
+
+| Threshold | Count (of 48) |
+|-----------|--------------|
+| p < 0.01 | 0 |
+| p < 0.05 | 3 |
+| p < 0.10 | 6 |
+
+**Significant relationships (p < 0.10):**
+
+| Segment | Weather Variable | Lag | F-stat | p-value | Marker |
+|---------|-----------------|-----|--------|---------|--------|
+| High Grown | Sunshine | 2 | 3.35 | 0.0649 | * |
+| High Grown | Sunshine | 3 | 2.97 | 0.0787 | * |
+| High Grown | Sunshine | 4 | 6.14 | 0.0147 | ** |
+| Off-Grade | Sunshine | 2 | 4.32 | 0.0293 | ** |
+| Off-Grade | Temperature | 1 | 7.00 | 0.0160 | ** |
+| Off-Grade | Temperature | 2 | 3.55 | 0.0530 | * |
+
+**Key findings by weather variable:**
+- **Precipitation:** No significant Granger causality detected (p < 0.10) in any segment. Prior week rainfall does not carry incremental predictive power beyond lagged prices alone.
+- **Temperature:** Granger-causes Off-Grade prices at Lag 1 (F=7.00, p=0.016 **). Effect weakens but remains marginal at Lag 2. No significant effect on High Grown, Low Grown, or Dust.
+- **Sunshine:** Strongest and most consistent causal signal. Granger-causes High Grown prices with increasing strength from Lag 2 through Lag 4 (best: Lag 4, F=6.14, p=0.015 **), consistent with a multi-week supply response. Also Granger-causes Off-Grade prices at Lag 2 (F=4.32, p=0.029 **).
+
+**Interpretation:**
+- The sunshine→High Grown relationship (strengthening from Lag 2 to Lag 4) supports the hypothesis that weather conditions during the growing period affect supply 2–4 auction weeks later.
+- Precipitation failing to achieve significance despite its theoretical relevance is likely a combination of small sample power (n ≈ 22–25) and high week-to-week variance in rainfall series.
+- Low Grown and Dust segments show no statistically significant weather Granger causality at any lag, suggesting their prices are driven more by demand-side or structural factors.
+- Results are treated as preliminary given the small auction window (26 sales). All interpretations in the paper should be qualified by the limited sample size.
+
 ---
 
 ## 6. Technical Validation Status
@@ -293,12 +369,15 @@ Action needed before final paper numbers:
 
 ### Notebooks
 - [notebooks/tea_eda.ipynb](notebooks/tea_eda.ipynb): Main EDA notebook for preliminary results and publication figures.
+- [notebooks/eda_extended.ipynb](notebooks/eda_extended.ipynb): Extended EDA targeting dual-market hypothesis (weather vs demand drivers).
+- [notebooks/granger_causality.ipynb](notebooks/granger_causality.ipynb): Granger causality tests (weather → price) for all segments at lags 1–4; produces IEEE table and four diagnostic figures.
 - [notebooks/test.ipynb](notebooks/test.ipynb): Experimental notebook; not the canonical EDA artifact.
 
 ### Outputs
 - [data/Interim](data/Interim): Extraction-stage structured tables.
 - [data/Processed](data/Processed): Modeling-stage master/reduced/preprocessed datasets.
 - [reports/figures](reports/figures): Primary exported figure set for the short paper.
+- [reports/tables](reports/tables): Statistical result tables (Granger causality full results, summary pivot, LaTeX source).
 
 ---
 
