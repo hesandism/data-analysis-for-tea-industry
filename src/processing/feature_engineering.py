@@ -9,6 +9,11 @@ This script builds three groups of engineered features on top of tea_preprocesse
 Output: tea_preprocessed_v2.csv  (+new feature columns appended)
 """
 
+import warnings
+warnings.filterwarnings("ignore")
+
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 from pathlib import Path
@@ -20,7 +25,7 @@ warnings.filterwarnings("ignore")
 # ─────────────────────────────────────────────
 # 0. LOAD DATA
 # ─────────────────────────────────────────────
-_ROOT = Path(__file__).parent.parent.parent
+_ROOT = Path(__file__).resolve().parent.parent.parent
 INPUT_PATH = _ROOT / "data" / "processed" / "tea_preprocessed.csv"
 OUTPUT_PATH = _ROOT / "data" / "processed" / "tea_preprocessed_v2.csv"
 
@@ -183,12 +188,12 @@ for segment, grp in df.groupby("category_type"):
     for col in ROLL_COLS:
         # Compute rolling mean over the PREVIOUS 3 sales (min_periods=1 avoids NaN at start)
         roll_data[f"roll3_mean__{col}"] = (
-            grp[col].rolling(window=WINDOW, min_periods=1).mean().values
+            grp[col].shift(1).rolling(window=WINDOW, min_periods=1).mean().values
         )
         # Rolling std for price (captures volatility)
         if col in PRICE_COLS:
             roll_data[f"roll3_std__{col}"] = (
-                grp[col].rolling(window=WINDOW, min_periods=1).std().fillna(0).values
+                grp[col].shift(1).rolling(window=WINDOW, min_periods=1).std().fillna(0).values
             )
 
     roll_df = pd.DataFrame(roll_data, index=grp.index)
@@ -204,35 +209,29 @@ print(f"  Added   : {len(rolling_df.columns)} rolling statistic features")
 # ─────────────────────────────────────────────────────────────────────────────
 print("\n[3/3] Building polynomial features (degree=2, top-5 weather predictors) ...")
 
-# ── 3a. Identify top-5 weather predictors by absolute correlation with price_mid_lkr
-#       Use only rows where price_mid_lkr is not NaN
-CANDIDATE_WEATHER = [
-    c for c in df.columns
-    if any(kw in c for kw in [
-        "precipitation_sum_total",
-        "sunshine_duration_total",
-        "temperature_2m_mean_mean",
-        "relative_humidity_2m_max_mean",
-        "windspeed_10m_max_mean",
-        "text_condition_score",
-        "all_regions__avg_precipitation",
-    ])
-    and "lag" not in c          # current-period features only
-    and df[c].dtype in [np.float64, np.int64]
+# ── 3a. Use a fixed, non-target-based weather feature set to avoid selection leakage
+fixed_weather_candidates = [
+    "all_regions__avg_precipitation",
+    "western_high__precipitation_sum_total",
+    "nuwara_eliya__precipitation_sum_total",
+    "uva_udapussellawa__precipitation_sum_total",
+    "low_grown__precipitation_sum_total",
+    "western_high__sunshine_duration_total",
+    "nuwara_eliya__sunshine_duration_total",
+    "uva_udapussellawa__sunshine_duration_total",
+    "low_grown__sunshine_duration_total",
+    "western_high__temperature_2m_mean_mean",
+    "nuwara_eliya__temperature_2m_mean_mean",
+    "uva_udapussellawa__temperature_2m_mean_mean",
+    "low_grown__temperature_2m_mean_mean",
+    "western_high__relative_humidity_2m_max_mean",
+    "low_grown__relative_humidity_2m_max_mean",
 ]
 
-price_ref = df["price_mid_lkr"]
-valid_mask = price_ref.notna()
-
-correlations = {}
-for col in CANDIDATE_WEATHER:
-    if df.loc[valid_mask, col].std() > 0:
-        correlations[col] = abs(df.loc[valid_mask, col].corr(price_ref[valid_mask]))
-
-top5_weather = sorted(correlations, key=correlations.get, reverse=True)[:5]
-print("  Top-5 weather predictors (by |corr| with price_mid_lkr):")
+top5_weather = [c for c in fixed_weather_candidates if c in df.columns][:5]
+print("  Fixed weather predictors used for polynomial features:")
 for rank, col in enumerate(top5_weather, 1):
-    print(f"    {rank}. {col:60s}  r={correlations[col]:.4f}")
+    print(f"    {rank}. {col:60s}")
 
 # ── 3b. Generate degree-2 polynomial features for those 5 columns
 poly_input = df[top5_weather].fillna(df[top5_weather].median())
@@ -254,10 +253,8 @@ rename_map = {
 poly_df_new = poly_df_new.rename(columns=rename_map)
 
 df = pd.concat([df, poly_df_new], axis=1)
-print(
-    f"  Added   : {len(poly_df_new.columns)} polynomial features "
-    f"({len([n for n in poly_feature_names if '^2' in n or ' ' in n])} sq + cross terms)"
-)
+print(f"  Added   : {len(poly_df_new.columns)} polynomial features "
+    f"({len([n for n in poly_feature_names if '^2' in n or ' ' in n])} sq + cross terms)")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
