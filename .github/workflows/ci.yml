@@ -27,7 +27,7 @@ jobs:
               run: |
                 python -m pip install --upgrade pip
                 if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-                pip install flake8 jupyter nbconvert statsmodels
+                pip install flake8 nbconvert
 
             - name: Check Python Syntax
               run: |
