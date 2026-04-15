@@ -1,0 +1,53 @@
+name: Python CI
+
+on:
+    push:   
+        branches: [ main ]    
+
+    pull_request:
+        branches: [ main]
+
+permissions:
+  contents: read
+
+jobs:
+    lint-and-check:
+        runs-on : ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up python
+              uses: actions/setup-python@v5
+              with: 
+                python-version: "3.11"
+
+            - name: Install Dependencies
+              run: |
+                python -m pip install --upgrade pip
+                if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+                pip install flake8 jupyter nbconvert
+
+            - name: Check Python Syntax
+              run: |
+                python -m compileall src
+
+            - name: Lint Python Files
+              run: |
+                flake8 src --max-line-length=120 --extend-ignore=E203,W503
+
+            - name: Execute all Jupyter notebooks
+              run: |
+                shopt -s nullglob
+                mkdir -p executed_notebooks
+                found=0
+                for notebook in notebooks/*.ipynb; do
+                    found=1
+                    echo "Running $notebook"
+                    base=$(basename "$notebook" .ipynb)
+                    jupyter nbconvert --to notebook --execute "$notebook" --output "${base}-executed.ipynb" --output-dir executed_notebooks
+                done
+                if [ $found -eq 0 ]; then
+                    echo "No notebooks found in notebooks/"
+                fi

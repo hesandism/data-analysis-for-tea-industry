@@ -9,14 +9,13 @@ This script builds three groups of engineered features on top of tea_preprocesse
 Output: tea_preprocessed_v2.csv  (+new feature columns appended)
 """
 
-import warnings
-warnings.filterwarnings("ignore")
-
-from pathlib import Path
-
 import numpy as np
 import pandas as pd
+from pathlib import Path
+import warnings
 from sklearn.preprocessing import PolynomialFeatures
+
+warnings.filterwarnings("ignore")
 
 # ─────────────────────────────────────────────
 # 0. LOAD DATA
@@ -39,11 +38,12 @@ df = df.sort_values(["sale_number", "category_type"]).reset_index(drop=True)
 # Each tea segment is grown in specific regions.
 # Map segment → primary and secondary weather region prefixes.
 SEGMENT_WEATHER_MAP = {
-    "high_grown" : ["western_high", "nuwara_eliya"],
-    "low_grown"  : ["low_grown"],
-    "off_grade"  : ["low_grown", "western_high"],   # mixed origin
-    "dust"       : ["low_grown", "western_high"],   # mixed origin
+    "high_grown": ["western_high", "nuwara_eliya"],
+    "low_grown": ["low_grown"],
+    "off_grade": ["low_grown", "western_high"],  # mixed origin
+    "dust": ["low_grown", "western_high"],  # mixed origin
 }
+
 
 def segment_weather_col(df_cols, segment, metric, suffix=""):
     """
@@ -70,9 +70,9 @@ for segment, group in df.groupby("category_type"):
 
     # ── 1a. Weather × Grade  ─────────────────────────────────────────────────
     # Use segment-relevant precipitation and sunshine
-    precip_col   = segment_weather_col(df.columns, segment, "precipitation_sum_total")
+    precip_col = segment_weather_col(df.columns, segment, "precipitation_sum_total")
     sunshine_col = segment_weather_col(df.columns, segment, "sunshine_duration_total")
-    temp_col     = segment_weather_col(df.columns, segment, "temperature_2m_mean_mean")
+    temp_col = segment_weather_col(df.columns, segment, "temperature_2m_mean_mean")
 
     mask = df["category_type"] == segment
 
@@ -110,10 +110,10 @@ for segment, group in df.groupby("category_type"):
     # ── 1c. Sentiment × Demand  ──────────────────────────────────────────────
     # Map each segment to the most relevant demand score
     demand_col_map = {
-        "high_grown" : "leafy__demand_score",        # leafy / premium flowery
-        "low_grown"  : "ex_estate__demand_score",
-        "off_grade"  : "off_grade__demand_score",
-        "dust"       : "dust__demand_score",
+        "high_grown": "leafy__demand_score",  # leafy / premium flowery
+        "low_grown": "ex_estate__demand_score",
+        "off_grade": "off_grade__demand_score",
+        "dust": "dust__demand_score",
     }
     demand_col = demand_col_map.get(segment)
 
@@ -153,8 +153,8 @@ print(f"  Added   : {len(interaction_df.columns)} interaction features")
 print("\n[2/3] Building rolling statistics (window=3, per segment) ...")
 
 # Columns to roll
-PRICE_COLS   = ["price_mid_lkr", "price_lo_lkr", "price_hi_lkr", "price_range_lkr"]
-VOLUME_COLS  = ["total__qty_mkgs", "total_sold_weekly_2026", "volume_yoy_change_pct"]
+PRICE_COLS = ["price_mid_lkr", "price_lo_lkr", "price_hi_lkr", "price_range_lkr"]
+VOLUME_COLS = ["total__qty_mkgs", "total_sold_weekly_2026", "volume_yoy_change_pct"]
 WEATHER_ROLL = [
     "all_regions__avg_precipitation",
     "low_grown__precipitation_sum_total",
@@ -167,7 +167,7 @@ WEATHER_ROLL = [
 ]
 
 ROLL_COLS = (
-    [c for c in PRICE_COLS  if c in df.columns] +
+    [c for c in PRICE_COLS if c in df.columns] +
     [c for c in VOLUME_COLS if c in df.columns] +
     [c for c in WEATHER_ROLL if c in df.columns]
 )
@@ -248,8 +248,10 @@ rename_map = {
 poly_df_new = poly_df_new.rename(columns=rename_map)
 
 df = pd.concat([df, poly_df_new], axis=1)
-print(f"  Added   : {len(poly_df_new.columns)} polynomial features "
-    f"({len([n for n in poly_feature_names if '^2' in n or ' ' in n])} sq + cross terms)")
+print(
+    f"  Added   : {len(poly_df_new.columns)} polynomial features "
+    f"({len([n for n in poly_feature_names if '^2' in n or ' ' in n])} sq + cross terms)"
+)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -261,15 +263,15 @@ print("="*60)
 
 original_cols = 182
 added_interaction = len(interaction_df.columns)
-added_rolling     = len(rolling_df.columns)
-added_poly        = len(poly_df_new.columns)
-total_new         = added_interaction + added_rolling + added_poly
+added_rolling = len(rolling_df.columns)
+added_poly = len(poly_df_new.columns)
+total_new = added_interaction + added_rolling + added_poly
 
 print(f"  Original features          : {original_cols}")
 print(f"  + Interaction features     : {added_interaction}")
 print(f"  + Rolling stat features    : {added_rolling}")
 print(f"  + Polynomial features      : {added_poly}")
-print(f"  ─────────────────────────────────────")
+print("  ─────────────────────────────────────")
 print(f"  Total new features added   : {total_new}")
 print(f"  Final shape                : {df.shape[0]} rows × {df.shape[1]} columns")
 
@@ -278,7 +280,7 @@ new_cols = list(interaction_df.columns) + list(rolling_df.columns) + list(poly_d
 nan_counts = df[new_cols].isna().sum()
 nan_nonzero = nan_counts[nan_counts > 0]
 if len(nan_nonzero) > 0:
-    print(f"\n  NaN counts in new features (non-zero only):")
+    print("\n  NaN counts in new features (non-zero only):")
     for col, cnt in nan_nonzero.items():
         print(f"    {col[:70]:70s}  NaN={cnt}")
 else:
