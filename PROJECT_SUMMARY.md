@@ -174,6 +174,28 @@ Current capabilities:
 5. Evaluates in original LKR scale using MAE, RMSE, R2, and MAPE.
 6. Produces comparable test-set benchmark tables across all four segments.
 
+### 2.8 SHAP Explainability Analysis (Segment Models)
+
+Implemented in:
+
+- [notebooks/model.ipynb](notebooks/model.ipynb)
+
+Current capabilities:
+
+1. Selects the best-performing model per segment (by highest test R2).
+2. Computes SHAP values for each segment-specific best model.
+3. Handles post-imputation feature alignment safely (avoids index mismatch when all-missing columns are dropped).
+4. Produces a 4-panel SHAP beeswarm summary figure (top features per segment).
+5. Produces SHAP dependence plots for the top weather feature per segment with interaction coloring.
+6. Exports publication-ready explainability figures in both PNG and PDF formats.
+
+Generated figures:
+
+- [reports/figures/fig_shap_summary_4panel.png](reports/figures/fig_shap_summary_4panel.png)
+- [reports/figures/fig_shap_summary_4panel.pdf](reports/figures/fig_shap_summary_4panel.pdf)
+- [reports/figures/fig_shap_dependence_weather.png](reports/figures/fig_shap_dependence_weather.png)
+- [reports/figures/fig_shap_dependence_weather.pdf](reports/figures/fig_shap_dependence_weather.pdf)
+
 ## 3. Current Data Inventory (Observed)
 
 ### 3.1 Interim Layer
@@ -375,6 +397,25 @@ Interpretation:
 - High Grown currently favors Random Forest on all reported metrics.
 - Dust currently favors Gradient Boosting.
 - Low Grown is mixed: Random Forest slightly lower RMSE, while Gradient Boosting slightly lower MAE/MAPE.
+
+### 5.7 SHAP Explainability Outcomes (Latest `notebooks/model.ipynb` Run)
+
+Generated explainability outputs:
+
+- Figure A: 4-panel SHAP beeswarm summary comparing top-8 drivers for High Grown, Low Grown, Off-Grade, and Dust.
+- Figure B: SHAP dependence plots for the most influential weather feature in each segment.
+
+Observed interpretation outcomes:
+
+- Feature influence is segment-specific, validating the segment-wise modeling strategy rather than a single pooled model.
+- Weather-related effects are present across all segments but with different strength and nonlinear behavior by segment.
+- Structural tea attributes and market/supply context remain major contributors, while weather and crop signals provide additional explanatory lift.
+- Interaction behavior (for example, quality/segment rank with precipitation) appears materially important, supporting the engineered interaction feature design.
+- Off-Grade and Dust explainability profiles are generally more stable/compact, consistent with their stronger predictive fit (higher R2).
+
+Research implication:
+
+- The SHAP analysis strengthens the dual-market interpretation by showing that each segment responds to a different mix of market, structural, and weather drivers, rather than a uniform effect pattern.
 
 ---
 
