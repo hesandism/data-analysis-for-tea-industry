@@ -112,17 +112,103 @@ def get_segment_data(df, target=TARGET, rank_col=RANK_COL, exclude_cols=None):
 
 def build_model_registry(seed=SEED):
     return {
-        "Ridge": Pipeline([("impute", SimpleImputer(strategy="median")), ("scale", StandardScaler()), ("model", Ridge(alpha=1.0, random_state=seed))]),
-        "Lasso": Pipeline([("impute", SimpleImputer(strategy="median")), ("scale", StandardScaler()), ("model", Lasso(alpha=0.001, random_state=seed, max_iter=10000))]),
-        "ElasticNet": Pipeline([("impute", SimpleImputer(strategy="median")), ("scale", StandardScaler()), ("model", ElasticNet(alpha=0.001, l1_ratio=0.5, random_state=seed, max_iter=10000))]),
-        "Random Forest": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", RandomForestRegressor(n_estimators=400, min_samples_leaf=3, random_state=seed, n_jobs=-1))]),
-        "Gradient Boosting": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", GradientBoostingRegressor(random_state=seed))]),
-        "SVR (RBF)": Pipeline([("impute", SimpleImputer(strategy="median")), ("scale", StandardScaler()), ("model", SVR(kernel="rbf", C=10.0, epsilon=0.05, gamma="scale"))]),
-        "XGBoost": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", XGBRegressor(n_estimators=400, learning_rate=0.05, max_depth=5, subsample=0.8, colsample_bytree=0.8, random_state=seed, n_jobs=-1, verbosity=0))]),
-        "LightGBM": Pipeline([("impute", SimpleImputer(strategy="median")), ("model", LGBMRegressor(n_estimators=400, learning_rate=0.05, num_leaves=31, random_state=seed, n_jobs=-1, verbosity=-1))]),
+        "Ridge": Pipeline(
+            [
+                ("impute", SimpleImputer(strategy="median")),
+                ("scale", StandardScaler()),
+                ("model", Ridge(alpha=1.0, random_state=seed)),
+            ]
+        ),
+        "Lasso": Pipeline(
+            [
+                ("impute", SimpleImputer(strategy="median")),
+                ("scale", StandardScaler()),
+                (
+                    "model",
+                    Lasso(alpha=0.001, random_state=seed, max_iter=10000),
+                ),
+            ]
+        ),
+        "ElasticNet": Pipeline(
+            [
+                ("impute", SimpleImputer(strategy="median")),
+                ("scale", StandardScaler()),
+                (
+                    "model",
+                    ElasticNet(
+                        alpha=0.001,
+                        l1_ratio=0.5,
+                        random_state=seed,
+                        max_iter=10000,
+                    ),
+                ),
+            ]
+        ),
+        "Random Forest": Pipeline(
+            [
+                ("impute", SimpleImputer(strategy="median")),
+                (
+                    "model",
+                    RandomForestRegressor(
+                        n_estimators=400,
+                        min_samples_leaf=3,
+                        random_state=seed,
+                        n_jobs=-1,
+                    ),
+                ),
+            ]
+        ),
+        "Gradient Boosting": Pipeline(
+            [
+                ("impute", SimpleImputer(strategy="median")),
+                ("model", GradientBoostingRegressor(random_state=seed)),
+            ]
+        ),
+        "SVR (RBF)": Pipeline(
+            [
+                ("impute", SimpleImputer(strategy="median")),
+                ("scale", StandardScaler()),
+                (
+                    "model",
+                    SVR(kernel="rbf", C=10.0, epsilon=0.05, gamma="scale"),
+                ),
+            ]
+        ),
+        "XGBoost": Pipeline(
+            [
+                ("impute", SimpleImputer(strategy="median")),
+                (
+                    "model",
+                    XGBRegressor(
+                        n_estimators=400,
+                        learning_rate=0.05,
+                        max_depth=5,
+                        subsample=0.8,
+                        colsample_bytree=0.8,
+                        random_state=seed,
+                        n_jobs=-1,
+                        verbosity=0,
+                    ),
+                ),
+            ]
+        ),
+        "LightGBM": Pipeline(
+            [
+                ("impute", SimpleImputer(strategy="median")),
+                (
+                    "model",
+                    LGBMRegressor(
+                        n_estimators=400,
+                        learning_rate=0.05,
+                        num_leaves=31,
+                        random_state=seed,
+                        n_jobs=-1,
+                        verbosity=-1,
+                    ),
+                ),
+            ]
+        ),
     }
-
-
 
 
 def get_param_grids():
@@ -162,6 +248,7 @@ def get_param_grids():
         },
     }
 
+
 def compute_metrics(y_true_log, y_pred_log):
     y_true = np.expm1(y_true_log)
     y_pred = np.expm1(y_pred_log)
@@ -185,18 +272,17 @@ def run_timeseries_cv(sdf, feature_cols, model_name, model_obj, target=TARGET, k
         rmse, mae, mape, r2 = compute_metrics(y_te.values, pred_log)
 
         fold_rows.append(
-        {
-            "Model": model_name,
-            "Fold": fold,
-            "RMSE": rmse,
-            "MAE": mae,
-            "MAPE": mape,
-            "R2": r2,
-            "n_train": len(tr_idx),
-            "n_test": len(te_idx),
-        }
-)
-
+            {
+                "Model": model_name,
+                "Fold": fold,
+                "RMSE": rmse,
+                "MAE": mae,
+                "MAPE": mape,
+                "R2": r2,
+                "n_train": len(tr_idx),
+                "n_test": len(te_idx),
+            }
+        )
 
     return pd.DataFrame(fold_rows)
 
@@ -223,5 +309,5 @@ def evaluate_estimator_timeseries(sdf, feature_cols, estimator, target=TARGET, k
                 "n_train": len(tr_idx),
                 "n_test": len(te_idx),
             }
-)
+        )
     return pd.DataFrame(rows)
