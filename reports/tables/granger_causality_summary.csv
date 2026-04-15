@@ -1,13 +1,13 @@
 Segment,Weather Variable,Region,Lag 1,Lag 2,Lag 3,Lag 4
-High Grown,Precipitation,Nuwara Eliya,0.20 [0.662],0.36 [0.702],0.67 [0.587],2.05 [0.192]
-High Grown,Temperature,Nuwara Eliya,0.49 [0.495],0.66 [0.533],0.32 [0.809],0.24 [0.909]
-High Grown,Sunshine,Nuwara Eliya,1.48 [0.240],3.35 [0.065]*,2.97 [0.079]*,6.14 [0.015]**
-Low Grown,Precipitation,Low Grown,0.40 [0.533],0.93 [0.415],0.56 [0.649],0.57 [0.690]
-Low Grown,Temperature,Low Grown,0.54 [0.473],0.61 [0.554],1.89 [0.182],1.19 [0.371]
-Low Grown,Sunshine,Low Grown,0.08 [0.780],0.65 [0.535],0.37 [0.774],0.81 [0.544]
-Off-Grade,Precipitation,Uva/Udapussellawa,0.29 [0.596],1.38 [0.280],0.49 [0.697],1.22 [0.363]
-Off-Grade,Temperature,Uva/Udapussellawa,7.00 [0.016]**,3.55 [0.053]*,1.63 [0.230],1.49 [0.276]
-Off-Grade,Sunshine,Uva/Udapussellawa,0.36 [0.555],4.32 [0.029]**,2.45 [0.103](t),1.62 [0.233]
-Dust,Precipitation,All-Region Avg,0.27 [0.607],1.14 [0.341],1.00 [0.420],1.44 [0.281]
-Dust,Temperature,All-Region Avg,0.24 [0.628],0.02 [0.978],0.09 [0.964],0.40 [0.805]
-Dust,Sunshine,All-Region Avg,0.01 [0.903],0.76 [0.481],1.46 [0.265],1.95 [0.167]
+High Grown,Precipitation,Nuwara Eliya,0.84 [0.363],1.63 [0.203],1.34 [0.269],0.92 [0.457]
+High Grown,Temperature,Nuwara Eliya,0.11 [0.742],0.18 [0.833],0.63 [0.597],0.89 [0.476]
+High Grown,Sunshine,Nuwara Eliya,0.02 [0.900],0.95 [0.392],0.81 [0.492],0.55 [0.698]
+Low Grown,Precipitation,Low Grown,2.29 [0.134](t),1.99 [0.143](t),1.66 [0.182],1.83 [0.131](t)
+Low Grown,Temperature,Low Grown,0.06 [0.806],0.37 [0.693],0.24 [0.869],0.21 [0.932]
+Low Grown,Sunshine,Low Grown,2.09 [0.152],1.48 [0.235],0.94 [0.426],0.97 [0.430]
+Off-Grade,Precipitation,Uva/Udapussellawa,0.55 [0.460],0.13 [0.880],0.23 [0.876],2.56 [0.045]**
+Off-Grade,Temperature,Uva/Udapussellawa,0.65 [0.421],1.34 [0.267],0.72 [0.545],0.90 [0.469]
+Off-Grade,Sunshine,Uva/Udapussellawa,2.15 [0.146](t),0.80 [0.455],0.65 [0.587],1.06 [0.384]
+Dust,Precipitation,All-Region Avg,0.46 [0.499],0.08 [0.922],0.04 [0.988],0.56 [0.693]
+Dust,Temperature,All-Region Avg,0.65 [0.423],4.30 [0.017]**,3.39 [0.022]**,2.42 [0.056]*
+Dust,Sunshine,All-Region Avg,0.00 [0.977],0.38 [0.689],0.60 [0.614],1.34 [0.261]
