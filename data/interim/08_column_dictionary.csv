@@ -1,237 +1,236 @@
 table,column,description,data_type,example_value
-01_sales_index,sale_id,Primary key: SALE_{number}_{year},text,SALE_38_2025
-01_sales_index,sale_number,Auction sale number within the year,integer,38
-01_sales_index,sale_date_raw,Date string as printed in PDF header,text,29TH/30TH September 2025
-01_sales_index,sale_year,Calendar year of the sale,integer,2025
-01_sales_index,sale_month,Month name of the sale,text,September
-01_sales_index,source_file,PDF filename this row was extracted from,text,Sale of  29 & 30 September 2025.pdf
-01_sales_index,extracted_at,ISO timestamp of extraction run,datetime,2026-03-20T00:07:46
-01_sales_index,total_lots,Total lots offered across all categories,integer,10039
-01_sales_index,total_kgs,Total kg offered across all categories,integer,4865936
-01_sales_index,reprint_lots,Number of re-print lots,integer,772
-01_sales_index,reprint_quantity,Re-print quantity in kg,integer,378620
-01_sales_index,settlement_10pct,10% payment date (DD/MM/YYYY),date,03/10/2025
-01_sales_index,settlement_buyers,Buyers' prompt date (DD/MM/YYYY),date,07/10/2025
-01_sales_index,settlement_sellers,Sellers' prompt date (DD/MM/YYYY),date,08/10/2025
-01_sales_index,commentary,Full market commentary text (up to 1500 chars),text,"Auctionofferingsdeclinedandtotalled4.8M/Kgs,thelowestonoffersinceSaleNo.16of22and24April2024(4.7M/Kgs). Ex-Estateofferingsweremaintainedaround0.6M/Kgs.ThelimitedavailabilityofHigh&MidGrownliquoringBOP/BOPF's continuedtosellwell,whilsttheLowGrowns/LargeLeafteasmetwithmixeddemand. IntheEx-Estatecatalogue,overallqualityofteaswerereasonablymaintainedandinthebackdropoflimitedavailability,there wasgooddemand. IntheBestWesterncategory,BOP's-Selectinvoices,wherequalitywasmaintained,werefirmanduptoRs.50perkgdearer, whilsttheotherswereirregularandeasierbyasimilarmargin.CorrespondingBOPF's-Selecthigh-pricedteaswereoften irregularandeasier,whilsttheotherswherequalitywasmaintainedwerefirmwithafewselectinvoicesappreciating followingspecialinquiry.IntheBelowBestcategory,selectimprovedBOP'sappreciatedbyRs.50perkgandmore,whilstthe otherswereirregularfollowingquality.CorrespondingBOPF's-ImprovedteasappreciatedbyRs.50perkgandmore,whilst theotherswerefirmanddearertoalesserextent.Atthelowerend,BOP/BOPF'sweremostlyfirmwithselectBOPFinvoices appreciatingbyuptoRs.20perkg.NuwaraEliyaBOP/BOPF'smostlysoldaroundlast.UdaPussellawaBOP'swereirregular. CorrespondingBOPF's-Cleanleaftypeswerefirm,whilsttheotherswereirregular.UvaBOP'sweremostlyunsoldduetoa lackofsuitablebids.CorrespondingBOPF'swerefirmandRs.20perkgdearerforthebettersorts,whilsttheotherswere lowerbyasimilarmarginandattimesunsold. High&MidGrownCTCteas-BP1'shadhardlyanyofferings,whilstthePF1'swerefirmandselectivelydearerbyRs.20perkg andmore.LowGr"
-01_sales_index,sentiment_overall,Rule-based sentiment of full commentary: −1 (bearish) to +1 (bullish),float,0.1064
-01_sales_index,sentiment_ex_estate,Sentiment score for Ex-Estate commentary segment,float,0.1064
+01_sales_index,sale_id,Primary key: SALE_{number}_{year},text,SALE_25_2025
+01_sales_index,sale_number,Auction sale number within the year,integer,25
+01_sales_index,sale_date_raw,Date string as printed in PDF header,text,01ST/02ND July 2025
+01_sales_index,sale_year,Calendar year of the sale,integer,2025.0
+01_sales_index,sale_month,Month name of the sale,text,July
+01_sales_index,source_file,PDF filename this row was extracted from,text,Sale of 1 & 2 July 2025.pdf
+01_sales_index,extracted_at,ISO timestamp of extraction run,datetime,2026-04-15T23:28:03
+01_sales_index,total_lots,Total lots offered across all categories,integer,12290.0
+01_sales_index,total_kgs,Total kg offered across all categories,integer,6380763.0
+01_sales_index,reprint_lots,Number of re-print lots,integer,1149.0
+01_sales_index,reprint_quantity,Re-print quantity in kg,integer,624183.0
+01_sales_index,settlement_10pct,10% payment date (DD/MM/YYYY),date,04/07/2025
+01_sales_index,settlement_buyers,Buyers' prompt date (DD/MM/YYYY),date,08/07/2025
+01_sales_index,settlement_sellers,Sellers' prompt date (DD/MM/YYYY),date,09/07/2025
+01_sales_index,commentary,Full market commentary text (up to 1500 chars),text,"Auctionofferingstotalled6.4M/Kgs,marginallylowertothe6.5M/Kgsonofferthepreviousweek.Followingthe Iran-Israelceasefire,agreaterdegreeofstabilitywaswitnessedinthemarketandanupwardtrendinpricesall round. Ex-Estateofferingstotalled0.83M/Kgsandhereagain,marginallylowertothe0.86M/Kgsonoffertheprevious week.Overallqualityofteasonofferwereslightlypreferabletolast. Improveddemand,particularlyforthebetterWesterns,whichappreciatedbyRs.50-100perkgandmore.Prices atthelowerendofthemarketfortheBOP'swereweakandwerefirmtoRs.50perkgeasierinmostinstances. CorrespondingBOPF'softenappreciatedbyasimilarmarginwideningthepriceparityatthelowerendbetween BOP/BOPF'sgreatlyinfavourofthelatter.NuwaraEliyaBOP/BOPF'sweremostlyunsoldinthebackdropofweak quality.UdaPussellawas'werefirmandeasier,whilsttheUvaBOP/BOPF'swerefirmanddearerandhereagain, particularlyforBOPFgrade. CTCteas-BP1'shadhardlyanyofferings.PF1's-High&MidGrownswerefirmanduptoRs.50perkgdearerfor thebetterteas,whilsttheLowGrownscontinuedtosellwellatfirmtomarginallydearerrates. Itwashearteningtowitnessthebetterteasrealisingsubstantialpricegainsvis-à-vistheirpoorercounterpartsand asignificantpriceparitybetweenthetwowouldcertainlybeofencouragementtoproducersofgoodqualityteas. SelectivebuyingonaccountofshipperstotheUKandthecontinent.ShipperstoJapan,ChinaandSouthAfrica werereasonablyactive,whilstshipperstotheCISandtheMiddleEastlentgoodsupport. Fromaglobalperspective,thereappearstobeadearthofgoodqualityteasvis-à-vistheplainer/poorer counterpartsandint"
+01_sales_index,sentiment_overall,Rule-based sentiment of full commentary: −1 (bearish) to +1 (bullish),float,0.6098
+01_sales_index,sentiment_ex_estate,Sentiment score for Ex-Estate commentary segment,float,0.6098
 01_sales_index,sentiment_low_grown,Sentiment score for Low Grown commentary segment,float,0.0
-01_sales_index,western_nuwara_eliya_weather_desc,Raw weather text for Western/Nuwara Eliya region,text,The Western and Nuwara Eliya regions reported bright mornings and occasional evening showers throughout the The Western and Nuwara Eliya regions week. Intermittent showers are expected in both regions in reported a slight increase in the
+01_sales_index,western_nuwara_eliya_weather_desc,Raw weather text for Western/Nuwara Eliya region,text,"The Western Region reported rain, whilst the Nuwara Eliya Region reported bright weather throughout the week. The The Nuwara Eliya Region maintained Department of Meteorology expects showers in both regions the"
 01_sales_index,western_nuwara_eliya_weather_score,Weather severity 1=sunny … 5=heavy rain,integer,3
-01_sales_index,uva_udapussellawa_weather_desc,Raw weather text for Uva/Udapussellawa region,text,Both regions reported bright weather and intermittent showers throughout the week. The Department of Meteorology expects rain in both regions in the week ahead.
+01_sales_index,uva_udapussellawa_weather_desc,Raw weather text for Uva/Udapussellawa region,text,"Bright weather was reported from the Uva and Uda Pussellawa regions throughout the week. According to the Department of Meteorology, showers are expected in both regions in the week ahead."
 01_sales_index,uva_udapussellawa_weather_score,Weather severity 1=sunny … 5=heavy rain,integer,3
-01_sales_index,low_grown_weather_desc,Raw weather text for Low Grown region,text,regions maintained. Uva/Udapussellawa Regions Both regions reported bright weather and intermittent showers throughout the week. The Department of Meteorology expects rain in both regions in the week ahead. Low Growns Rain was reported in the Low Gro
+01_sales_index,low_grown_weather_desc,Raw weather text for Low Grown region,text,"average in June 2025 recorded a decrease of Rs. 53.31 and USD 0.18 month on month, whilst showing a decrease of Rs. 149.46 and USD 0.44 vis-à-vis June 2024. * All regions recorded negative variances during the period January-June 2025 in comparison t"
 01_sales_index,low_grown_weather_score,Weather severity 1=sunny … 5=heavy rain,integer,3
-01_sales_index,crop_notes,Crop intake summary text,text,AND WEATHER FOR THE PERIOD 24 - 29 September 2025 Crop Western/Nuwara Eliya Regions The Western and Nuwara Eliya regions reported bright mornings and occasional evening showers throughout the The Western and Nuwara Eliya regions week. Intermittent showers are expected in both regions in reported a s
+01_sales_index,crop_notes,Crop intake summary text,text,"AND WEATHER FOR THE PERIOD 25 June - 01 July 2025 Crop Western/Nuwara Eliya Regions The Western Region reported rain, whilst the Nuwara Eliya Region reported bright weather throughout the week. The The Nuwara Eliya Region maintained Department of Meteorology expects showers in both regions the crop "
 01_sales_index,avg_weather_severity,Mean of the three regional weather scores,float,3.0
-01_sales_index,crop_nuwara_eliya_trend,Crop intake trend: +1 increase / 0 maintained / -1 decrease,integer,1.0
-01_sales_index,crop_western_trend,Crop intake trend for Western region,integer,1.0
-01_sales_index,crop_uva_trend,Crop intake trend for Uva region,integer,1.0
-01_sales_index,crop_low_grown_trend,Crop intake trend for Low Grown region,integer,1.0
-01_sales_index,fx_usd_2026,LKR per USD (current year),float,298.76
-01_sales_index,fx_usd_2025,LKR per USD (prior year),float,299.71
-01_sales_index,fx_usd_2024,LKR per USD (two years prior),float,318.73
-01_sales_index,fx_gbp_2026,LKR per GBP (current year),float,400.06
-01_sales_index,fx_gbp_2025,,,398.63
-01_sales_index,fx_gbp_2024,,,389.17
-01_sales_index,fx_eur_2026,LKR per EUR (current year),float,348.99
-01_sales_index,fx_eur_2025,,,331.33
-01_sales_index,fx_eur_2024,,,337.85
-01_sales_index,fx_jpy_2026,LKR per JPY (current year),float,1.99
-01_sales_index,fx_jpy_2025,,,2.07
-01_sales_index,fx_jpy_2024,,,2.13
-01_sales_index,private_sales_weekly_2026,Private sales volume this week 2026 (kgs),integer,165981.0
-01_sales_index,private_sales_weekly_2025,Private sales volume this week 2025 (kgs),integer,82693.0
-01_sales_index,private_sales_todate_2026,,,7111185.0
-01_sales_index,private_sales_todate_2025,,,4186795.0
-01_sales_index,public_auction_weekly_2026,Public auction volume sold this week 2026 (kgs),integer,4541661.0
-01_sales_index,public_auction_weekly_2025,Public auction volume sold this week 2025 (kgs),integer,5030855.0
-01_sales_index,public_auction_todate_2026,Public auction year-to-date volume 2026 (kgs),integer,166249998.0
-01_sales_index,public_auction_todate_2025,Public auction year-to-date volume 2025 (kgs),integer,158312296.0
-01_sales_index,forward_contracts_weekly_2026,Forward contract volume this week 2026 (kgs),integer,20000.0
-01_sales_index,forward_contracts_weekly_2025,,,96180.0
-01_sales_index,forward_contracts_todate_2026,Forward contract year-to-date volume 2026 (kgs),integer,1615231.0
-01_sales_index,forward_contracts_todate_2025,,,1433250.0
-01_sales_index,total_sold_weekly_2026,Total all-channel volume sold this week 2026 (kgs),integer,4727642.0
-01_sales_index,total_sold_weekly_2025,Total all-channel volume sold this week 2025 (kgs),integer,5209728.0
-01_sales_index,total_sold_todate_2026,,,174976414.0
-01_sales_index,total_sold_todate_2025,,,163932341.0
-01_sales_index,gross_lkr_weekly_uva_high_2026,,,1078.53
-01_sales_index,gross_lkr_weekly_uva_high_2025,,,1155.32
-01_sales_index,gross_lkr_todate_uva_high_2026,,,1038.76
-01_sales_index,gross_lkr_todate_uva_high_2025,,,1114.09
-01_sales_index,gross_lkr_weekly_western_high_2026,,,1159.31
-01_sales_index,gross_lkr_weekly_western_high_2025,,,1163.53
-01_sales_index,gross_lkr_todate_western_high_2026,,,1093.72
-01_sales_index,gross_lkr_todate_western_high_2025,,,1192.96
-01_sales_index,gross_lkr_weekly_ctc_high_2026,,,1101.42
-01_sales_index,gross_lkr_weekly_ctc_high_2025,,,1000.1
-01_sales_index,gross_lkr_todate_ctc_high_2026,,,1071.21
-01_sales_index,gross_lkr_todate_ctc_high_2025,,,1106.24
-01_sales_index,gross_lkr_weekly_high_summary_2026,,,1128.35
-01_sales_index,gross_lkr_weekly_high_summary_2025,,,1160.69
-01_sales_index,gross_lkr_todate_high_summary_2026,,,1075.71
-01_sales_index,gross_lkr_todate_high_summary_2025,,,1167.57
-01_sales_index,gross_lkr_weekly_uva_medium_2026,,,1097.71
-01_sales_index,gross_lkr_weekly_uva_medium_2025,,,1095.6
-01_sales_index,gross_lkr_todate_uva_medium_2026,,,1068.68
-01_sales_index,gross_lkr_todate_uva_medium_2025,,,1144.57
-01_sales_index,gross_lkr_weekly_western_medium_2026,,,1015.67
-01_sales_index,gross_lkr_weekly_western_medium_2025,,,1012.61
-01_sales_index,gross_lkr_todate_western_medium_2026,,,1004.38
-01_sales_index,gross_lkr_todate_western_medium_2025,,,1070.98
-01_sales_index,gross_lkr_weekly_ctc_medium_2026,,,927.54
-01_sales_index,gross_lkr_weekly_ctc_medium_2025,,,949.03
-01_sales_index,gross_lkr_todate_ctc_medium_2026,,,940.02
-01_sales_index,gross_lkr_todate_ctc_medium_2025,,,978.34
-01_sales_index,gross_lkr_weekly_medium_summary_2026,,,1039.68
-01_sales_index,gross_lkr_weekly_medium_summary_2025,,,1038.77
-01_sales_index,gross_lkr_todate_medium_summary_2026,,,1025.62
-01_sales_index,gross_lkr_todate_medium_summary_2025,,,1096.09
-01_sales_index,gross_lkr_weekly_orthodox_low_2026,,,1314.25
-01_sales_index,gross_lkr_weekly_orthodox_low_2025,,,1304.65
-01_sales_index,gross_lkr_todate_orthodox_low_2026,,,1260.54
-01_sales_index,gross_lkr_todate_orthodox_low_2025,,,1380.88
-01_sales_index,gross_lkr_weekly_ctc_low_2026,,,976.92
-01_sales_index,gross_lkr_weekly_ctc_low_2025,,,948.61
-01_sales_index,gross_lkr_todate_ctc_low_2026,,,980.03
-01_sales_index,gross_lkr_todate_ctc_low_2025,,,1002.99
-01_sales_index,gross_lkr_weekly_low_summary_2026,,,1289.61
-01_sales_index,gross_lkr_weekly_low_summary_2025,,,1280.84
-01_sales_index,gross_lkr_todate_low_summary_2026,,,1245.12
-01_sales_index,gross_lkr_todate_low_summary_2025,,,1356.55
-01_sales_index,gross_lkr_weekly_total_2026,,,1221.77
-01_sales_index,gross_lkr_weekly_total_2025,,,1212.16
-01_sales_index,gross_lkr_todate_total_2026,,,1172.55
-01_sales_index,gross_lkr_todate_total_2025,,,1271.55
+01_sales_index,crop_nuwara_eliya_trend,Crop intake trend: +1 increase / 0 maintained / -1 decrease,integer,-1.0
+01_sales_index,crop_western_trend,Crop intake trend for Western region,integer,-1.0
+01_sales_index,crop_uva_trend,Crop intake trend for Uva region,integer,-1.0
+01_sales_index,crop_low_grown_trend,Crop intake trend for Low Grown region,integer,-1.0
+01_sales_index,private_sales_weekly_2026,Private sales volume this week 2026 (kgs),integer,197417.0
+01_sales_index,private_sales_weekly_2025,Private sales volume this week 2025 (kgs),integer,200011.0
+01_sales_index,private_sales_todate_2026,,,5368552.0
+01_sales_index,private_sales_todate_2025,,,2939041.0
+01_sales_index,public_auction_weekly_2026,Public auction volume sold this week 2026 (kgs),integer,5406971.0
+01_sales_index,public_auction_weekly_2025,Public auction volume sold this week 2025 (kgs),integer,5273253.0
+01_sales_index,public_auction_todate_2026,Public auction year-to-date volume 2026 (kgs),integer,121175877.0
+01_sales_index,public_auction_todate_2025,Public auction year-to-date volume 2025 (kgs),integer,114341672.0
+01_sales_index,forward_contracts_weekly_2026,Forward contract volume this week 2026 (kgs),integer,44000.0
+01_sales_index,forward_contracts_weekly_2025,,,39500.0
+01_sales_index,forward_contracts_todate_2026,Forward contract year-to-date volume 2026 (kgs),integer,1358831.0
+01_sales_index,forward_contracts_todate_2025,,,847450.0
+01_sales_index,total_sold_weekly_2026,Total all-channel volume sold this week 2026 (kgs),integer,5648388.0
+01_sales_index,total_sold_weekly_2025,Total all-channel volume sold this week 2025 (kgs),integer,5512764.0
+01_sales_index,total_sold_todate_2026,,,127903260.0
+01_sales_index,total_sold_todate_2025,,,118128163.0
+01_sales_index,fx_usd_2026,LKR per USD (current year),float,295.91
+01_sales_index,fx_usd_2025,LKR per USD (prior year),float,300.54
+01_sales_index,fx_usd_2024,LKR per USD (two years prior),float,301.32
+01_sales_index,fx_gbp_2026,LKR per GBP (current year),float,405.11
+01_sales_index,fx_gbp_2025,,,380.07
+01_sales_index,fx_gbp_2024,,,382.63
+01_sales_index,fx_eur_2026,LKR per EUR (current year),float,347.33
+01_sales_index,fx_eur_2025,,,320.98
+01_sales_index,fx_eur_2024,,,328.46
+01_sales_index,fx_jpy_2026,LKR per JPY (current year),float,2.05
+01_sales_index,fx_jpy_2025,,,1.87
+01_sales_index,fx_jpy_2024,,,2.09
+01_sales_index,gross_lkr_weekly_uva_high_2026,,,963.24
+01_sales_index,gross_lkr_weekly_uva_high_2025,,,1091.14
+01_sales_index,gross_lkr_todate_uva_high_2026,,,1037.46
+01_sales_index,gross_lkr_todate_uva_high_2025,,,1114.26
+01_sales_index,gross_lkr_weekly_western_high_2026,,,976.75
+01_sales_index,gross_lkr_weekly_western_high_2025,,,1162.91
+01_sales_index,gross_lkr_todate_western_high_2026,,,1094.58
+01_sales_index,gross_lkr_todate_western_high_2025,,,1196.33
+01_sales_index,gross_lkr_weekly_ctc_high_2026,,,1040.18
+01_sales_index,gross_lkr_weekly_ctc_high_2025,,,1081.73
+01_sales_index,gross_lkr_todate_ctc_high_2026,,,1074.53
+01_sales_index,gross_lkr_todate_ctc_high_2025,,,1125.95
+01_sales_index,gross_lkr_weekly_high_summary_2026,,,972.36
+01_sales_index,gross_lkr_weekly_high_summary_2025,,,1136.7
+01_sales_index,gross_lkr_todate_high_summary_2026,,,1076.71
+01_sales_index,gross_lkr_todate_high_summary_2025,,,1170.46
+01_sales_index,gross_lkr_weekly_uva_medium_2026,,,1003.8
+01_sales_index,gross_lkr_weekly_uva_medium_2025,,,1149.92
+01_sales_index,gross_lkr_todate_uva_medium_2026,,,1077.18
+01_sales_index,gross_lkr_todate_uva_medium_2025,,,1154.98
+01_sales_index,gross_lkr_weekly_western_medium_2026,,,929.9
+01_sales_index,gross_lkr_weekly_western_medium_2025,,,1068.45
+01_sales_index,gross_lkr_todate_western_medium_2026,,,1015.47
+01_sales_index,gross_lkr_todate_western_medium_2025,,,1086.32
+01_sales_index,gross_lkr_weekly_ctc_medium_2026,,,914.44
+01_sales_index,gross_lkr_weekly_ctc_medium_2025,,,1028.33
+01_sales_index,gross_lkr_todate_ctc_medium_2026,,,946.4
+01_sales_index,gross_lkr_todate_ctc_medium_2025,,,979.31
+01_sales_index,gross_lkr_weekly_medium_summary_2026,,,958.3
+01_sales_index,gross_lkr_weekly_medium_summary_2025,,,1098.94
+01_sales_index,gross_lkr_todate_medium_summary_2026,,,1035.45
+01_sales_index,gross_lkr_todate_medium_summary_2025,,,1109.4
+01_sales_index,gross_lkr_weekly_orthodox_low_2026,,,1194.0
+01_sales_index,gross_lkr_weekly_orthodox_low_2025,,,1388.22
+01_sales_index,gross_lkr_todate_orthodox_low_2026,,,1260.76
+01_sales_index,gross_lkr_todate_orthodox_low_2025,,,1400.59
+01_sales_index,gross_lkr_weekly_ctc_low_2026,,,973.76
+01_sales_index,gross_lkr_weekly_ctc_low_2025,,,982.55
+01_sales_index,gross_lkr_todate_ctc_low_2026,,,984.95
+01_sales_index,gross_lkr_todate_ctc_low_2025,,,1025.56
+01_sales_index,gross_lkr_weekly_low_summary_2026,,,1177.19
+01_sales_index,gross_lkr_weekly_low_summary_2025,,,1362.92
+01_sales_index,gross_lkr_todate_low_summary_2026,,,1247.09
+01_sales_index,gross_lkr_todate_low_summary_2025,,,1375.69
+01_sales_index,gross_lkr_weekly_total_2026,,,1090.19
+01_sales_index,gross_lkr_weekly_total_2025,,,1267.83
+01_sales_index,gross_lkr_todate_total_2026,,,1175.05
+01_sales_index,gross_lkr_todate_total_2025,,,1287.14
 01_sales_index,sl_production_mkgs,Sri Lanka monthly tea production (M/Kgs),float,21.37
 01_sales_index,sl_production_yoy_variance,Year-on-year production variance M/Kgs (negative = decline),float,-0.78
-02_auction_offerings,sale_id,Primary key: SALE_{number}_{year},text,SALE_38_2025
+02_auction_offerings,sale_id,Primary key: SALE_{number}_{year},text,SALE_25_2025
 02_auction_offerings,category,Tea category: ex_estate / high_medium / lg_leafy / lg_semi_leafy / lg_tippy / premium_flowery / off_grades / dust / total,text,ex_estate
-02_auction_offerings,qty_mkgs,Quantity on offer in Million Kilograms,float,0.68
-02_auction_offerings,demand_label,Demand description: good / fair / fair_general / less / poor,text,good
-02_auction_offerings,demand_score,Demand encoded numerically: good=4 fair=3 less=2 poor=1,integer,4
-02_auction_offerings,lots,Number of lots in this category,integer,705.0
-02_auction_offerings,kgs,Kilograms offered in this category,integer,676440.0
-03_quantity_sold,sale_id,Primary key: SALE_{number}_{year},text,SALE_38_2025
-03_quantity_sold,sale_number,Auction sale number within the year,integer,38
-03_quantity_sold,sale_year,Calendar year of the sale,integer,2025
-03_quantity_sold,sale_month,Month name of the sale,text,September
-03_quantity_sold,fx_usd_2026,LKR per USD (current year),float,298.76
-03_quantity_sold,fx_usd_2025,LKR per USD (prior year),float,299.71
-03_quantity_sold,fx_usd_2024,LKR per USD (two years prior),float,318.73
-03_quantity_sold,fx_gbp_2026,LKR per GBP (current year),float,400.06
-03_quantity_sold,fx_gbp_2025,,,398.63
-03_quantity_sold,fx_gbp_2024,,,389.17
-03_quantity_sold,fx_eur_2026,LKR per EUR (current year),float,348.99
-03_quantity_sold,fx_eur_2025,,,331.33
-03_quantity_sold,fx_eur_2024,,,337.85
-03_quantity_sold,fx_jpy_2026,LKR per JPY (current year),float,1.99
-03_quantity_sold,fx_jpy_2025,,,2.07
-03_quantity_sold,fx_jpy_2024,,,2.13
-03_quantity_sold,private_sales_weekly_2026,Private sales volume this week 2026 (kgs),integer,165981.0
-03_quantity_sold,private_sales_weekly_2025,Private sales volume this week 2025 (kgs),integer,82693.0
-03_quantity_sold,private_sales_todate_2026,,,7111185.0
-03_quantity_sold,private_sales_todate_2025,,,4186795.0
-03_quantity_sold,public_auction_weekly_2026,Public auction volume sold this week 2026 (kgs),integer,4541661.0
-03_quantity_sold,public_auction_weekly_2025,Public auction volume sold this week 2025 (kgs),integer,5030855.0
-03_quantity_sold,public_auction_todate_2026,Public auction year-to-date volume 2026 (kgs),integer,166249998.0
-03_quantity_sold,public_auction_todate_2025,Public auction year-to-date volume 2025 (kgs),integer,158312296.0
-03_quantity_sold,forward_contracts_weekly_2026,Forward contract volume this week 2026 (kgs),integer,20000.0
-03_quantity_sold,forward_contracts_weekly_2025,,,96180.0
-03_quantity_sold,forward_contracts_todate_2026,Forward contract year-to-date volume 2026 (kgs),integer,1615231.0
-03_quantity_sold,forward_contracts_todate_2025,,,1433250.0
-03_quantity_sold,total_sold_weekly_2026,Total all-channel volume sold this week 2026 (kgs),integer,4727642.0
-03_quantity_sold,total_sold_weekly_2025,Total all-channel volume sold this week 2025 (kgs),integer,5209728.0
-03_quantity_sold,total_sold_todate_2026,,,174976414.0
-03_quantity_sold,total_sold_todate_2025,,,163932341.0
-04_high_grown_prices,sale_id,Primary key: SALE_{number}_{year},text,SALE_34_2025
+02_auction_offerings,qty_mkgs,Quantity on offer in Million Kilograms,float,0.83
+02_auction_offerings,demand_label,Demand description: good / fair / fair_general / less / poor,text,fair
+02_auction_offerings,demand_score,Demand encoded numerically: good=4 fair=3 less=2 poor=1,integer,3
+02_auction_offerings,lots,Number of lots in this category,integer,826.0
+02_auction_offerings,kgs,Kilograms offered in this category,integer,831010.0
+03_quantity_sold,sale_id,Primary key: SALE_{number}_{year},text,SALE_25_2025
+03_quantity_sold,sale_number,Auction sale number within the year,integer,25
+03_quantity_sold,sale_year,Calendar year of the sale,integer,2025.0
+03_quantity_sold,sale_month,Month name of the sale,text,July
+03_quantity_sold,private_sales_weekly_2026,Private sales volume this week 2026 (kgs),integer,197417.0
+03_quantity_sold,private_sales_weekly_2025,Private sales volume this week 2025 (kgs),integer,200011.0
+03_quantity_sold,private_sales_todate_2026,,,5368552.0
+03_quantity_sold,private_sales_todate_2025,,,2939041.0
+03_quantity_sold,public_auction_weekly_2026,Public auction volume sold this week 2026 (kgs),integer,5406971.0
+03_quantity_sold,public_auction_weekly_2025,Public auction volume sold this week 2025 (kgs),integer,5273253.0
+03_quantity_sold,public_auction_todate_2026,Public auction year-to-date volume 2026 (kgs),integer,121175877.0
+03_quantity_sold,public_auction_todate_2025,Public auction year-to-date volume 2025 (kgs),integer,114341672.0
+03_quantity_sold,forward_contracts_weekly_2026,Forward contract volume this week 2026 (kgs),integer,44000.0
+03_quantity_sold,forward_contracts_weekly_2025,,,39500.0
+03_quantity_sold,forward_contracts_todate_2026,Forward contract year-to-date volume 2026 (kgs),integer,1358831.0
+03_quantity_sold,forward_contracts_todate_2025,,,847450.0
+03_quantity_sold,total_sold_weekly_2026,Total all-channel volume sold this week 2026 (kgs),integer,5648388.0
+03_quantity_sold,total_sold_weekly_2025,Total all-channel volume sold this week 2025 (kgs),integer,5512764.0
+03_quantity_sold,total_sold_todate_2026,,,127903260.0
+03_quantity_sold,total_sold_todate_2025,,,118128163.0
+03_quantity_sold,fx_usd_2026,LKR per USD (current year),float,295.91
+03_quantity_sold,fx_usd_2025,LKR per USD (prior year),float,300.54
+03_quantity_sold,fx_usd_2024,LKR per USD (two years prior),float,301.32
+03_quantity_sold,fx_gbp_2026,LKR per GBP (current year),float,405.11
+03_quantity_sold,fx_gbp_2025,,,380.07
+03_quantity_sold,fx_gbp_2024,,,382.63
+03_quantity_sold,fx_eur_2026,LKR per EUR (current year),float,347.33
+03_quantity_sold,fx_eur_2025,,,320.98
+03_quantity_sold,fx_eur_2024,,,328.46
+03_quantity_sold,fx_jpy_2026,LKR per JPY (current year),float,2.05
+03_quantity_sold,fx_jpy_2025,,,1.87
+03_quantity_sold,fx_jpy_2024,,,2.09
+04_high_grown_prices,sale_id,Primary key: SALE_{number}_{year},text,SALE_25_2025
 04_high_grown_prices,elevation,high_grown / low_grown / off_grade / dust,text,high_grown
 04_high_grown_prices,segment,Price segment: best_western / below_best_western / plainer_western / nuwara_eliya / brighter_udapussellawa / other_udapussellawa / best_uva / other_uva,text,best_western
 04_high_grown_prices,grade,Tea grade: bop / bopf / pekoe_fbop / op  (HG) or fbop1 / fbop / bop1 / bopf / bop / fbopf1 / fbopf / fbopf_tippy / op1 / opa / op / pekoe / pek1 (LG),text,bop
-04_high_grown_prices,price_lo_lkr,Lower bound of quoted price range (LKR per kg),float,1300.0
-04_high_grown_prices,price_hi_lkr,Upper bound of quoted price range (LKR per kg). NULL if open-ended.,float,1440.0
-05_low_grown_prices,sale_id,Primary key: SALE_{number}_{year},text,SALE_38_2025
+04_high_grown_prices,price_lo_lkr,Lower bound of quoted price range (LKR per kg),float,1180.0
+04_high_grown_prices,price_hi_lkr,Upper bound of quoted price range (LKR per kg). NULL if open-ended.,float,1480.0
+05_low_grown_prices,sale_id,Primary key: SALE_{number}_{year},text,SALE_25_2025
 05_low_grown_prices,elevation,high_grown / low_grown / off_grade / dust,text,low_grown
 05_low_grown_prices,grade,Tea grade: bop / bopf / pekoe_fbop / op  (HG) or fbop1 / fbop / bop1 / bopf / bop / fbopf1 / fbopf / fbopf_tippy / op1 / opa / op / pekoe / pek1 (LG),text,fbopf_tippy
 05_low_grown_prices,tier,Quality tier: select_best / best / below_best / others,text,select_best
-05_low_grown_prices,price_lo_lkr,Lower bound of quoted price range (LKR per kg),float,3800.0
-05_low_grown_prices,price_hi_lkr,Upper bound of quoted price range (LKR per kg). NULL if open-ended.,float,4600.0
-06_offgrade_dust_prices,sale_id,Primary key: SALE_{number}_{year},text,SALE_38_2025
+05_low_grown_prices,price_lo_lkr,Lower bound of quoted price range (LKR per kg),float,3500.0
+05_low_grown_prices,price_hi_lkr,Upper bound of quoted price range (LKR per kg). NULL if open-ended.,float,4500.0
+06_offgrade_dust_prices,sale_id,Primary key: SALE_{number}_{year},text,SALE_25_2025
 06_offgrade_dust_prices,category_type,off_grade or dust,text,off_grade
 06_offgrade_dust_prices,category,Tea category: ex_estate / high_medium / lg_leafy / lg_semi_leafy / lg_tippy / premium_flowery / off_grades / dust / total,text,fannings_orthodox_better
 06_offgrade_dust_prices,elevation,high_grown / low_grown / off_grade / dust,text,high
-06_offgrade_dust_prices,price_lo_lkr,Lower bound of quoted price range (LKR per kg),float,840.0
-06_offgrade_dust_prices,price_hi_lkr,Upper bound of quoted price range (LKR per kg). NULL if open-ended.,float,1320.0
-07_top_prices,sale_id,Primary key: SALE_{number}_{year},text,SALE_38_2025
-07_top_prices,estate,Name of the tea estate,text,Maratenne
+06_offgrade_dust_prices,price_lo_lkr,Lower bound of quoted price range (LKR per kg),float,790.0
+06_offgrade_dust_prices,price_hi_lkr,Upper bound of quoted price range (LKR per kg). NULL if open-ended.,float,1120.0
+07_top_prices,sale_id,Primary key: SALE_{number}_{year},text,SALE_25_2025
+07_top_prices,estate,Name of the tea estate,text,Dartry Valley
 07_top_prices,grade,Tea grade: bop / bopf / pekoe_fbop / op  (HG) or fbop1 / fbop / bop1 / bopf / bop / fbopf1 / fbopf / fbopf_tippy / op1 / opa / op / pekoe / pek1 (LG),text,BOP
-07_top_prices,fw_sold,"1 if the lot was brokered by Forbes & Walker, else 0",integer,0
-07_top_prices,price_lkr,Top price achieved (LKR per kg),integer,1360
-07_top_prices,region,Region header this record appeared under in the PDF,text,UNORTHODOX MEDIUM
-09_weather_features,sale_id,Primary key: SALE_{number}_{year},text,SALE_01_2026
-09_weather_features,auction_date,,,2026-01-06
+07_top_prices,fw_sold,"1 if the lot was brokered by Forbes & Walker, else 0",integer,1
+07_top_prices,price_lkr,Top price achieved (LKR per kg),integer,1550
+07_top_prices,region,Region header this record appeared under in the PDF,text,WESTERN MEDIUM
+09_weather_features,sale_id,Primary key: SALE_{number}_{year},text,SALE_01_2024
+09_weather_features,auction_date,,,2024-01-04
 09_weather_features,region,Region header this record appeared under in the PDF,text,low_grown
 09_weather_features,region_label,,,Low Grown (Matara / Galle belt)
 09_weather_features,lat,,,6.25
 09_weather_features,lon,,,80.3
-09_weather_features,pdf_source,,,Sale of 6 & 7 January 2026.pdf
-09_weather_features,text_condition_score,,,0
+09_weather_features,pdf_source,,,Sale of 4 & 5 January 2024.pdf
+09_weather_features,text_condition_score,,,-5
 09_weather_features,text_crop_change,,,decrease
 09_weather_features,text_has_rain,,,1
-09_weather_features,text_has_mist,,,0
-09_weather_features,text_has_bright,,,1
+09_weather_features,text_has_mist,,,1
+09_weather_features,text_has_bright,,,0
 09_weather_features,text_has_thunder,,,0
-09_weather_features,text_keywords,,,sunny|showers
-09_weather_features,text_raw_summary,,,"Low Grown
-Uva/Udapussellawa Regions regions reported a decrease.
-Both regions reported sunny mornings and evening showers
-throughout the week. According to the Department of
-Meteorology, showers are expected in the"
-09_weather_features,temperature_2m_max_mean,,,29.76
-09_weather_features,temperature_2m_max_max,,,31.4
-09_weather_features,temperature_2m_max_min,,,27.3
-09_weather_features,temperature_2m_min_mean,,,21.97
-09_weather_features,temperature_2m_min_max,,,22.6
-09_weather_features,temperature_2m_min_min,,,21.0
-09_weather_features,temperature_2m_mean_mean,,,25.03
+09_weather_features,text_keywords,,,showers|misty|mist|heavy
+09_weather_features,text_raw_summary,,,"Low Grown regions reported a decline
+misty mornings in the Nuwara Eliya Region and misty morning
+in the crop intake, whilst the Nuwara
+together with heavy showers in the"
+09_weather_features,temperature_2m_max_mean,,,29.31
+09_weather_features,temperature_2m_max_max,,,30.5
+09_weather_features,temperature_2m_max_min,,,27.4
+09_weather_features,temperature_2m_min_mean,,,22.83
+09_weather_features,temperature_2m_min_max,,,23.6
+09_weather_features,temperature_2m_min_min,,,22.3
+09_weather_features,temperature_2m_mean_mean,,,25.27
 09_weather_features,temperature_2m_mean_max,,,25.7
-09_weather_features,temperature_2m_mean_min,,,24.4
-09_weather_features,precipitation_sum_total,,,16.5
-09_weather_features,precipitation_sum_max_day,,,5.1
-09_weather_features,rain_sum_total,,,16.5
-09_weather_features,rain_sum_max_day,,,5.1
-09_weather_features,windspeed_10m_max_mean,,,12.49
-09_weather_features,windspeed_10m_max_max,,,21.0
-09_weather_features,windspeed_10m_max_min,,,8.0
-09_weather_features,sunshine_duration_total,,,233157.27
-09_weather_features,sunshine_duration_max_day,,,40437.73
-09_weather_features,et0_fao_evapotranspiration_total,,,24.01
-09_weather_features,et0_fao_evapotranspiration_max_day,,,4.17
-09_weather_features,relative_humidity_2m_max_mean,,,98.43
-09_weather_features,relative_humidity_2m_max_max,,,100
-09_weather_features,relative_humidity_2m_max_min,,,97
-09_weather_features,relative_humidity_2m_min_mean,,,63.0
-09_weather_features,relative_humidity_2m_min_max,,,76
-09_weather_features,relative_humidity_2m_min_min,,,54
-09_weather_features,fetch_start,,,2025-12-30
-09_weather_features,fetch_end,,,2026-01-05
-09_weather_features,precipitation_sum_total_lag1,,,16.5
-09_weather_features,precipitation_sum_total_lag2,,,16.5
-09_weather_features,precipitation_sum_total_lag3,,,16.5
-09_weather_features,rain_sum_total_lag1,,,16.5
-09_weather_features,rain_sum_total_lag2,,,16.5
-09_weather_features,rain_sum_total_lag3,,,16.5
-09_weather_features,temperature_2m_mean_mean_lag1,,,25.03
-09_weather_features,temperature_2m_mean_mean_lag2,,,25.03
-09_weather_features,temperature_2m_mean_mean_lag3,,,25.03
-09_weather_features,sunshine_duration_total_lag1,,,233157.27
-09_weather_features,sunshine_duration_total_lag2,,,233157.27
-09_weather_features,sunshine_duration_total_lag3,,,233157.27
+09_weather_features,temperature_2m_mean_min,,,24.6
+09_weather_features,precipitation_sum_total,,,101.3
+09_weather_features,precipitation_sum_max_day,,,36.0
+09_weather_features,rain_sum_total,,,101.3
+09_weather_features,rain_sum_max_day,,,36.0
+09_weather_features,windspeed_10m_max_mean,,,11.31
+09_weather_features,windspeed_10m_max_max,,,21.7
+09_weather_features,windspeed_10m_max_min,,,7.8
+09_weather_features,sunshine_duration_total,,,163892.03
+09_weather_features,sunshine_duration_max_day,,,31318.3
+09_weather_features,et0_fao_evapotranspiration_total,,,19.89
+09_weather_features,et0_fao_evapotranspiration_max_day,,,3.37
+09_weather_features,relative_humidity_2m_max_mean,,,97.86
+09_weather_features,relative_humidity_2m_max_max,,,100.0
+09_weather_features,relative_humidity_2m_max_min,,,94.0
+09_weather_features,relative_humidity_2m_min_mean,,,75.14
+09_weather_features,relative_humidity_2m_min_max,,,86.0
+09_weather_features,relative_humidity_2m_min_min,,,69.0
+09_weather_features,fetch_start,,,2023-12-28
+09_weather_features,fetch_end,,,2024-01-03
+09_weather_features,precipitation_sum_total_lag1,,,101.3
+09_weather_features,precipitation_sum_total_lag2,,,101.3
+09_weather_features,precipitation_sum_total_lag3,,,101.3
+09_weather_features,rain_sum_total_lag1,,,101.3
+09_weather_features,rain_sum_total_lag2,,,101.3
+09_weather_features,rain_sum_total_lag3,,,101.3
+09_weather_features,temperature_2m_mean_mean_lag1,,,25.27
+09_weather_features,temperature_2m_mean_mean_lag2,,,25.27
+09_weather_features,temperature_2m_mean_mean_lag3,,,25.27
+09_weather_features,sunshine_duration_total_lag1,,,163892.03
+09_weather_features,sunshine_duration_total_lag2,,,163892.03
+09_weather_features,sunshine_duration_total_lag3,,,163892.03
 09_weather_features,relative_humidity_2m_max_max_lag1,,,100.0
 09_weather_features,relative_humidity_2m_max_max_lag2,,,100.0
 09_weather_features,relative_humidity_2m_max_max_lag3,,,100.0
-09_weather_features,text_condition_score_lag1,,,0.0
-09_weather_features,text_condition_score_lag2,,,0.0
-09_weather_features,text_condition_score_lag3,,,0.0
+09_weather_features,text_condition_score_lag1,,,-5.0
+09_weather_features,text_condition_score_lag2,,,-5.0
+09_weather_features,text_condition_score_lag3,,,-5.0
