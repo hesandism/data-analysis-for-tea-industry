@@ -1,0 +1,49 @@
+segment,seg_key,weather_var,region,lag,F_stat,p_value,sig,price_diff,weather_diff
+High Grown,high_grown,Precipitation,Nuwara Eliya,1,0.199,0.6617,,True,True
+High Grown,high_grown,Precipitation,Nuwara Eliya,2,0.363,0.7021,,True,True
+High Grown,high_grown,Precipitation,Nuwara Eliya,3,0.674,0.5874,,True,True
+High Grown,high_grown,Precipitation,Nuwara Eliya,4,2.049,0.1916,,True,True
+High Grown,high_grown,Temperature,Nuwara Eliya,1,0.486,0.4952,,True,False
+High Grown,high_grown,Temperature,Nuwara Eliya,2,0.658,0.5332,,True,False
+High Grown,high_grown,Temperature,Nuwara Eliya,3,0.322,0.8095,,True,False
+High Grown,high_grown,Temperature,Nuwara Eliya,4,0.237,0.9095,,True,False
+High Grown,high_grown,Sunshine,Nuwara Eliya,1,1.483,0.24,,True,False
+High Grown,high_grown,Sunshine,Nuwara Eliya,2,3.346,0.0649,*,True,False
+High Grown,high_grown,Sunshine,Nuwara Eliya,3,2.969,0.0787,*,True,False
+High Grown,high_grown,Sunshine,Nuwara Eliya,4,6.137,0.0147,**,True,False
+Low Grown,low_grown,Precipitation,Low Grown,1,0.401,0.5335,,True,False
+Low Grown,low_grown,Precipitation,Low Grown,2,0.926,0.4151,,True,False
+Low Grown,low_grown,Precipitation,Low Grown,3,0.561,0.6494,,True,False
+Low Grown,low_grown,Precipitation,Low Grown,4,0.57,0.6901,,True,False
+Low Grown,low_grown,Temperature,Low Grown,1,0.535,0.4735,,True,True
+Low Grown,low_grown,Temperature,Low Grown,2,0.613,0.5541,,True,True
+Low Grown,low_grown,Temperature,Low Grown,3,1.887,0.1817,,True,True
+Low Grown,low_grown,Temperature,Low Grown,4,1.194,0.3714,,True,True
+Low Grown,low_grown,Sunshine,Low Grown,1,0.08,0.7797,,True,False
+Low Grown,low_grown,Sunshine,Low Grown,2,0.648,0.5355,,True,False
+Low Grown,low_grown,Sunshine,Low Grown,3,0.373,0.7737,,True,False
+Low Grown,low_grown,Sunshine,Low Grown,4,0.81,0.544,,True,False
+Off-Grade,off_grade,Precipitation,Uva/Udapussellawa,1,0.29,0.5962,,False,True
+Off-Grade,off_grade,Precipitation,Uva/Udapussellawa,2,1.381,0.2797,,False,True
+Off-Grade,off_grade,Precipitation,Uva/Udapussellawa,3,0.488,0.6966,,False,True
+Off-Grade,off_grade,Precipitation,Uva/Udapussellawa,4,1.217,0.3631,,False,True
+Off-Grade,off_grade,Temperature,Uva/Udapussellawa,1,6.995,0.016,**,False,True
+Off-Grade,off_grade,Temperature,Uva/Udapussellawa,2,3.549,0.053,*,False,True
+Off-Grade,off_grade,Temperature,Uva/Udapussellawa,3,1.633,0.2302,,False,True
+Off-Grade,off_grade,Temperature,Uva/Udapussellawa,4,1.493,0.276,,False,True
+Off-Grade,off_grade,Sunshine,Uva/Udapussellawa,1,0.36,0.5551,,False,False
+Off-Grade,off_grade,Sunshine,Uva/Udapussellawa,2,4.323,0.0293,**,False,False
+Off-Grade,off_grade,Sunshine,Uva/Udapussellawa,3,2.451,0.1035,(t),False,False
+Off-Grade,off_grade,Sunshine,Uva/Udapussellawa,4,1.62,0.2326,,False,False
+Dust,dust,Precipitation,All-Region Avg,1,0.272,0.6073,,False,False
+Dust,dust,Precipitation,All-Region Avg,2,1.142,0.3413,,False,False
+Dust,dust,Precipitation,All-Region Avg,3,0.999,0.4203,,False,False
+Dust,dust,Precipitation,All-Region Avg,4,1.439,0.2806,,False,False
+Dust,dust,Temperature,All-Region Avg,1,0.243,0.628,,False,True
+Dust,dust,Temperature,All-Region Avg,2,0.023,0.9775,,False,True
+Dust,dust,Temperature,All-Region Avg,3,0.091,0.9635,,False,True
+Dust,dust,Temperature,All-Region Avg,4,0.399,0.8053,,False,True
+Dust,dust,Sunshine,All-Region Avg,1,0.015,0.9034,,False,False
+Dust,dust,Sunshine,All-Region Avg,2,0.763,0.4809,,False,False
+Dust,dust,Sunshine,All-Region Avg,3,1.46,0.2653,,False,False
+Dust,dust,Sunshine,All-Region Avg,4,1.946,0.1673,,False,False
