@@ -123,18 +123,44 @@ def build_model_registry(seed=SEED):
     }
 
 
+
+
 def get_param_grids():
     return {
         "Ridge": {"model__alpha": [0.01, 0.1, 1.0, 10.0, 100.0]},
         "Lasso": {"model__alpha": [1e-4, 1e-3, 1e-2, 1e-1]},
-        "ElasticNet": {"model__alpha": [1e-4, 1e-3, 1e-2, 1e-1], "model__l1_ratio": [0.2, 0.5, 0.8]},
-        "Random Forest": {"model__n_estimators": [200, 400], "model__max_depth": [None, 8, 16], "model__min_samples_leaf": [1, 3, 5]},
-        "Gradient Boosting": {"model__n_estimators": [100, 200, 400], "model__learning_rate": [0.03, 0.05, 0.1], "model__max_depth": [2, 3, 4]},
-        "SVR (RBF)": {"model__C": [1.0, 10.0, 50.0], "model__epsilon": [0.01, 0.05, 0.1], "model__gamma": ["scale", "auto"]},
-        "XGBoost": {"model__n_estimators": [200, 400], "model__learning_rate": [0.03, 0.05, 0.1], "model__max_depth": [3, 5, 7], "model__subsample": [0.8, 1.0]},
-        "LightGBM": {"model__n_estimators": [200, 400], "model__learning_rate": [0.03, 0.05, 0.1], "model__num_leaves": [31, 63], "model__subsample": [0.8, 1.0]},
+        "ElasticNet": {
+            "model__alpha": [1e-4, 1e-3, 1e-2, 1e-1],
+            "model__l1_ratio": [0.2, 0.5, 0.8],
+        },
+        "Random Forest": {
+            "model__n_estimators": [200, 400],
+            "model__max_depth": [None, 8, 16],
+            "model__min_samples_leaf": [1, 3, 5],
+        },
+        "Gradient Boosting": {
+            "model__n_estimators": [100, 200, 400],
+            "model__learning_rate": [0.03, 0.05, 0.1],
+            "model__max_depth": [2, 3, 4],
+        },
+        "SVR (RBF)": {
+            "model__C": [1.0, 10.0, 50.0],
+            "model__epsilon": [0.01, 0.05, 0.1],
+            "model__gamma": ["scale", "auto"],
+        },
+        "XGBoost": {
+            "model__n_estimators": [200, 400],
+            "model__learning_rate": [0.03, 0.05, 0.1],
+            "model__max_depth": [3, 5, 7],
+            "model__subsample": [0.8, 1.0],
+        },
+        "LightGBM": {
+            "model__n_estimators": [200, 400],
+            "model__learning_rate": [0.03, 0.05, 0.1],
+            "model__num_leaves": [31, 63],
+            "model__subsample": [0.8, 1.0],
+        },
     }
-
 
 def compute_metrics(y_true_log, y_pred_log):
     y_true = np.expm1(y_true_log)
@@ -157,7 +183,21 @@ def run_timeseries_cv(sdf, feature_cols, model_name, model_obj, target=TARGET, k
         model_obj.fit(X_tr, y_tr)
         pred_log = model_obj.predict(X_te)
         rmse, mae, mape, r2 = compute_metrics(y_te.values, pred_log)
-        fold_rows.append({"Model": model_name, "Fold": fold, "RMSE": rmse, "MAE": mae, "MAPE": mape, "R2": r2, "n_train": len(tr_idx), "n_test": len(te_idx)})
+
+        fold_rows.append(
+        {
+            "Model": model_name,
+            "Fold": fold,
+            "RMSE": rmse,
+            "MAE": mae,
+            "MAPE": mape,
+            "R2": r2,
+            "n_train": len(tr_idx),
+            "n_test": len(te_idx),
+        }
+)
+
+
     return pd.DataFrame(fold_rows)
 
 
@@ -172,5 +212,16 @@ def evaluate_estimator_timeseries(sdf, feature_cols, estimator, target=TARGET, k
         estimator.fit(X_tr, y_tr)
         pred_log = estimator.predict(X_te)
         rmse, mae, mape, r2 = compute_metrics(y_te.values, pred_log)
-        rows.append({"Fold": fold, "RMSE": rmse, "MAE": mae, "MAPE": mape, "R2": r2, "n_train": len(tr_idx), "n_test": len(te_idx)})
+
+        rows.append(
+            {
+                "Fold": fold,
+                "RMSE": rmse,
+                "MAE": mae,
+                "MAPE": mape,
+                "R2": r2,
+                "n_train": len(tr_idx),
+                "n_test": len(te_idx),
+            }
+)
     return pd.DataFrame(rows)
