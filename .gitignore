@@ -100,5 +100,3 @@ reports/figures/*.jpeg
 *.sqlite3
 *.tmp
 *.temp
-
-t1_3_supply_demand_unified_baseline.ipynb
