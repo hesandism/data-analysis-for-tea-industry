@@ -86,12 +86,18 @@ def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, di
     else:
         df_local["_sale_number_numeric"] = np.nan
 
+    sort_identity = ["sale_id"]
+    if "report_id" in df_local.columns:
+        sort_identity.append("report_id")
     df_local = df_local.sort_values(
-        ["_sale_date_parsed", "_sale_number_numeric", "sale_id"], kind="mergesort"
+        ["_sale_date_parsed", "_sale_number_numeric"] + sort_identity, kind="mergesort"
     ).reset_index(drop=True)
     df_local["_sale_order"] = np.arange(len(df_local))
 
-    key_cols = ["sale_id"] + group_cols
+    key_cols = ["sale_id"]
+    if "report_id" in df_local.columns:
+        key_cols.append("report_id")
+    key_cols += group_cols
     keep_cols = key_cols + ["_sale_order", supply_col]
     if total_demand_col is not None:
         keep_cols.append(total_demand_col)
@@ -373,7 +379,7 @@ print(f"\nSaved: {OUTPUT_FILE}")
 
 # Columns to ALWAYS exclude from model feature matrix
 EXCLUDE_FROM_FEATURES = [
-    "sale_id", "sale_date_raw",            # identifiers
+    "sale_id", "report_id", "sale_date_raw",  # identifiers
     "sale_month",                           # replaced by sale_month_enc
     "elevation",                            # replaced by elevation_enc
     "category_type",                        # replaced by category_type_enc

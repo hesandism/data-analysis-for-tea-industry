@@ -95,6 +95,34 @@ def sale_id(sale_number, sale_year):
     return f"SALE_{sale_number:02d}_{sale_year}"
 
 
+def parse_sale_components(sid):
+    """Parse SALE_XX_YYYY into numeric (year, sale_number)."""
+    m = re.match(r'^SALE_(\d+)_(\d{4})$', str(sid).strip())
+    if not m:
+        return None
+    return int(m.group(2)), int(m.group(1))
+
+
+def build_report_id_map(sale_ids):
+    """Build integer report_id map in chronological order by (year, sale_number)."""
+    parsed = []
+    for sid in set(sale_ids):
+        comps = parse_sale_components(sid)
+        if comps:
+            year, number = comps
+            parsed.append((year, number, sid))
+    parsed.sort(key=lambda x: (x[0], x[1], x[2]))
+    return {sid: idx for idx, (_, _, sid) in enumerate(parsed, start=1)}
+
+
+def assign_report_ids(extractions):
+    """Assign sequential integer report_id values across extracted sales."""
+    sale_ids = [e.get('sale_id') for e in extractions if e.get('sale_id')]
+    rid_map = build_report_id_map(sale_ids)
+    for e in extractions:
+        e['report_id'] = rid_map.get(e.get('sale_id'))
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # EXTRACTION MODULES  (return plain Python dicts / lists)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -572,6 +600,7 @@ def extract_pdf(pdf_path):
 
     return {
         'sale_id': sid,
+        'report_id': None,
         'header': header,
         'market_rows': market_rows,
         'totals': totals,
@@ -605,6 +634,7 @@ def build_sales_index(extractions):
     for e in extractions:
         row = {
             'sale_id':    e['sale_id'],
+            'report_id':  e['report_id'],
             'sale_number': e['header'].get('sale_number'),
             'sale_date_raw': e['header'].get('sale_date_raw'),
             'sale_year':  e['header'].get('sale_year'),
@@ -631,6 +661,7 @@ def build_auction_offerings(extractions):
     rows = []
     for e in extractions:
         sid = e['sale_id']
+        rid = e['report_id']
         # Build lookup from cat_rows (lots + kgs)
         lots_lookup = {r['category']: r for r in e['cat_rows']}
         for mrow in e['market_rows']:
@@ -638,6 +669,7 @@ def build_auction_offerings(extractions):
             lot_info = lots_lookup.get(cat, {})
             rows.append({
                 'sale_id':      sid,
+                'report_id':    rid,
                 'category':     cat,
                 'qty_mkgs':     mrow.get('qty_mkgs'),
                 'demand_label': mrow.get('demand_label'),
@@ -658,6 +690,7 @@ def build_quantity_sold(extractions):
     for e in extractions:
         row = {
             'sale_id':     e['sale_id'],
+            'report_id':   e['report_id'],
             'sale_number': e['header'].get('sale_number'),
             'sale_year':   e['header'].get('sale_year'),
             'sale_month':  e['header'].get('sale_month'),
@@ -675,7 +708,7 @@ def build_hg_prices(extractions):
     rows = []
     for e in extractions:
         for r in e['hg_prices']:
-            rows.append({'sale_id': e['sale_id'], **r})
+            rows.append({'sale_id': e['sale_id'], 'report_id': e['report_id'], **r})
     return pd.DataFrame(rows)
 
 
@@ -687,7 +720,7 @@ def build_lg_prices(extractions):
     rows = []
     for e in extractions:
         for r in e['lg_prices']:
-            rows.append({'sale_id': e['sale_id'], **r})
+            rows.append({'sale_id': e['sale_id'], 'report_id': e['report_id'], **r})
     return pd.DataFrame(rows)
 
 
@@ -699,7 +732,7 @@ def build_offgrade_dust_prices(extractions):
     rows = []
     for e in extractions:
         for r in e['og_prices']:
-            rows.append({'sale_id': e['sale_id'], **r})
+            rows.append({'sale_id': e['sale_id'], 'report_id': e['report_id'], **r})
     return pd.DataFrame(rows)
 
 
@@ -711,7 +744,7 @@ def build_top_prices(extractions):
     rows = []
     for e in extractions:
         for r in e['top_prices']:
-            rows.append({'sale_id': e['sale_id'], **r})
+            rows.append({'sale_id': e['sale_id'], 'report_id': e['report_id'], **r})
     return pd.DataFrame(rows)
 
 
@@ -722,6 +755,7 @@ def build_top_prices(extractions):
 COLUMN_DEFINITIONS = {
     # ── 01_sales_index ──────────────────────────────────────────────────────
     'sale_id':                       ('01_sales_index', 'Primary key: SALE_{number}_{year}', 'text'),
+    'report_id':                     ('01_sales_index', 'Unique integer report index ordered by (sale_year, sale_number)', 'integer'),
     'sale_number':                   ('01_sales_index', 'Auction sale number within the year', 'integer'),
     'sale_date_raw':                 ('01_sales_index', 'Date string as printed in PDF header', 'text'),
     'sale_year':                     ('01_sales_index', 'Calendar year of the sale', 'integer'),
@@ -841,6 +875,9 @@ def run_pipeline(pdf_paths, output_dir='.'):
         print("No data extracted.")
         return
 
+    # Assign integer report_id in chronological order across extracted sales.
+    assign_report_ids(extractions)
+
     # ── Build tables ──
     tables = {
         '01_sales_index':          build_sales_index(extractions),
@@ -858,20 +895,27 @@ def run_pipeline(pdf_paths, output_dir='.'):
     print("\n  Generating weather features from PDFs...")
     run_pipeline_weather(str(pdf_dir), str(weather_output_path))
     tables['09_weather_features'] = pd.read_csv(weather_output_path, low_memory=False)
+    if 'sale_id' in tables['09_weather_features'].columns and 'report_id' not in tables['09_weather_features'].columns:
+        weather_rid_map = build_report_id_map(tables['09_weather_features']['sale_id'].dropna().astype(str).tolist())
+        tables['09_weather_features']['report_id'] = tables['09_weather_features']['sale_id'].map(weather_rid_map)
+    if 'report_id' in tables['09_weather_features'].columns:
+        tables['09_weather_features']['report_id'] = pd.to_numeric(
+            tables['09_weather_features']['report_id'], errors='coerce'
+        ).astype('Int64')
     
     tables['08_column_dictionary'] = build_column_dictionary(tables)
 
     # ── Write CSVs (append + deduplicate if files already exist) ──
     dedup_keys = {
-        '01_sales_index':          ['sale_id'],
-        '02_auction_offerings':    ['sale_id', 'category'],
-        '03_quantity_sold':        ['sale_id'],
-        '04_high_grown_prices':    ['sale_id', 'segment', 'grade'],
-        '05_low_grown_prices':     ['sale_id', 'grade', 'tier'],
-        '06_offgrade_dust_prices': ['sale_id', 'category_type', 'category', 'elevation'],
-        '07_top_prices':           ['sale_id', 'estate', 'grade'],
+        '01_sales_index':          ['report_id'],
+        '02_auction_offerings':    ['report_id', 'category'],
+        '03_quantity_sold':        ['report_id'],
+        '04_high_grown_prices':    ['report_id', 'segment', 'grade'],
+        '05_low_grown_prices':     ['report_id', 'grade', 'tier'],
+        '06_offgrade_dust_prices': ['report_id', 'category_type', 'category', 'elevation'],
+        '07_top_prices':           ['report_id', 'estate', 'grade'],
         '08_column_dictionary':    ['table', 'column'],
-        '09_weather_features':     ['sale_id', 'region'],
+        '09_weather_features':     ['report_id', 'region'],
     }
 
     print(f"\n{'─'*55}")
@@ -917,4 +961,5 @@ if __name__ == '__main__':
         sys.exit(1)
 
     print(f"\nForbes & Walker Tea Pipeline  –  {len(pdf_files)} PDF(s) found\n")
-    run_pipeline(pdf_files, output_dir=Path(__file__).parent.parent.parent / 'data' / 'interim')
+    #run_pipeline(pdf_files, output_dir=Path(__file__).parent.parent.parent / 'data' / 'interim')
+    run_pipeline(pdf_files, output_dir=Path(__file__).parent.parent.parent / 'data' / 'extracted')

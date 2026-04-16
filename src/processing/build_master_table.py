@@ -45,7 +45,7 @@ warnings.filterwarnings("ignore", category=pd.errors.DtypeWarning)
 # ---------------------------------------------------------------------------
 
 _ROOT            = Path(__file__).parent.parent.parent
-DEFAULT_DATA_DIR = _ROOT / "data" / "interim"
+DEFAULT_DATA_DIR = _ROOT / "data" / "extracted"
 DEFAULT_OUT      = _ROOT / "data" / "processed" / "master_tea_prices.csv"
 
 # Columns from 01_sales_index we want as sale-level context.
@@ -54,7 +54,7 @@ DEFAULT_OUT      = _ROOT / "data" / "processed" / "master_tea_prices.csv"
 #           columns (we keep only the *_summary_* rollups which are the meaningful ones).
 SALES_INDEX_KEEP = [
     # identity
-    "sale_id", "sale_number", "sale_date_raw", "sale_year", "sale_month",
+    "sale_id", "report_id", "sale_number", "sale_date_raw", "sale_year", "sale_month",
     # auction totals
     "total_lots", "total_kgs", "reprint_lots", "reprint_quantity",
     # sentiment (rule-based NLP scores from commentary)
@@ -172,7 +172,7 @@ def build_spine(data_dir: Path) -> pd.DataFrame:
     frames.append(df6)
 
     spine_cols = [
-        "sale_id", "table_source", "elevation", "category_type",
+        "sale_id", "report_id", "table_source", "elevation", "category_type",
         "grade", "segment", "tier", "category",
         "price_lo_lkr", "price_hi_lkr",
     ]
@@ -186,7 +186,7 @@ def build_spine(data_dir: Path) -> pd.DataFrame:
     spine["price_range_lkr"] = (spine["price_hi_lkr"] - spine["price_lo_lkr"]).clip(lower=0)
 
     print(f"  [spine]    {len(spine):,} rows × {len(spine.columns)} cols  "
-          f"({spine['sale_id'].nunique()} unique sales)")
+        f"({spine['report_id'].nunique() if 'report_id' in spine.columns else spine['sale_id'].nunique()} unique sales)")
     return spine
 
 
@@ -209,7 +209,10 @@ def build_sale_context(data_dir: Path) -> pd.DataFrame:
     # Add qty_sold columns from 03 (they may already be in 01, but 03 is the canonical source)
     available_03 = [c for c in QTY_SOLD_UNIQUE if c in df3.columns and c not in ctx.columns]
     if available_03:
-        ctx = ctx.merge(df3[["sale_id"] + available_03], on="sale_id", how="left")
+        join_cols = ["sale_id"]
+        if "report_id" in df3.columns and "report_id" in ctx.columns:
+            join_cols = ["sale_id", "report_id"]
+        ctx = ctx.merge(df3[join_cols + available_03], on=join_cols, how="left")
 
     # Derived: USD-adjusted gross average price for current year
     # This helps compare across sales when FX is moving
@@ -243,8 +246,12 @@ def build_offerings_pivot(data_dir: Path) -> pd.DataFrame:
     df2 = pd.read_csv(data_dir / "02_auction_offerings.csv")
 
     available_metrics = [m for m in OFFERING_METRICS if m in df2.columns]
+    index_cols = ["sale_id"]
+    if "report_id" in df2.columns:
+        index_cols.append("report_id")
+
     pivoted = df2.pivot_table(
-        index="sale_id",
+        index=index_cols,
         columns="category",
         values=available_metrics,
         aggfunc="first",
@@ -271,8 +278,12 @@ def build_weather_pivot(data_dir: Path) -> pd.DataFrame:
     df9 = pd.read_csv(data_dir / "09_weather_features.csv")
 
     available_metrics = [m for m in WEATHER_METRICS if m in df9.columns]
+    index_cols = ["sale_id"]
+    if "report_id" in df9.columns:
+        index_cols.append("report_id")
+
     pivoted = df9.pivot_table(
-        index="sale_id",
+        index=index_cols,
         columns="region",
         values=available_metrics,
         aggfunc="first",
@@ -303,12 +314,16 @@ def build_master(data_dir: Path, out_path: Path) -> pd.DataFrame:
     offering = build_offerings_pivot(data_dir)
     weather  = build_weather_pivot(data_dir)
 
+    merge_keys = ["sale_id"]
+    if all("report_id" in df.columns for df in [spine, context, offering, weather]):
+        merge_keys.append("report_id")
+
     # Join sale-level tables onto the spine (left join to keep all price rows)
     master = (
         spine
-        .merge(context,  on="sale_id", how="left")
-        .merge(offering, on="sale_id", how="left")
-        .merge(weather,  on="sale_id", how="left")
+        .merge(context,  on=merge_keys, how="left")
+        .merge(offering, on=merge_keys, how="left")
+        .merge(weather,  on=merge_keys, how="left")
     )
 
     # ---------------------------------------------------------------------------
@@ -316,7 +331,7 @@ def build_master(data_dir: Path, out_path: Path) -> pd.DataFrame:
     # then demand/offering, then weather
     # ---------------------------------------------------------------------------
     identity_cols = [
-        "sale_id", "sale_number", "sale_year", "sale_month", "sale_date_raw",
+        "sale_id", "report_id", "sale_number", "sale_year", "sale_month", "sale_date_raw",
         "table_source", "elevation", "category_type", "grade", "segment", "tier", "category",
         "price_lo_lkr", "price_hi_lkr", "price_mid_lkr", "price_range_lkr",
     ]

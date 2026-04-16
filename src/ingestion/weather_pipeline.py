@@ -205,6 +205,26 @@ def parse_sale_id_from_cover(pdf_path: Path) -> str | None:
     return f"SALE_{sale_num:02d}_{year}"
 
 
+def parse_sale_components(sid: str) -> tuple[int, int] | None:
+    """Parse SALE_XX_YYYY into numeric (year, sale_number)."""
+    m = re.match(r"^SALE_(\d+)_(\d{4})$", str(sid).strip())
+    if not m:
+        return None
+    return int(m.group(2)), int(m.group(1))
+
+
+def build_report_id_lookup(sale_ids) -> dict[str, int]:
+    """Build integer report_id mapping ordered by (sale_year, sale_number)."""
+    parsed = []
+    for sid in set(sale_ids):
+        comps = parse_sale_components(sid)
+        if comps:
+            year, number = comps
+            parsed.append((year, number, sid))
+    parsed.sort(key=lambda x: (x[0], x[1], x[2]))
+    return {sid: idx for idx, (_, _, sid) in enumerate(parsed, start=1)}
+
+
 # ── Weather text parsing ─────────────────────────────────────────────────────
 
 CONDITION_KEYWORDS = {
@@ -362,7 +382,11 @@ def add_lag_features(df: pd.DataFrame,
     For each (region, variable) add lag-N columns aligned by sale order.
     This is the core of your 'lag deviation of time' idea.
     """
-    df = df.sort_values(["region", "sale_id"]).copy()
+    sort_cols = ["region"]
+    if "report_id" in df.columns:
+        sort_cols.append("report_id")
+    sort_cols.append("sale_id")
+    df = df.sort_values(sort_cols).copy()
 
     for region, grp in df.groupby("region"):
         idx = grp.index
@@ -386,6 +410,7 @@ def run_pipeline_weather(pdf_dir: str, output_path: str):
     print("Building SALE_DATES from PDFs...")
     SALE_DATES = build_sale_dates(pdf_dir)
     print(f"   Found {len(SALE_DATES)} sales\n")
+    report_id_lookup = build_report_id_lookup(SALE_DATES.keys())
     
     rows = []
 
@@ -424,6 +449,7 @@ def run_pipeline_weather(pdf_dir: str, output_path: str):
 
             row = {
                 "sale_id": sale_id,
+                "report_id": report_id_lookup.get(sale_id),
                 "auction_date": auction_date,
                 "region": region_key,
                 "region_label": region_info["label"],
@@ -471,6 +497,9 @@ def run_pipeline_weather(pdf_dir: str, output_path: str):
     ]
     df = add_lag_features(df, lag_targets, lags=[1, 2, 3])
 
+    if "report_id" in df.columns:
+        df["report_id"] = pd.to_numeric(df["report_id"], errors="coerce").astype("Int64")
+
     # Save
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -494,7 +523,7 @@ if __name__ == "__main__":
         help="Directory containing the weekly PDF reports"
     )
     parser.add_argument(
-        "--output", default=str(_root / "data" / "interim" / "09_weather_features.csv"),
+        "--output", default=str(_root / "data" / "extracted" / "09_weather_features.csv"),
         help="Output CSV path"
     )
     args = parser.parse_args()
