@@ -1,0 +1,285 @@
+sale_id,auction_date,region,region_label,lat,lon,pdf_source,text_condition_score,text_crop_change,text_has_rain,text_has_mist,text_has_bright,text_has_thunder,text_keywords,text_raw_summary,temperature_2m_max_mean,temperature_2m_max_max,temperature_2m_max_min,temperature_2m_min_mean,temperature_2m_min_max,temperature_2m_min_min,temperature_2m_mean_mean,temperature_2m_mean_max,temperature_2m_mean_min,precipitation_sum_total,precipitation_sum_max_day,rain_sum_total,rain_sum_max_day,windspeed_10m_max_mean,windspeed_10m_max_max,windspeed_10m_max_min,sunshine_duration_total,sunshine_duration_max_day,et0_fao_evapotranspiration_total,et0_fao_evapotranspiration_max_day,relative_humidity_2m_max_mean,relative_humidity_2m_max_max,relative_humidity_2m_max_min,relative_humidity_2m_min_mean,relative_humidity_2m_min_max,relative_humidity_2m_min_min,fetch_start,fetch_end,precipitation_sum_total_lag1,precipitation_sum_total_lag2,precipitation_sum_total_lag3,rain_sum_total_lag1,rain_sum_total_lag2,rain_sum_total_lag3,temperature_2m_mean_mean_lag1,temperature_2m_mean_mean_lag2,temperature_2m_mean_mean_lag3,sunshine_duration_total_lag1,sunshine_duration_total_lag2,sunshine_duration_total_lag3,relative_humidity_2m_max_max_lag1,relative_humidity_2m_max_max_lag2,relative_humidity_2m_max_max_lag3,text_condition_score_lag1,text_condition_score_lag2,text_condition_score_lag3
+SALE_34_2025,2025-09-01,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 1 & 2 September 2025.pdf,0,increase,0,0,0,0,,"Low Grown
+regions reported an increase.",29.24,30.7,28.0,22.89,23.5,22.4,25.53,26.3,25.1,52.1,19.1,52.1,19.1,20.36,22.1,17.4,264920.8,40852.88,27.02,4.53,99.0,100,94,69.14,77,59,2025-08-25,2025-08-31,,,,,,,,,,,,,,,,,,
+SALE_35_2025,2025-09-09,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 9 & 10 September 2025.pdf,0,unknown,1,0,1,0,sunny|rain,"Low Growns
+The Low Grown region reported sunny weather throughout the
+week. According to the Department of Meteorology, rain is
+expected in the Low Grown region in the week ahead.",29.57,30.2,29.0,23.24,24.0,22.0,25.83,26.3,25.2,21.7,5.5,21.7,5.5,20.91,22.8,17.3,277383.49,41205.49,29.75,4.51,98.86,100,98,66.0,68,60,2025-09-02,2025-09-08,52.1,,,52.1,,,25.53,,,264920.8,,,100.0,,,0.0,,
+SALE_36_2025,2025-09-16,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 16 & 17 September 2025.pdf,0,unknown,1,0,1,0,bright|rain,"Low Growns
+Bright weather was reported in the Low Grown Region
+throughout the week. The Department of Meteorology
+expects rain in the Low Grown Region in the week ahead.",29.91,30.2,29.4,23.57,24.0,23.1,26.1,26.4,25.7,30.8,8.4,30.8,8.4,18.47,22.1,14.3,274743.82,41015.0,28.58,4.38,97.14,99,95,66.57,70,64,2025-09-09,2025-09-15,21.7,52.1,,21.7,52.1,,25.83,25.53,,277383.49,264920.8,,100.0,100.0,,0.0,0.0,
+SALE_38_2025,2025-09-29,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of  29 & 30 September 2025.pdf,-1,maintained,1,0,1,0,bright|showers|rain,"Low Grown regions maintained.
+Uva/Udapussellawa Regions
+Both regions reported bright weather and intermittent showers
+throughout the week. The Department of Meteorology expects
+rain in both regions in the week ahead.
+Low Growns
+Rain was reported in the Low Grown Region throughout the week.
+According to the Department of Meteorology, rain is expected in
+the Low Grown Region in the week ahead.",28.7,30.0,26.0,22.74,23.3,22.3,24.86,26.0,23.5,94.3,29.4,94.3,29.4,18.64,20.4,17.3,211106.29,39825.82,22.4,4.37,99.43,100,98,72.71,88,64,2025-09-22,2025-09-28,30.8,21.7,52.1,30.8,21.7,52.1,26.1,25.83,25.53,274743.82,277383.49,264920.8,99.0,100.0,100.0,0.0,0.0,0.0
+SALE_39_2025,2025-10-07,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 7 & 8 October 2025.pdf,0,decrease,0,0,0,0,,"Low Grown regions reported a
+slight decrease.",30.19,31.2,29.0,22.89,24.1,22.0,25.99,26.8,24.8,29.5,12.3,29.5,12.3,15.64,19.7,13.5,261228.53,40311.11,30.0,4.89,97.43,100,94,65.29,76,56,2025-09-30,2025-10-06,94.3,30.8,21.7,94.3,30.8,21.7,24.86,26.1,25.83,211106.29,274743.82,277383.49,100.0,99.0,100.0,-1.0,0.0,0.0
+SALE_40_2025,2025-10-14,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 14 & 15 October 2025.pdf,0,decrease,0,0,0,0,,"Low Grown regions reported a
+decrease.",30.01,31.2,28.5,22.96,23.5,22.8,25.67,26.7,24.9,84.9,41.5,84.9,41.5,11.94,14.1,9.4,252990.88,39828.52,26.76,5.0,97.57,100,92,66.43,77,54,2025-10-07,2025-10-13,29.5,94.3,30.8,29.5,94.3,30.8,25.99,24.86,26.1,261228.53,211106.29,274743.82,100.0,100.0,99.0,0.0,-1.0,0.0
+SALE_41_2025,2025-10-21,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 21 & 22 October 2025.pdf,0,increase,0,0,0,0,,"Low Grown
+ahead. regions reported a slight increase.",29.49,31.8,26.9,22.64,23.1,22.2,24.86,25.4,24.1,112.3,26.7,112.3,26.7,12.33,15.0,10.2,150970.44,34631.21,20.19,4.16,99.57,100,99,71.0,85,55,2025-10-14,2025-10-20,84.9,29.5,94.3,84.9,29.5,94.3,25.67,25.99,24.86,252990.88,261228.53,211106.29,100.0,100.0,100.0,0.0,0.0,-1.0
+SALE_42_2025,2025-10-28,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 28 & 29 October 2025.pdf,-2,unknown,1,0,0,0,showers|rain,"Low Growns
+Rain was reported in the Low Grown Region throughout the
+week. The Department of Meteorology expects intermittent
+showers in the Low Grown Region in the week ahead.",29.43,30.5,28.0,22.76,23.5,22.0,25.19,26.2,24.3,51.9,20.2,51.9,20.2,18.79,25.3,16.0,194020.74,35662.58,22.97,4.24,98.86,100,96,66.71,76,61,2025-10-21,2025-10-27,112.3,84.9,29.5,112.3,84.9,29.5,24.86,25.67,25.99,150970.44,252990.88,261228.53,100.0,100.0,100.0,0.0,0.0,0.0
+SALE_43_2025,2025-11-03,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 3 & 4 November 2025.pdf,0,unknown,1,0,1,0,bright|showers,"Low Growns
+The Low Grown Region reported bright weather throughout the
+week. The Department of Meteorology expects scattered showers
+in the Low Grown Region in the week ahead.",30.91,31.6,30.2,23.3,24.0,22.7,26.44,26.8,26.1,5.4,2.3,5.4,2.3,17.13,25.3,11.0,276075.12,40576.52,31.54,4.76,97.0,100,96,59.14,62,56,2025-10-27,2025-11-02,51.9,112.3,84.9,51.9,112.3,84.9,25.19,24.86,25.67,194020.74,150970.44,252990.88,100.0,100.0,100.0,-2.0,0.0,0.0
+SALE_44_2025,2025-11-11,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 11 & 12 November 2025.pdf,0,increase,0,0,0,0,,"Low Grown
+Meteorology. regions reported an increase.",29.9,31.0,28.8,22.6,23.1,22.0,25.43,26.3,24.7,31.5,12.1,31.5,12.1,16.44,19.6,11.9,238979.12,40365.37,26.29,4.33,97.14,99,92,64.0,72,55,2025-11-04,2025-11-10,5.4,51.9,112.3,5.4,51.9,112.3,26.44,25.19,24.86,276075.12,194020.74,150970.44,100.0,100.0,100.0,0.0,-2.0,0.0
+SALE_45_2025,2025-11-19,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 19 & 20 November 2025.pdf,0,increase,0,0,0,0,,"Low Grown
+regions reported a slight increase.",30.47,31.5,28.2,22.36,23.0,22.1,24.83,25.9,23.9,125.7,30.9,125.7,30.9,10.44,14.8,6.2,184231.28,32689.79,21.21,3.95,99.57,100,99,66.14,76,58,2025-11-12,2025-11-18,31.5,5.4,51.9,31.5,5.4,51.9,25.43,26.44,25.19,238979.12,276075.12,194020.74,99.0,100.0,100.0,0.0,0.0,-2.0
+SALE_46_2025,2025-11-25,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 25 & 26 November 2025.pdf,0,increase,0,0,0,0,,"Low Grown
+regions reported a slight increase.",30.01,31.1,28.2,22.04,22.2,21.7,24.7,25.3,23.9,131.1,33.5,131.1,33.5,10.5,17.3,6.2,196296.88,37761.86,22.35,4.15,99.86,100,99,64.43,76,57,2025-11-18,2025-11-24,125.7,31.5,5.4,125.7,31.5,5.4,24.83,25.43,26.44,184231.28,238979.12,276075.12,100.0,99.0,100.0,0.0,0.0,0.0
+SALE_47_2025,2025-12-08,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 8 & 9 December 2025.pdf,-1,unknown,1,0,1,0,bright|showers|rain,"Low Growns
+The Low Grown Region reported rain throughout the week.
+According to the Department of Meteorology, intermittent bright
+mornings and evening showers are expected in the Low Grown
+Region in the week ahead.",30.47,31.4,28.9,21.73,22.4,21.2,24.97,25.6,24.2,48.9,12.3,48.9,12.3,10.54,12.6,8.4,243269.83,39600.0,25.13,4.44,98.71,100,95,60.43,76,52,2025-12-01,2025-12-07,131.1,125.7,31.5,131.1,125.7,31.5,24.7,24.83,25.43,196296.88,184231.28,238979.12,100.0,100.0,99.0,0.0,0.0,0.0
+SALE_48_2025,2025-12-15,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 15 & 16 December 2025_1765962768.pdf,0,decrease,0,0,0,0,,"Low Grown
+Eliya regions in the week ahead. regions reported a slight decrease.",30.04,30.9,28.6,22.24,22.8,22.0,24.6,25.0,24.2,75.3,23.3,75.3,23.3,7.99,9.1,6.4,206818.01,37838.56,21.53,3.58,99.86,100,99,64.57,72,61,2025-12-08,2025-12-14,48.9,131.1,125.7,48.9,131.1,125.7,24.97,24.7,24.83,243269.83,196296.88,184231.28,100.0,100.0,100.0,-1.0,0.0,0.0
+SALE_49_2025,2025-12-22,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 22 & 23 December 2025_1766552379.pdf,-2,unknown,1,0,1,0,bright|showers|heavy,"Low Growns
+The Low Grown Region reported bright mornings and evening
+showers throughout the week. The Department of Meteorology
+expects fairly heavy showers in the Low Grown Region in the
+week ahead.",30.17,31.8,29.1,21.84,22.8,21.1,24.8,25.4,24.1,99.3,43.3,99.3,43.3,8.76,11.2,6.4,206529.43,39657.88,21.67,4.23,99.86,100,99,63.86,72,57,2025-12-15,2025-12-21,75.3,48.9,131.1,75.3,48.9,131.1,24.6,24.97,24.7,206818.01,243269.83,196296.88,100.0,100.0,100.0,0.0,-1.0,0.0
+SALE_50_2025,2025-12-30,low_grown,Low Grown (Matara / Galle belt),6.25,80.3,Sale of 30 December 2025.pdf,0,unknown,1,0,1,0,sunny|rain,"Low Growns
+Sunny weather was reported in the Low Grown Region
+throughout the week. The Department of Meteorology expects
+rain in the Low Grown Region in the week ahead.",30.39,31.0,29.5,21.76,22.2,21.1,25.16,25.7,24.7,13.9,7.6,13.9,7.6,8.06,9.1,6.3,276711.74,40013.49,26.4,4.11,98.71,100,97,59.14,65,51,2025-12-23,2025-12-29,99.3,75.3,48.9,99.3,75.3,48.9,24.8,24.6,24.97,206529.43,206818.01,243269.83,100.0,100.0,100.0,-2.0,0.0,-1.0
+SALE_34_2025,2025-09-01,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 1 & 2 September 2025.pdf,0,maintained,1,0,1,0,bright|showers,"Nuwara Eliya Regions
+Bright mornings and evening showers were reported in the
+Western and Nuwara Eliya regions throughout the week.
+The Western and Nuwara Eliya regions
+According to the Department of Meteorology, sporadic showers
+maintained the crop intake, whilst the
+are expected in both regions in the week ahead.",20.01,23.6,18.5,13.03,13.8,12.1,15.86,17.0,15.4,17.0,5.4,17.0,5.4,21.74,25.7,13.1,256410.65,42234.46,24.14,4.87,99.43,100,98,65.14,76,40,2025-08-25,2025-08-31,,,,,,,,,,,,,,,,,,
+SALE_35_2025,2025-09-09,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 9 & 10 September 2025.pdf,0,increase,1,0,1,0,sunny|showers,"Nuwara Eliya Regions
+Both regions reported sunny weather throughout the week. The Western and Nuwara Eliya regions
+The Department of Meteorology, expects intermitted recorded an increase in the crop intake,
+showers in the Nuwara Eliya and Western regions in the whilst the",20.69,23.5,19.5,12.41,13.3,11.8,15.83,17.0,15.1,6.6,2.0,6.6,2.0,18.46,24.6,11.9,270414.68,40744.38,27.62,4.53,98.86,100,96,59.71,66,46,2025-09-02,2025-09-08,17.0,,,17.0,,,15.86,,,256410.65,,,100.0,,,0.0,,
+SALE_36_2025,2025-09-16,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 16 & 17 September 2025.pdf,0,increase,1,0,1,0,bright|showers,"Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright weather The Western and Nuwara Eliya regions
+and occasional evening showers throughout the week. reported an increase in the crop intake,
+Intermittent showers are expected in both regions in the week whilst the",20.53,22.0,19.4,12.96,13.9,12.1,15.8,16.5,15.5,32.5,17.1,32.5,17.1,16.37,23.2,9.4,245845.8,41636.52,23.52,3.95,98.57,100,97,64.86,67,61,2025-09-09,2025-09-15,6.6,17.0,,6.6,17.0,,15.83,15.86,,270414.68,256410.65,,100.0,100.0,,0.0,0.0,
+SALE_38_2025,2025-09-29,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of  29 & 30 September 2025.pdf,0,increase,1,0,1,0,bright|showers,"Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright
+mornings and occasional evening showers throughout the
+The Western and Nuwara Eliya regions
+week. Intermittent showers are expected in both regions in
+reported a slight increase in the",18.79,20.5,17.0,13.66,14.3,12.9,15.51,16.2,14.8,36.3,15.8,36.3,15.8,22.61,25.4,18.9,185231.12,40805.56,17.92,3.37,99.0,99,99,73.0,87,64,2025-09-22,2025-09-28,32.5,6.6,17.0,32.5,6.6,17.0,15.8,15.83,15.86,245845.8,270414.68,256410.65,100.0,100.0,100.0,0.0,0.0,0.0
+SALE_39_2025,2025-10-07,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 7 & 8 October 2025.pdf,0,increase,1,0,1,0,sunny|showers,"Nuwara Eliya Regions
+Both regions reported sunny mornings and evening showers The Western and Nuwara Eliya regions
+throughout the week. The Department of Meteorology expects reported a slight increase in the",21.24,23.1,19.9,12.81,13.5,12.2,15.89,16.8,15.0,47.1,28.3,47.1,28.3,14.91,25.2,8.7,250392.0,41190.19,25.36,4.49,97.86,99,95,57.57,65,44,2025-09-30,2025-10-06,36.3,32.5,6.6,36.3,32.5,6.6,15.51,15.8,15.83,185231.12,245845.8,270414.68,99.0,100.0,100.0,0.0,0.0,0.0
+SALE_40_2025,2025-10-14,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 14 & 15 October 2025.pdf,-1,increase,1,0,1,0,bright|showers|rain,"Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright
+mornings and evening showers throughout the week. Rain is
+The Western and Nuwara Eliya regions
+expected in both regions in the week ahead according to the
+reported a slight increase in the",20.71,21.9,19.7,12.53,13.0,12.2,15.64,15.8,15.4,54.6,11.7,54.6,11.7,6.31,7.5,5.0,234636.41,38663.87,22.55,3.72,99.71,100,98,64.14,71,56,2025-10-07,2025-10-13,47.1,36.3,32.5,47.1,36.3,32.5,15.89,15.51,15.8,250392.0,185231.12,245845.8,99.0,99.0,100.0,0.0,0.0,0.0
+SALE_41_2025,2025-10-21,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 21 & 22 October 2025.pdf,-2,maintained,1,0,0,0,showers|rain,"Nuwara Eliya Regions
+Rain was reported in the Western and Nuwara Eliya regions The Western and Nuwara Eliya regions
+throughout the week. According to the Department of maintained the crop intake, whilst the
+Meteorology, showers are expected in both regions in the week",20.2,21.0,18.7,13.5,14.0,12.4,15.99,16.2,15.6,107.1,30.2,107.1,30.2,9.43,12.0,6.9,161379.01,35219.37,19.11,3.85,100.0,100,100,71.71,77,65,2025-10-14,2025-10-20,54.6,47.1,36.3,54.6,47.1,36.3,15.64,15.89,15.51,234636.41,250392.0,185231.12,100.0,99.0,99.0,-1.0,0.0,0.0
+SALE_42_2025,2025-10-28,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 28 & 29 October 2025.pdf,-2,increase,1,0,0,0,showers|rain,"Nuwara Eliya Regions
+Both regions reported rain throughout the week. Showers are The Western and Nuwara Eliya regions
+expected in the Western and Nuwara Eliya regions in the week reported an increase in the crop intake,
+ahead according to the Department of Meteorology. whilst the",18.0,19.3,15.9,13.44,14.0,12.8,15.23,15.8,14.8,22.7,13.8,22.7,13.8,20.7,29.2,14.3,129081.18,37534.12,15.29,3.6,98.71,100,96,74.29,93,57,2025-10-21,2025-10-27,107.1,54.6,47.1,107.1,54.6,47.1,15.99,15.64,15.89,161379.01,234636.41,250392.0,100.0,100.0,99.0,-2.0,-1.0,0.0
+SALE_43_2025,2025-11-03,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 3 & 4 November 2025.pdf,0,decrease,1,0,1,0,bright|showers,"Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright weather The Western and Nuwara Eliya regions
+throughout the week. According to the Department of reported a decrease in the crop intake,
+Meteorology, showers are expected in both regions in the week whilst the",20.9,22.3,18.7,12.7,13.7,11.9,15.79,16.1,15.1,17.7,12.0,17.7,12.0,17.17,31.0,5.8,282749.43,41565.48,25.95,4.04,98.71,100,97,58.43,67,51,2025-10-27,2025-11-02,22.7,107.1,54.6,22.7,107.1,54.6,15.23,15.99,15.64,129081.18,161379.01,234636.41,100.0,100.0,100.0,-2.0,-2.0,-1.0
+SALE_44_2025,2025-11-11,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 11 & 12 November 2025.pdf,0,maintained,1,0,1,0,bright|showers,"Nuwara Eliya Regions
+Bright weather was reported in both regions throughout the The Western and Nuwara Eliya regions
+week. Showers are expected in the Western and Nuwara Eliya maintained the crop intake, whilst the
+regions in the week ahead according to the Department of",20.69,22.5,19.2,12.1,13.2,10.9,15.67,16.4,15.2,23.5,12.9,23.5,12.9,8.26,11.1,4.5,250118.99,41521.98,23.47,4.55,98.86,100,94,58.57,77,41,2025-11-04,2025-11-10,17.7,22.7,107.1,17.7,22.7,107.1,15.79,15.23,15.99,282749.43,129081.18,161379.01,100.0,100.0,100.0,0.0,-2.0,-2.0
+SALE_45_2025,2025-11-19,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 19 & 20 November 2025.pdf,-1,maintained,1,0,1,0,bright|showers|rain,"Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright mornings
+and evening showers throughout the week. The Department of
+The Western and Nuwara Eliya regions
+Meteorology expects rain in both regions in the week ahead.
+maintained the crop intake, whilst the",19.73,20.9,17.7,12.94,14.3,12.3,15.36,15.7,15.0,103.6,35.0,103.6,35.0,8.59,10.1,5.2,178438.49,39920.52,17.63,3.29,100.0,100,100,75.0,84,65,2025-11-12,2025-11-18,23.5,17.7,22.7,23.5,17.7,22.7,15.67,15.79,15.23,250118.99,282749.43,129081.18,100.0,100.0,100.0,0.0,0.0,-2.0
+SALE_46_2025,2025-11-25,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 25 & 26 November 2025.pdf,-1,maintained,1,0,1,0,bright|showers|rain,"Nuwara Eliya Regions
+Bright mornings and evening showers were reported in both
+regions throughout the week. According to the Department of
+The Western and Nuwara Eliya regions
+Meteorology, rain is expected in the Western and Nuwara Eliya
+maintained the crop intake, whilst the
+regions in the week ahead.",19.47,21.4,16.7,12.94,13.6,11.6,15.4,16.1,14.9,131.1,45.0,131.1,45.0,9.26,12.0,6.7,155406.98,39787.31,16.95,3.54,100.0,100,100,74.29,93,61,2025-11-18,2025-11-24,103.6,23.5,17.7,103.6,23.5,17.7,15.36,15.67,15.79,178438.49,250118.99,282749.43,100.0,100.0,100.0,-1.0,0.0,0.0
+SALE_47_2025,2025-12-08,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 8 & 9 December 2025.pdf,-3,decrease,1,0,1,0,bright|showers|rain|heavy,"Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported heavy rain All regions reported a decrease in the
+throughout the week. The Department of Meteorology expects crop intake.
+bright mornings and heavy evening showers in both regions in the
+week ahead.",20.47,22.2,17.6,11.41,12.5,9.8,15.04,15.5,14.1,24.0,11.1,24.0,11.1,9.59,12.1,5.2,255488.42,40418.06,23.32,4.28,99.57,100,97,58.57,87,35,2025-12-01,2025-12-07,131.1,103.6,23.5,131.1,103.6,23.5,15.4,15.36,15.67,155406.98,178438.49,250118.99,100.0,100.0,100.0,-1.0,-1.0,0.0
+SALE_48_2025,2025-12-15,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 15 & 16 December 2025_1765962768.pdf,0,maintained,1,0,1,0,bright|showers,"Nuwara Eliya Regions
+Bright mornings and evening showers were reported in both The Western and Nuwara Eliya regions
+regions throughout the week. According to the Department of maintained the crop intake, whilst the
+Meteorology, showers are expected in the Western and Nuwara",18.67,20.4,16.8,12.1,13.0,11.0,14.74,15.1,14.2,37.4,11.2,37.4,11.2,10.83,13.0,7.0,197957.2,39600.0,18.21,3.63,100.0,100,100,74.43,84,62,2025-12-08,2025-12-14,24.0,131.1,103.6,24.0,131.1,103.6,15.04,15.4,15.36,255488.42,155406.98,178438.49,100.0,100.0,100.0,-3.0,-1.0,-1.0
+SALE_49_2025,2025-12-22,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 22 & 23 December 2025_1766552379.pdf,0,decrease,1,0,1,0,bright|showers,"Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright mornings All regions reported a decrease in the
+and occasional evening showers throughout the week. crop intake.
+Intermittent showers are expected in both regions in the week
+ahead according to the Department of Meteorology.",18.3,20.0,16.4,12.86,13.9,11.4,15.0,15.4,14.6,63.7,30.4,63.7,30.4,12.46,16.8,8.1,190264.75,39758.79,16.82,3.56,100.0,100,100,77.29,93,56,2025-12-15,2025-12-21,37.4,24.0,131.1,37.4,24.0,131.1,14.74,15.04,15.4,197957.2,255488.42,155406.98,100.0,100.0,100.0,0.0,-3.0,-1.0
+SALE_50_2025,2025-12-30,nuwara_eliya,Nuwara Eliya,6.9497,80.7891,Sale of 30 December 2025.pdf,0,decrease,1,0,1,0,bright|showers,"Nuwara Eliya Regions
+Both regions reported bright weather throughout the week. All regions reported a decrease in the
+According to the Department of Meteorology, intermittent crop intake.
+showers are expected in the Western and Nuwara Eliya regions in
+the week ahead.",19.27,20.8,17.5,10.81,11.9,8.8,14.37,15.3,13.4,27.5,6.8,27.5,6.8,8.37,9.9,5.6,236437.0,39641.75,19.57,3.4,100.0,100,100,69.0,79,59,2025-12-23,2025-12-29,63.7,37.4,24.0,63.7,37.4,24.0,15.0,14.74,15.04,190264.75,197957.2,255488.42,100.0,100.0,100.0,0.0,0.0,-3.0
+SALE_34_2025,2025-09-01,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 1 & 2 September 2025.pdf,0,unknown,1,0,1,0,sunny|showers,"Uva/Udapussellawa Regions
+The Uva and Uda Pussellawa regions reported sunny weather
+throughout the week. The Department of Meteorology expects
+showers in both regions in the week ahead.",29.66,30.7,29.0,18.47,20.4,15.9,23.29,24.1,22.0,7.8,2.5,7.8,2.5,9.47,10.7,7.6,287109.67,42208.04,33.42,5.06,89.43,96,79,41.0,45,29,2025-08-25,2025-08-31,,,,,,,,,,,,,,,,,,
+SALE_35_2025,2025-09-09,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 9 & 10 September 2025.pdf,0,unknown,1,0,1,0,bright|showers,"Uva/Udapussellawa Regions
+Bright weather was reported in the Uva and Uda Pussellawa
+regions throughout the week. Showers are expected in both
+regions in the week ahead, according to the Department of
+Meteorology.",30.29,30.9,29.5,18.49,20.4,17.5,23.36,24.4,22.3,18.7,10.8,18.7,10.8,10.41,13.7,7.9,281036.87,41792.23,34.86,5.49,85.71,98,78,35.71,45,31,2025-09-02,2025-09-08,7.8,,,7.8,,,23.29,,,287109.67,,,96.0,,,0.0,,
+SALE_36_2025,2025-09-16,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 16 & 17 September 2025.pdf,1,unknown,0,0,1,0,sunny,"Uva/Udapussellawa Regions
+Both regions reported sunny weather throughout the week.
+Overcast conditions are expected in the Uva and Uda Pussellawa
+regions, in the week ahead.",27.69,29.1,26.8,17.21,18.8,16.4,21.74,22.3,21.4,33.0,19.7,33.0,19.7,8.06,10.3,5.8,253919.14,40681.38,28.08,4.49,93.29,98,88,51.29,64,44,2025-09-09,2025-09-15,18.7,7.8,,18.7,7.8,,23.36,23.29,,281036.87,287109.67,,98.0,96.0,,0.0,0.0,
+SALE_38_2025,2025-09-29,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of  29 & 30 September 2025.pdf,-1,unknown,1,0,1,0,bright|showers|rain,"Uva/Udapussellawa Regions
+Both regions reported bright weather and intermittent showers
+throughout the week. The Department of Meteorology expects
+rain in both regions in the week ahead.",28.14,30.1,25.4,19.0,20.3,18.2,22.6,23.5,21.8,20.7,7.8,20.7,7.8,9.59,12.9,7.6,221033.04,40805.25,26.64,4.67,92.57,97,84,49.0,62,40,2025-09-22,2025-09-28,33.0,18.7,7.8,33.0,18.7,7.8,21.74,23.36,23.29,253919.14,281036.87,287109.67,98.0,98.0,96.0,1.0,0.0,0.0
+SALE_39_2025,2025-10-07,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 7 & 8 October 2025.pdf,-1,unknown,1,0,1,0,bright|showers|rain,"Uva/Udapussellawa Regions
+The Uva and Uda Pussellawa regions reported bright weather
+and rain throughout the week. Intermittent showers are
+expected in both regions according to the Department of
+Meteorology.",28.44,30.8,25.8,17.83,19.5,15.7,22.29,23.9,20.4,78.5,52.7,78.5,52.7,9.41,13.0,5.9,247642.71,41435.05,30.63,5.38,90.71,99,80,44.86,58,32,2025-09-30,2025-10-06,20.7,33.0,18.7,20.7,33.0,18.7,22.6,21.74,23.36,221033.04,253919.14,281036.87,97.0,98.0,98.0,-1.0,1.0,0.0
+SALE_40_2025,2025-10-14,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 14 & 15 October 2025.pdf,0,unknown,1,0,1,0,bright|showers,"Uva/Udapussellawa Regions
+Both regions reported bright weather and evening showers
+throughout the week. According to the Department of
+Meteorology, sporadic showers are expected in the Uva and
+Uda Pussellawa regions in the week ahead.",25.9,26.8,25.0,16.69,17.5,15.9,20.53,21.0,20.2,56.5,16.6,56.5,16.6,7.67,10.1,4.9,239239.7,40911.89,26.28,4.71,98.43,99,98,63.29,69,55,2025-10-07,2025-10-13,78.5,20.7,33.0,78.5,20.7,33.0,22.29,22.6,21.74,247642.71,221033.04,253919.14,99.0,97.0,98.0,-1.0,-1.0,1.0
+SALE_41_2025,2025-10-21,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 21 & 22 October 2025.pdf,-4,unknown,1,0,0,0,showers|rain|heavy,"Uva/Udapussellawa Regions
+The Uva and Uda Pussellawa regions reported rain throughout
+the week. Heavy showers are expected in both regions in the
+week ahead according to the Department of Meteorology.",24.41,25.6,22.5,17.63,18.8,16.6,20.23,20.6,19.7,139.2,50.9,139.2,50.9,8.3,11.8,5.2,174660.08,38014.09,20.45,3.96,99.71,100,99,74.71,89,67,2025-10-14,2025-10-20,56.5,78.5,20.7,56.5,78.5,20.7,20.53,22.29,22.6,239239.7,247642.71,221033.04,99.0,99.0,97.0,0.0,-1.0,-1.0
+SALE_42_2025,2025-10-28,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 28 & 29 October 2025.pdf,0,unknown,1,0,1,0,bright|showers,"Uva/Udapussellawa Regions
+Bright mornings and evening showers were reported in the Uva
+and Uda Pussellawa regions throughout the week. According
+to the Department of Meteorology, showers are expected in
+both regions in the week ahead.",25.51,27.5,22.3,17.7,19.0,16.1,21.19,22.0,20.1,15.8,13.0,15.8,13.0,9.19,15.6,5.9,183723.35,38727.76,22.32,4.91,93.86,100,79,60.71,87,44,2025-10-21,2025-10-27,139.2,56.5,78.5,139.2,56.5,78.5,20.23,20.53,22.29,174660.08,239239.7,247642.71,100.0,99.0,99.0,-4.0,0.0,-1.0
+SALE_43_2025,2025-11-03,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 3 & 4 November 2025.pdf,0,unknown,1,0,1,0,sunny|showers,"Uva/Udapussellawa Regions
+The Uva and Uda Pussellawa regions reported sunny weather
+throughout the week. Showers are expected in both regions in the
+week ahead according to the Department of Meteorology.",27.47,28.4,26.2,16.31,18.3,15.2,21.57,22.9,20.7,5.6,3.0,5.6,3.0,8.79,15.6,5.1,285502.75,41632.35,31.27,4.91,90.29,99,76,47.71,57,42,2025-10-27,2025-11-02,15.8,139.2,56.5,15.8,139.2,56.5,21.19,20.23,20.53,183723.35,174660.08,239239.7,100.0,100.0,99.0,0.0,-4.0,0.0
+SALE_44_2025,2025-11-11,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 11 & 12 November 2025.pdf,0,unknown,1,0,1,0,sunny|showers,"Uva/Udapussellawa Regions
+Sunny weather was reported in the Uva and Uda Pussellawa
+regions throughout the week. According to the Department of
+Meteorology, showers are expected in both regions in the week
+ahead.",25.94,28.5,24.0,16.47,17.3,15.7,20.64,21.8,19.6,23.5,12.0,23.5,12.0,7.4,10.3,5.0,230621.51,41252.23,25.47,4.75,96.86,99,90,56.86,72,41,2025-11-04,2025-11-10,5.6,15.8,139.2,5.6,15.8,139.2,21.57,21.19,20.23,285502.75,183723.35,174660.08,99.0,100.0,100.0,0.0,0.0,-4.0
+SALE_45_2025,2025-11-19,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 19 & 20 November 2025.pdf,-2,unknown,1,1,1,0,sunny|showers|misty|mist,"Uva/Udapussellawa Regions
+The Uva and Uda Pussellawa regions reported sunny weather
+and occasional showers throughout the week. Misty conditions
+are expected in both regions in the week ahead according to
+the Department of Meteorology.",24.01,25.4,22.9,17.41,18.6,16.7,19.87,20.1,19.3,56.0,15.9,56.0,15.9,9.77,12.6,7.9,169855.57,33263.02,18.62,3.17,99.86,100,99,75.0,85,68,2025-11-12,2025-11-18,23.5,5.6,15.8,23.5,5.6,15.8,20.64,21.57,21.19,230621.51,285502.75,183723.35,99.0,99.0,100.0,0.0,0.0,0.0
+SALE_46_2025,2025-11-25,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 25 & 26 November 2025.pdf,-2,unknown,1,1,1,0,sunny|showers|misty|mist,"Uva/Udapussellawa Regions
+Sunny weather and occasional showers were reported in the Uva
+and Uda Pussellawa regions throughout the week. The
+Department of Meteorology expects misty conditions in both
+regions in the week ahead.",23.5,24.8,21.1,17.06,18.1,15.1,19.64,20.4,19.3,136.7,56.1,136.7,56.1,8.54,9.4,7.8,163990.3,40707.4,17.94,3.72,100.0,100,100,76.86,91,66,2025-11-18,2025-11-24,56.0,23.5,5.6,56.0,23.5,5.6,19.87,20.64,21.57,169855.57,230621.51,285502.75,100.0,99.0,99.0,-2.0,0.0,0.0
+SALE_47_2025,2025-12-08,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 8 & 9 December 2025.pdf,-2,unknown,1,1,1,0,bright|showers|misty|mist,"Uva/Udapussellawa Regions
+The Uva and Uda Pussellawa regions reported bright mornings
+and evening showers throughout the week. Misty conditions are
+expected in both regions in the week ahead according to the
+Department of Meteorology.",24.73,25.4,23.4,15.39,16.6,13.9,19.64,20.2,19.3,34.6,15.4,34.6,15.4,8.81,11.3,6.3,262210.82,40136.48,24.82,3.91,99.14,100,97,63.86,76,56,2025-12-01,2025-12-07,136.7,56.0,23.5,136.7,56.0,23.5,19.64,19.87,20.64,163990.3,169855.57,230621.51,100.0,100.0,99.0,-2.0,-2.0,0.0
+SALE_48_2025,2025-12-15,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 15 & 16 December 2025_1765962768.pdf,-4,unknown,1,0,0,0,showers|rain|heavy,"Uva/Udapussellawa Regions
+Rain was reported in the Uva and Uda Pussellawa regions
+throughout the week. The Department of Meteorology expects
+heavy showers in both regions in the week ahead.",23.2,25.1,22.0,17.06,17.9,15.6,19.54,20.2,19.0,62.1,22.5,62.1,22.5,12.06,14.2,9.6,207055.92,39729.04,19.91,4.06,99.0,100,98,74.57,86,61,2025-12-08,2025-12-14,34.6,136.7,56.0,34.6,136.7,56.0,19.64,19.64,19.87,262210.82,163990.3,169855.57,100.0,100.0,100.0,-2.0,-2.0,-2.0
+SALE_49_2025,2025-12-22,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 22 & 23 December 2025_1766552379.pdf,-4,unknown,1,0,0,0,showers|rain|heavy,"Uva/Udapussellawa Regions
+Both regions reported rain throughout the week. According to
+the Department of Meteorology, heavy showers are expected
+in both regions in the week ahead.",22.84,24.5,21.2,18.01,18.6,17.4,19.83,20.5,19.4,38.2,15.7,38.2,15.7,11.23,15.7,8.7,190069.27,39160.93,18.8,3.52,99.0,100,98,78.71,91,66,2025-12-15,2025-12-21,62.1,34.6,136.7,62.1,34.6,136.7,19.54,19.64,19.64,207055.92,262210.82,163990.3,100.0,100.0,100.0,-4.0,-2.0,-2.0
+SALE_50_2025,2025-12-30,uva_udapussellawa,Uva / Uda Pussellawa,6.87,81.06,Sale of 30 December 2025.pdf,0,unknown,1,0,1,0,bright|showers,"Uva/Udapussellawa Regions
+The Uva and Uda Pussellawa regions reported bright mornings and
+occasional evening showers throughout the week. Showers are
+expected in both regions in the week ahead according to the
+Department of Meteorology.",23.7,24.0,23.3,16.29,17.1,14.1,19.64,20.5,18.9,7.2,2.6,7.2,2.6,12.87,15.6,11.3,248062.01,39823.09,22.32,3.54,97.71,99,96,68.71,75,62,2025-12-23,2025-12-29,38.2,62.1,34.6,38.2,62.1,34.6,19.83,19.54,19.64,190069.27,207055.92,262210.82,100.0,100.0,100.0,-4.0,-4.0,-2.0
+SALE_34_2025,2025-09-01,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 1 & 2 September 2025.pdf,0,maintained,1,0,1,0,bright|showers,"Western/Nuwara Eliya Regions
+Bright mornings and evening showers were reported in the
+Western and Nuwara Eliya regions throughout the week.
+The Western and Nuwara Eliya regions
+According to the Department of Meteorology, sporadic showers
+maintained the crop intake, whilst the
+are expected in both regions in the week ahead.",22.59,26.6,20.5,17.7,18.5,16.3,19.53,20.8,18.8,82.5,19.0,82.5,19.0,12.8,15.4,10.5,227845.92,41138.9,21.29,4.68,100.0,100,100,79.0,91,55,2025-08-25,2025-08-31,,,,,,,,,,,,,,,,,,
+SALE_35_2025,2025-09-09,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 9 & 10 September 2025.pdf,0,increase,1,0,1,0,sunny|showers,"Western/Nuwara Eliya Regions
+Both regions reported sunny weather throughout the week. The Western and Nuwara Eliya regions
+The Department of Meteorology, expects intermitted recorded an increase in the crop intake,
+showers in the Nuwara Eliya and Western regions in the whilst the",23.01,25.6,20.9,17.1,18.3,15.9,19.59,20.6,18.8,56.4,14.1,56.4,14.1,11.99,13.5,9.9,258342.84,40761.96,24.77,4.21,99.14,100,98,75.71,92,60,2025-09-02,2025-09-08,82.5,,,82.5,,,19.53,,,227845.92,,,100.0,,,0.0,,
+SALE_36_2025,2025-09-16,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 16 & 17 September 2025.pdf,0,increase,1,0,1,0,bright|showers,"Western/Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright weather The Western and Nuwara Eliya regions
+and occasional evening showers throughout the week. reported an increase in the crop intake,
+Intermittent showers are expected in both regions in the week whilst the",23.03,23.7,21.8,17.69,18.4,16.7,19.73,20.1,19.3,52.9,22.9,52.9,22.9,11.4,13.2,7.9,222221.59,40388.46,22.01,3.63,99.14,100,98,78.43,86,70,2025-09-09,2025-09-15,56.4,82.5,,56.4,82.5,,19.59,19.53,,258342.84,227845.92,,100.0,100.0,,0.0,0.0,
+SALE_38_2025,2025-09-29,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of  29 & 30 September 2025.pdf,0,increase,1,0,1,0,bright|showers,"Western/Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright
+mornings and occasional evening showers throughout the
+The Western and Nuwara Eliya regions
+week. Intermittent showers are expected in both regions in
+reported a slight increase in the",21.33,22.8,20.0,18.09,18.3,17.3,19.2,19.5,18.7,128.6,48.2,128.6,48.2,14.1,15.5,13.4,158442.65,37380.24,16.15,2.86,99.57,100,99,88.71,95,80,2025-09-22,2025-09-28,52.9,56.4,82.5,52.9,56.4,82.5,19.73,19.59,19.53,222221.59,258342.84,227845.92,100.0,100.0,100.0,0.0,0.0,0.0
+SALE_39_2025,2025-10-07,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 7 & 8 October 2025.pdf,0,increase,1,0,1,0,sunny|showers,"Western/Nuwara Eliya Regions
+Both regions reported sunny mornings and evening showers The Western and Nuwara Eliya regions
+throughout the week. The Department of Meteorology expects reported a slight increase in the",24.23,25.7,22.7,16.91,18.2,15.6,20.06,20.7,19.1,22.5,7.1,22.5,7.1,10.74,14.1,8.3,247907.46,39832.7,26.19,4.48,98.71,100,97,67.86,83,59,2025-09-30,2025-10-06,128.6,52.9,56.4,128.6,52.9,56.4,19.2,19.73,19.59,158442.65,222221.59,258342.84,100.0,100.0,100.0,0.0,0.0,0.0
+SALE_40_2025,2025-10-14,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 14 & 15 October 2025.pdf,-1,increase,1,0,1,0,bright|showers|rain,"Western/Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright
+mornings and evening showers throughout the week. Rain is
+The Western and Nuwara Eliya regions
+expected in both regions in the week ahead according to the
+reported a slight increase in the",24.47,25.3,23.5,16.64,17.1,16.0,19.83,20.5,19.4,68.6,30.4,68.6,30.4,8.94,10.3,6.8,232562.39,39600.0,23.79,3.91,98.43,99,97,68.43,75,61,2025-10-07,2025-10-13,22.5,128.6,52.9,22.5,128.6,52.9,20.06,19.2,19.73,247907.46,158442.65,222221.59,100.0,100.0,100.0,0.0,0.0,0.0
+SALE_41_2025,2025-10-21,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 21 & 22 October 2025.pdf,-2,maintained,1,0,0,0,showers|rain,"Western/Nuwara Eliya Regions
+Rain was reported in the Western and Nuwara Eliya regions The Western and Nuwara Eliya regions
+throughout the week. According to the Department of maintained the crop intake, whilst the
+Meteorology, showers are expected in both regions in the week",23.41,25.0,20.8,17.61,18.3,16.6,19.83,20.3,19.2,161.4,37.4,161.4,37.4,7.9,9.3,6.8,146665.46,39849.5,17.83,3.89,99.57,100,99,78.71,90,67,2025-10-14,2025-10-20,68.6,22.5,128.6,68.6,22.5,128.6,19.83,20.06,19.2,232562.39,247907.46,158442.65,99.0,100.0,100.0,-1.0,0.0,0.0
+SALE_42_2025,2025-10-28,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 28 & 29 October 2025.pdf,-2,increase,1,0,0,0,showers|rain,"Western/Nuwara Eliya Regions
+Both regions reported rain throughout the week. Showers are The Western and Nuwara Eliya regions
+expected in the Western and Nuwara Eliya regions in the week reported an increase in the crop intake,
+ahead according to the Department of Meteorology. whilst the",21.83,23.7,20.4,17.66,18.4,16.1,19.29,19.5,18.9,78.5,39.0,78.5,39.0,12.53,16.6,8.6,150085.76,36873.89,15.9,3.34,99.0,100,98,82.29,91,66,2025-10-21,2025-10-27,161.4,68.6,22.5,161.4,68.6,22.5,19.83,19.83,20.06,146665.46,232562.39,247907.46,100.0,99.0,100.0,-2.0,-1.0,0.0
+SALE_43_2025,2025-11-03,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 3 & 4 November 2025.pdf,0,decrease,1,0,1,0,bright|showers,"Western/Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright weather The Western and Nuwara Eliya regions
+throughout the week. According to the Department of reported a decrease in the crop intake,
+Meteorology, showers are expected in both regions in the week whilst the",24.44,26.2,22.1,16.27,16.9,15.7,20.07,20.7,19.3,17.7,6.7,17.7,6.7,11.16,16.6,8.0,275804.45,41277.8,26.9,4.56,96.71,100,93,64.14,78,54,2025-10-27,2025-11-02,78.5,161.4,68.6,78.5,161.4,68.6,19.29,19.83,19.83,150085.76,146665.46,232562.39,100.0,100.0,99.0,-2.0,-2.0,-1.0
+SALE_44_2025,2025-11-11,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 11 & 12 November 2025.pdf,0,maintained,1,0,1,0,bright|showers,"Western/Nuwara Eliya Regions
+Bright weather was reported in both regions throughout the The Western and Nuwara Eliya regions
+week. Showers are expected in the Western and Nuwara Eliya maintained the crop intake, whilst the
+regions in the week ahead according to the Department of",23.71,25.2,21.2,16.96,17.9,15.5,19.64,20.3,19.0,49.8,14.7,49.8,14.7,8.8,10.9,7.2,233499.02,40117.28,23.2,4.24,99.29,100,98,69.43,86,55,2025-11-04,2025-11-10,17.7,78.5,161.4,17.7,78.5,161.4,20.07,19.29,19.83,275804.45,150085.76,146665.46,100.0,100.0,100.0,0.0,-2.0,-2.0
+SALE_45_2025,2025-11-19,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 19 & 20 November 2025.pdf,-1,maintained,1,0,1,0,bright|showers|rain,"Western/Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright mornings
+and evening showers throughout the week. The Department of
+The Western and Nuwara Eliya regions
+Meteorology expects rain in both regions in the week ahead.
+maintained the crop intake, whilst the",23.71,25.0,22.3,16.71,17.7,15.7,19.47,19.7,19.2,150.4,33.6,150.4,33.6,7.93,12.4,6.1,182577.96,40687.59,18.58,3.32,99.43,100,97,75.14,82,65,2025-11-12,2025-11-18,49.8,17.7,78.5,49.8,17.7,78.5,19.64,20.07,19.29,233499.02,275804.45,150085.76,100.0,100.0,100.0,0.0,0.0,-2.0
+SALE_46_2025,2025-11-25,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 25 & 26 November 2025.pdf,-1,maintained,1,0,1,0,bright|showers|rain,"Western/Nuwara Eliya Regions
+Bright mornings and evening showers were reported in both
+regions throughout the week. According to the Department of
+The Western and Nuwara Eliya regions
+Meteorology, rain is expected in the Western and Nuwara Eliya
+maintained the crop intake, whilst the
+regions in the week ahead.",23.46,25.4,21.2,16.79,17.8,14.7,19.5,19.9,19.1,130.3,28.1,130.3,28.1,7.47,9.0,4.2,175680.75,37515.35,18.53,3.63,99.14,100,98,74.86,91,61,2025-11-18,2025-11-24,150.4,49.8,17.7,150.4,49.8,17.7,19.47,19.64,20.07,182577.96,233499.02,275804.45,100.0,100.0,100.0,-1.0,0.0,0.0
+SALE_47_2025,2025-12-08,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 8 & 9 December 2025.pdf,-3,decrease,1,0,1,0,bright|showers|rain|heavy,"Western/Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported heavy rain All regions reported a decrease in the
+throughout the week. The Department of Meteorology expects crop intake.
+bright mornings and heavy evening showers in both regions in the
+week ahead.",24.3,24.9,23.7,14.61,15.6,13.2,19.06,19.5,18.5,35.7,16.8,35.7,16.8,8.37,9.6,7.5,258784.03,39962.12,23.96,4.37,98.71,100,98,64.57,71,52,2025-12-01,2025-12-07,130.3,150.4,49.8,130.3,150.4,49.8,19.5,19.47,19.64,175680.75,182577.96,233499.02,100.0,100.0,100.0,-1.0,-1.0,0.0
+SALE_48_2025,2025-12-15,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 15 & 16 December 2025_1765962768.pdf,0,maintained,1,0,1,0,bright|showers,"Western/Nuwara Eliya Regions
+Bright mornings and evening showers were reported in both The Western and Nuwara Eliya regions
+regions throughout the week. According to the Department of maintained the crop intake, whilst the
+Meteorology, showers are expected in the Western and Nuwara",23.71,24.9,22.2,16.1,17.3,14.7,19.19,19.6,18.8,74.7,34.1,74.7,34.1,7.61,9.9,5.7,214349.39,39600.0,19.24,3.76,99.0,100,97,72.86,87,59,2025-12-08,2025-12-14,35.7,130.3,150.4,35.7,130.3,150.4,19.06,19.5,19.47,258784.03,175680.75,182577.96,100.0,100.0,100.0,-3.0,-1.0,-1.0
+SALE_49_2025,2025-12-22,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 22 & 23 December 2025_1766552379.pdf,0,decrease,1,0,1,0,bright|showers,"Western/Nuwara Eliya Regions
+The Western and Nuwara Eliya regions reported bright mornings All regions reported a decrease in the
+and occasional evening showers throughout the week. crop intake.
+Intermittent showers are expected in both regions in the week
+ahead according to the Department of Meteorology.",23.51,25.4,22.3,15.81,17.8,12.8,19.27,19.9,18.7,113.1,44.2,113.1,44.2,8.86,11.4,6.9,235255.52,39772.54,21.34,4.01,99.0,100,98,71.43,81,54,2025-12-15,2025-12-21,74.7,35.7,130.3,74.7,35.7,130.3,19.19,19.06,19.5,214349.39,258784.03,175680.75,100.0,100.0,100.0,0.0,-3.0,-1.0
+SALE_50_2025,2025-12-30,western_high,Western High Grown (Maskeliya / Dickoya),6.9271,80.535,Sale of 30 December 2025.pdf,0,decrease,1,0,1,0,bright|showers,"Western/Nuwara Eliya Regions
+Both regions reported bright weather throughout the week. All regions reported a decrease in the
+According to the Department of Meteorology, intermittent crop intake.
+showers are expected in the Western and Nuwara Eliya regions in
+the week ahead.",24.46,25.2,23.3,14.4,16.5,12.5,19.36,19.9,18.8,4.6,2.2,4.6,2.2,8.83,10.6,7.3,277421.62,40267.36,24.71,3.97,98.14,100,96,60.29,71,52,2025-12-23,2025-12-29,113.1,74.7,35.7,113.1,74.7,35.7,19.27,19.19,19.06,235255.52,214349.39,258784.03,100.0,100.0,100.0,0.0,0.0,-3.0
