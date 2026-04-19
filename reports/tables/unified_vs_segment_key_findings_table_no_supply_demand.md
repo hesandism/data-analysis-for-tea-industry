@@ -1,7 +1,7 @@
-| Market Category | Optimal Algorithm | Coefficient of Determination (R^2) | RMSE (Segment-Specific vs. Unified) | Error Reduction (%) |
-| --- | --- | --- | --- | --- |
-| Dust | Random Forest | 0.4151 | 158.00 vs 156.56 | -0.91786180700481 |
-| High Grown | Random Forest | 0.2871 | 224.77 vs 223.81 | -0.4296601887557568 |
-| Low Grown | Gradient Boosting | 0.8581 | 280.54 vs 267.70 | -4.796805827897558 |
-| Off-Grade | XGBoost | 0.2832 | 145.11 vs 144.73 | -0.26229939838983607 |
-| Unified | Random Forest | 0.8727661309176495 | 221.74 vs 221.74 | 0.0 |
+| Market Category | Optimal Algorithm | Coefficient of Determination (R^2) | RMSE (Segment-Specific vs. Unified) | Error Reduction (%) | Forecast Horizon |
+| --- | --- | --- | --- | --- | --- |
+| Dust | Random Forest | 0.0856 | 197.21 vs 190.67 | -3.4291829163361323 | t_plus_1_week |
+| High Grown | LightGBM | -0.0317 | 269.31 vs 262.81 | -2.474029054359938 | t_plus_1_week |
+| Low Grown | Random Forest | 0.3125 | 622.59 vs 685.75 | 9.209771427500014 | t_plus_1_week |
+| Off-Grade | LightGBM | -0.0802 | 176.13 vs 175.63 | -0.2872774546819969 | t_plus_1_week |
+| Unified | Random Forest | 0.3614727682830181 | 482.66 vs 482.66 | 0.0 | t_plus_1_week |
