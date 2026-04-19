@@ -191,9 +191,14 @@ weekly_components = (
     + df["forward_contracts_weekly_2026"]
 )
 weekly_mismatch = (
-    df["total_sold_weekly_2026"].notna()
-    & weekly_components.notna()
-    & (df["total_sold_weekly_2026"] != weekly_components)
+    weekly_components.notna()
+    & ~np.isclose(
+        pd.to_numeric(df["total_sold_weekly_2026"], errors="coerce"),
+        pd.to_numeric(weekly_components, errors="coerce"),
+        rtol=0,
+        atol=1e-9,
+        equal_nan=True,
+    )
 )
 num_weekly_fixes = int(weekly_mismatch.sum())
 if num_weekly_fixes > 0:
@@ -226,6 +231,7 @@ print(f"     After:  {after}")
 # StandardScaler should be applied at modelling time (not here)
 # to avoid data leakage from validation folds.
 # See: NUMERIC_FEATURE_COLS at bottom of this file.
+print("\n[H2] No scaling applied in preprocessing. Scale NUMERIC_FEATURE_COLS only during CV/model training.")
 
 # ── H3: Structural nulls in grade / tier ─────────────────
 # grade and tier ONLY apply to 05_low_grown rows.
@@ -380,9 +386,19 @@ EXCLUDE_FROM_FEATURES = [
     "table_source",                         # replaced by table_source_enc
     "tier",                                 # replaced by tier_enc
     "grade",                                # free text / high null
-    "price_lo_lkr", "price_hi_lkr",        # C1 leakage
-    "price_range_lkr",                      # derived from lo/hi
+    *LEAKAGE_COLS,                           # C1 leakage (lo/hi/range)
     "price_mid_lkr",                        # raw target (use _log version)
+    "price_mid_usd",                        # directly derived from target via FX
     "price_mid_lkr_log",                    # the modelling target itself
     "has_price_target",                     # masking flag
+    "sentiment_low_grown",                  # H4 near-constant feature
 ]
+
+# Numeric columns that are valid candidates for scaling at modelling time.
+# Keep scaling inside cross-validation folds to prevent leakage.
+NUMERIC_FEATURE_COLS = [
+    col
+    for col in df.select_dtypes(include=[np.number]).columns
+    if col not in EXCLUDE_FROM_FEATURES
+]
+print(f"\n[REF] NUMERIC_FEATURE_COLS prepared ({len(NUMERIC_FEATURE_COLS)} columns)")
