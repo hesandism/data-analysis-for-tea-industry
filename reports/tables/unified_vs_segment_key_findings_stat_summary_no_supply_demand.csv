@@ -1,0 +1,5 @@
+segment,n_folds,n_obs,rmse_unified_mean,rmse_segment_mean,pct_improvement_rmse,r2_unified_mean,r2_segment_mean,paired_t_pvalue,dm_pvalue,better_model
+dust,5,421,150.26,153.72,-2.3,0.4643,0.4314,0.426659,0.184213,unified
+high_grown,5,420,251.04,251.13,-0.03,0.1134,0.1069,0.981806,0.84592,unified
+low_grown,5,1138,258.17,259.26,-0.42,0.8683,0.8718,0.907528,0.50941,unified
+off_grade,5,426,143.73,144.29,-0.39,0.2891,0.2857,0.664095,0.594195,unified

@@ -1,0 +1,5 @@
+Segment,Model,RMSE_mean,MAE_mean,MAPE_mean,R2_mean
+Dust,Random Forest,157.9989,109.9174,12.9115,0.4151
+High Grown,Random Forest,224.7682,156.6436,18.9225,0.2871
+Low Grown,Gradient Boosting,280.5365,153.7782,8.9725,0.8581
+Off-Grade,XGBoost,145.1082,106.9364,15.4117,0.2832
