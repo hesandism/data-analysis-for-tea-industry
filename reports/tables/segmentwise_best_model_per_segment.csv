@@ -1,5 +1,5 @@
-Segment,Model,RMSE_mean,MAE_mean,MAPE_mean,R2_mean
-Dust,Random Forest,157.9989,109.9174,12.9115,0.4151
-High Grown,Random Forest,224.7682,156.6436,18.9225,0.2871
-Low Grown,Gradient Boosting,280.5365,153.7782,8.9725,0.8581
-Off-Grade,XGBoost,145.1082,106.9364,15.4117,0.2832
+Segment,Model,RMSE_mean,MAE_mean,MAPE_mean,R2_mean,Forecast_Horizon
+Dust,Random Forest,166.6298,122.4933,14.644,0.352,t_plus_1_week
+High Grown,Random Forest,230.2222,170.8207,19.5658,0.2439,t_plus_1_week
+Low Grown,Gradient Boosting,353.0315,213.6422,13.2382,0.7782,t_plus_1_week
+Off-Grade,XGBoost,148.8136,108.0695,15.2361,0.2533,t_plus_1_week
