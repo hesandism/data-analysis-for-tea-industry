@@ -2,5 +2,8 @@
   "engineered_feature_source": "tea_preprocessed_v2.csv",
   "use_engineered_features": true,
   "use_supply_demand_features": false,
-  "config_suffix": "_no_supply_demand"
+  "config_suffix": "_no_supply_demand",
+  "target_base": "price_mid_lkr",
+  "target_column": "price_mid_lkr_t_plus_1w",
+  "forecast_horizon": "t_plus_1_week"
 }
