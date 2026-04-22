@@ -202,7 +202,7 @@ def parse_sale_id_from_cover(pdf_path: Path) -> str | None:
         return None
     year = years[-1]   # take the last occurrence — avoids matching body text
 
-    return f"SALE_{sale_num:02d}_{year}"
+    return f"SALE_{year}_{sale_num:02d}"
 
 
 # ── Weather text parsing ─────────────────────────────────────────────────────

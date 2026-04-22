@@ -22,6 +22,7 @@ def _first_existing(columns: list[str], candidates: list[str]) -> str | None:
     return None
 
 
+
 def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, str]]:
     """
     Add market-structure features using only past observations:
@@ -162,8 +163,8 @@ def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, di
 # LOAD
 # ──────────────────────────────────────────────────────────
 _ROOT = Path(__file__).parent.parent.parent
-INPUT_FILE = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
-OUTPUT_FILE = _ROOT / "data" / "processed" / "tea_preprocessed_2024.csv"
+INPUT_FILE = _ROOT / "data" / "processed-2024" / "reduced_master_tea_prices.csv"
+OUTPUT_FILE = _ROOT / "data" / "processed-2024" / "tea_preprocessed_2024.csv"
 
 df = pd.read_csv(INPUT_FILE)
 print(f"Loaded: {df.shape[0]} rows x {df.shape[1]} cols")
