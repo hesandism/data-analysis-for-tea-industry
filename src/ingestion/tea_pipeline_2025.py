@@ -468,7 +468,7 @@ def run_pipeline(pdf_paths, output_dir='.'):
 if __name__=='__main__':
     root = Path(__file__).resolve().parents[2]
     # paths=sys.argv[1:] if len(sys.argv)>1 else [Path(__file__).parent/'data'/'raw']
-    paths = [root/'data'/'raw']
+    paths = [root/'data'/'raw-2024']
     print(paths)
     pdf_files=[]
     for p in paths:
@@ -477,4 +477,4 @@ if __name__=='__main__':
         elif pp.suffix.lower()=='.pdf': pdf_files.append(pp)
     if not pdf_files: print("No PDF files found."); sys.exit(1)
     print(f"\nForbes & Walker Tea Pipeline (FW Edition) – {len(pdf_files)} PDF(s)\n")
-    run_pipeline(pdf_files, output_dir=root/'data'/'Interim'/'interim_combined')
+    run_pipeline(pdf_files, output_dir=root/'data'/'Interim'/'interim_2024')

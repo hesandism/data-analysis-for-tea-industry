@@ -65,7 +65,7 @@ warnings.filterwarnings("ignore", category=pd.errors.DtypeWarning)
 # PATHS
 # ---------------------------------------------------------------------------
 _ROOT            = Path(__file__).parent.parent.parent
-DEFAULT_DATA_DIR = _ROOT / "data" / "Interim" / "interim_combined"
+DEFAULT_DATA_DIR = _ROOT / "data" / "Interim" / "interim_2024"
 DEFAULT_OUT      = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
 
 # ---------------------------------------------------------------------------
