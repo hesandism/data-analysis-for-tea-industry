@@ -22,6 +22,7 @@ def _first_existing(columns: list[str], candidates: list[str]) -> str | None:
     return None
 
 
+
 def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, str]]:
     """
     Add market-structure features using only past observations:
@@ -163,7 +164,7 @@ def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, di
 # ──────────────────────────────────────────────────────────
 _ROOT = Path(__file__).parent.parent.parent
 INPUT_FILE = _ROOT / "data" / "processed-2024" / "reduced_master_tea_prices.csv"
-OUTPUT_FILE = _ROOT / "data" / "processed-2024" / "tea_preprocessed.csv"
+OUTPUT_FILE = _ROOT / "data" / "processed-2024" / "tea_preprocessed_2024.csv"
 
 df = pd.read_csv(INPUT_FILE)
 print(f"Loaded: {df.shape[0]} rows x {df.shape[1]} cols")
@@ -204,7 +205,7 @@ num_weekly_fixes = int(weekly_mismatch.sum())
 if num_weekly_fixes > 0:
     df.loc[weekly_mismatch, "total_sold_weekly_2026"] = weekly_components[weekly_mismatch]
     print(f"\n[C2] Corrected weekly totals from components for {num_weekly_fixes} row(s)")
-
+# print((df["sale_id"] == "SALE_2026_03").sum())
 # val_s3 = df.loc[df["sale_id"] == "SALE_2026_03", "total_sold_weekly_2026"].iloc[0]
 # assert val_s3 < 10_000_000, f"C2 anomaly still present after correction! Value: {val_s3}"
 # print(f"\n[C2] SALE_2026_03 total_sold_weekly_2026 = {val_s3:,} kg  ✓ sane")
@@ -265,12 +266,13 @@ df = df_s.sort_index()
 null_after = df[lag_cols].isna().sum().sum()
 print(f"\n[M1] Weather lag nulls: {null_before} → {null_after}")
 
-# ── M2: sl_production_mkgs imputation ────────────────────
-df["is_production_known"] = df["sl_production_mkgs"].notna().astype(int)
-prod_mean = df.loc[df["is_production_known"] == 1, "sl_production_mkgs"].mean()
-df["sl_production_mkgs"] = df["sl_production_mkgs"].fillna(prod_mean)
-print(f"\n[M2] sl_production_mkgs imputed with mean = {prod_mean:.2f} mkgs")
-print("     is_production_known flag column added")
+print(f"is sl_production_mkgs : {'sl_production_mkgs' in df.columns}")
+# # ── M2: sl_production_mkgs imputation ────────────────────
+# #df["is_production_known"] = df["sl_production_mkgs"].notna().astype(int)
+# prod_mean = df.loc[df["is_production_known"] == 1, "sl_production_mkgs"].mean()
+# df["sl_production_mkgs"] = df["sl_production_mkgs"].fillna(prod_mean)
+# print(f"\n[M2] sl_production_mkgs imputed with mean = {prod_mean:.2f} mkgs")
+# print("     is_production_known flag column added")
 
 # ── M3: FX — derive USD price ────────────────────────────
 # FX barely varies across 10 sales (CV < 0.3–1%), so it has

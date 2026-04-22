@@ -9,10 +9,12 @@ GRANULARITY: One row = one price observation (sale × grade/category × tier/seg
   - Each row is enriched with all sale-level context: auction stats, demand, weather, FX, sentiment
 
 SOURCES:
-  04_high_grown_prices  → Orthodox high-grown price bands  (segment × grade)
-  05_low_grown_prices   → Low-grown price bands            (grade × tier)
-  06_offgrade_dust_prices → Off-grade & dust price bands   (category_type × category × elevation)
-  -- above three form the SPINE of the master table --
+
+    04_high_grown_prices  → Orthodox high-grown price bands  (segment × grade)
+    05_low_grown_prices   → Low-grown price bands            (grade × tier)
+    06_offgrade_dust_prices → Off-grade & dust price bands   (category_type × category × elevation)
+    above three form the SPINE of the master table.
+
   01_sales_index        → Sale-level context (sentinel, totals, sentiment, crop, FX, gross avgs)
   02_auction_offerings  → Demand scores & qty offered, pivoted wide per category
   03_quantity_sold      → Channel volumes (private/public/forward) + FX rates
@@ -45,8 +47,8 @@ warnings.filterwarnings("ignore", category=pd.errors.DtypeWarning)
 # ---------------------------------------------------------------------------
 
 _ROOT            = Path(__file__).parent.parent.parent
-DEFAULT_DATA_DIR = _ROOT / "data" / "Interim" / "interim_combined"
-DEFAULT_OUT      = _ROOT / "data" / "processed" / "master_tea_prices.csv"
+DEFAULT_DATA_DIR = _ROOT / "data" / "Interim" / "interim_2024_oldpl"
+DEFAULT_OUT      = _ROOT / "data" / "processed-2024" / "master_tea_prices.csv"
 
 # Columns from 01_sales_index we want as sale-level context.
 # Excludes: source_file, extracted_at (pipeline metadata), raw commentary text (too long),
