@@ -1,5 +1,0 @@
-Segment,Model,RMSE_mean,MAE_mean,MAPE_mean,R2_mean,Forecast_Horizon
-Dust,Random Forest,197.2112,155.376,17.6117,0.0856,t_plus_1_week
-High Grown,LightGBM,269.3121,202.8024,22.8431,-0.0317,t_plus_1_week
-Low Grown,Random Forest,622.5927,394.4779,25.5345,0.3125,t_plus_1_week
-Off-Grade,LightGBM,176.1319,142.5826,19.8361,-0.0802,t_plus_1_week

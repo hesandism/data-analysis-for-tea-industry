@@ -1,7 +1,0 @@
-| Market Category | Optimal Algorithm | Coefficient of Determination (R^2) | RMSE (Segment-Specific vs. Unified) | Error Reduction (%) | Forecast Horizon |
-| --- | --- | --- | --- | --- | --- |
-| Dust | Random Forest | 0.0856 | 197.21 vs 190.67 | -3.4291829163361323 | t_plus_1_week |
-| High Grown | LightGBM | -0.0317 | 269.31 vs 262.81 | -2.474029054359938 | t_plus_1_week |
-| Low Grown | Random Forest | 0.3125 | 622.59 vs 685.75 | 9.209771427500014 | t_plus_1_week |
-| Off-Grade | LightGBM | -0.0802 | 176.13 vs 175.63 | -0.2872774546819969 | t_plus_1_week |
-| Unified | Random Forest | 0.3614727682830181 | 482.66 vs 482.66 | 0.0 | t_plus_1_week |

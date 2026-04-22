@@ -1,6 +1,0 @@
-{
-  "engineered_feature_source": "tea_preprocessed_v2.csv",
-  "use_engineered_features": true,
-  "use_supply_demand_features": true,
-  "config_suffix": "_with_supply_demand"
-}
