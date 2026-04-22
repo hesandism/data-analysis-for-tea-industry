@@ -202,7 +202,7 @@ def parse_sale_id_from_cover(pdf_path: Path) -> str | None:
         return None
     year = years[-1]   # take the last occurrence — avoids matching body text
 
-    return f"SALE_{sale_num:02d}_{year}"
+    return f"SALE_{year}_{sale_num:02d}"
 
 
 # ── Weather text parsing ─────────────────────────────────────────────────────
@@ -359,20 +359,107 @@ def add_lag_features(df: pd.DataFrame,
                       lag_cols: list[str],
                       lags: list[int] = [1, 2, 3]) -> pd.DataFrame:
     """
-    For each (region, variable) add lag-N columns aligned by sale order.
-    This is the core of your 'lag deviation of time' idea.
-    """
-    df = df.sort_values(["region", "sale_id"]).copy()
+    For each row, build lag-N features using true calendar-week offsets.
 
-    for region, grp in df.groupby("region"):
+    lag1 = value at (auction_date - 7 days)
+    lag2 = value at (auction_date - 14 days)
+    lag3 = value at (auction_date - 21 days)
+
+    Weather columns are fetched directly from Open-Meteo API using each row's
+    lat/lon and lagged auction_date. Non-API columns (for example text features)
+    are derived from in-data historical values by region.
+    """
+    df = df.copy()
+    if "auction_date" not in df.columns:
+        return df
+
+    df["auction_date"] = pd.to_datetime(df["auction_date"], errors="coerce")
+    df = df.sort_values(["region", "auction_date", "sale_id"]).copy()
+
+    # Detect API-derived weather columns from the known Open-Meteo variable prefixes.
+    api_cols = {
+        col for col in lag_cols
+        if any(col.startswith(f"{var}_") for var in METEO_VARIABLES)
+    }
+    non_api_cols = [col for col in lag_cols if col not in api_cols]
+
+    # Build historical lookups for non-API lag columns by region and auction_date.
+    non_api_lookup = {}
+    if non_api_cols:
+        for region, grp in df.groupby("region", sort=False):
+            region_series = {
+                col: grp.set_index("auction_date")[col].dropna().sort_index()
+                for col in non_api_cols
+                if col in grp.columns
+            }
+            non_api_lookup[region] = region_series
+
+    # Cache Open-Meteo responses to avoid duplicate API calls.
+    api_cache = {}
+
+    def get_api_weather(lat: float, lon: float, lag_auction_dt: pd.Timestamp) -> dict:
+        if pd.isna(lat) or pd.isna(lon) or pd.isna(lag_auction_dt):
+            return {}
+        date_str = lag_auction_dt.strftime("%Y-%m-%d")
+        key = (round(float(lat), 4), round(float(lon), 4), date_str)
+        if key not in api_cache:
+            api_cache[key] = fetch_weekly_weather(float(lat), float(lon), date_str)
+        return api_cache[key]
+
+    for idx, row in df.iterrows():
+        sale_id = row.get("sale_id")
+        region = row.get("region")
+        auction_dt = row.get("auction_date")
+        lat = row.get("lat")
+        lon = row.get("lon")
+
+        if pd.isna(auction_dt):
+            continue
+
+        for lag in lags:
+            lag_dt = auction_dt - pd.to_timedelta(7 * lag, unit="D")
+            auction_date_str = auction_dt.strftime("%Y-%m-%d")
+            lag_date_str = lag_dt.strftime("%Y-%m-%d")
+
+            # API-driven lag values (directly fetched from Open-Meteo).
+            api_data = get_api_weather(lat, lon, lag_dt) if api_cols else {}
+            for col in api_cols:
+                value = api_data.get(col)
+                df.at[idx, f"{col}_lag{lag}"] = value
+                print(
+                    f"[LAG][API] sale_id={sale_id} region={region} "
+                    f"col={col} lag{lag} auction_date={auction_date_str} "
+                    f"lag_date={lag_date_str} value={value}"
+                )
+
+            # Non-API lag values from historical in-data series by region.
+            region_series = non_api_lookup.get(region, {})
+            for col in non_api_cols:
+                series = region_series.get(col)
+                if series is None or series.empty:
+                    continue
+                value = series.get(lag_dt)
+                if pd.isna(value):
+                    hist = series.loc[:lag_dt]
+                    if not hist.empty:
+                        value = hist.iloc[-1]
+                df.at[idx, f"{col}_lag{lag}"] = value
+                print(
+                    f"[LAG][HIST] sale_id={sale_id} region={region} "
+                    f"col={col} lag{lag} auction_date={auction_date_str} "
+                    f"lag_date={lag_date_str} value={value}"
+                )
+
+    # Final safeguard so lag features stay complete for modelling.
+    for region, grp in df.groupby("region", sort=False):
         idx = grp.index
         for col in lag_cols:
-            if col not in df.columns:
-                continue
             for lag in lags:
                 lag_col = f"{col}_lag{lag}"
-                df.loc[idx, lag_col] = grp[col].shift(lag).values
+                if lag_col in df.columns:
+                    df.loc[idx, lag_col] = df.loc[idx, lag_col].bfill().ffill()
 
+    df["auction_date"] = df["auction_date"].dt.strftime("%Y-%m-%d")
     return df
 
 
@@ -463,11 +550,8 @@ def run_pipeline_weather(pdf_dir: str, output_path: str):
     # Generate lag features for key meteorological columns
     lag_targets = [
         "precipitation_sum_total",
-        "rain_sum_total",
         "temperature_2m_mean_mean",
         "sunshine_duration_total",
-        "relative_humidity_2m_max_max",
-        "text_condition_score",
     ]
     df = add_lag_features(df, lag_targets, lags=[1, 2, 3])
 

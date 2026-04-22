@@ -45,7 +45,7 @@ def sentiment(t):
     p=sum(t.count(w) for w in pos); n=sum(t.count(w) for w in neg); tot=p+n
     return round((p-n)/tot,4) if tot else 0.0
 
-def make_sale_id(n,y): return f"SALE_{int(n):02d}_{y}"
+def make_sale_id(n,y): return f"SALE_{y}_{int(n):02d}"
 
 MONTHS='JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER'
 
@@ -140,7 +140,7 @@ def build_weather_features(pdf_paths, extractions):
         dates = extract_dates_from_filename(pdf_path.name)
         if not dates:
             continue
-
+        print(f"Extracted dates from filename '{pdf_path.name}': {dates}")
         auction_date = dates[0]
         sale_id = extraction['sale_id']
         text = extract_pdf_text(pdf_path)
@@ -178,11 +178,8 @@ def build_weather_features(pdf_paths, extractions):
     df = pd.DataFrame(rows)
     lag_targets = [
         'precipitation_sum_total',
-        'rain_sum_total',
         'temperature_2m_mean_mean',
         'sunshine_duration_total',
-        'relative_humidity_2m_max_max',
-        'text_condition_score',
     ]
     return add_lag_features(df, lag_targets, lags=[1, 2, 3])
 
@@ -470,7 +467,9 @@ def run_pipeline(pdf_paths, output_dir='.'):
 
 if __name__=='__main__':
     root = Path(__file__).resolve().parents[2]
-    paths=sys.argv[1:] if len(sys.argv)>1 else [Path(__file__).parent/'data'/'raw']
+    # paths=sys.argv[1:] if len(sys.argv)>1 else [Path(__file__).parent/'data'/'raw']
+    paths = [root/'data'/'raw-2024']
+    print(paths)
     pdf_files=[]
     for p in paths:
         pp=Path(p)
@@ -478,4 +477,4 @@ if __name__=='__main__':
         elif pp.suffix.lower()=='.pdf': pdf_files.append(pp)
     if not pdf_files: print("No PDF files found."); sys.exit(1)
     print(f"\nForbes & Walker Tea Pipeline (FW Edition) – {len(pdf_files)} PDF(s)\n")
-    run_pipeline(pdf_files, output_dir=root/'data'/'Interim'/'interim_2025')
+    run_pipeline(pdf_files, output_dir=root/'data'/'Interim'/'interim_2024')
