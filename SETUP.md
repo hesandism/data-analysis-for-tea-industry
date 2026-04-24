@@ -40,7 +40,7 @@ python -c "import pandas, numpy, pdfplumber, requests, sklearn; print('All depen
 ## Project Structure
 
 ```
-extract-csv/
+DS-Research/
 ├── data/
 │   ├── Raw/              # Raw PDF reports
 │   ├── Interim/          # Extracted structured CSVs
@@ -49,7 +49,7 @@ extract-csv/
 │   ├── ingestion/        # PDF parsing and data extraction
 │   └── processing/       # Data transformation and preprocessing
 ├── notebooks/            # Jupyter notebooks for EDA and analysis
-├── reports/              # Output figures and reports
+├── results/              # Output figures and reports
 ├── requirements.txt      # Python dependencies
 └── .python-version       # Python version specification
 ```
@@ -80,10 +80,6 @@ python src/processing/build_reduced_master.py
 python src/processing/preprocess_tea.py
 ```
 
-### Run EDA Notebook
-```bash
-jupyter notebook notebooks/tea_eda.ipynb
-```
 
 ## Dependencies Overview
 
@@ -120,12 +116,6 @@ jupyter notebook notebooks/tea_eda.ipynb
 ## Development Workflow
 
 1. **Always activate the virtual environment** before working
-2. **Make code changes** in the `src/` directory
-3. **Test changes** by running individual pipeline steps or notebooks
-4. **Commit changes** to git with descriptive messages
+2. **Test changes** by running individual pipeline steps or notebooks
+3. **Commit changes** to git with descriptive messages
 
-## Additional Resources
-
-- See `PROJECT_SUMMARY.md` for detailed technical documentation
-- Refer to notebook comments for data processing rationale
-- Check code docstrings for function-level details
