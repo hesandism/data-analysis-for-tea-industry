@@ -21,8 +21,8 @@ warnings.filterwarnings("ignore")
 # 0. LOAD DATA
 # ─────────────────────────────────────────────
 _ROOT = Path(__file__).resolve().parent.parent.parent
-INPUT_PATH = _ROOT / "data" / "processed-2024" / "tea_preprocessed.csv"
-OUTPUT_PATH = _ROOT / "data" / "processed-2024" / "tea_preprocessed_v4.csv"
+INPUT_PATH = _ROOT / "data" / "processed" / "tea_preprocessed.csv"
+OUTPUT_PATH = _ROOT / "data" / "processed" / "tea_preprocessed_fe.csv"
 
 print("Loading data ...")
 df = pd.read_csv(INPUT_PATH)

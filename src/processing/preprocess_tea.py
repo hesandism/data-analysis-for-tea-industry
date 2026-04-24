@@ -1,12 +1,3 @@
-"""
-Tea Auction Price Preprocessing Pipeline
-Forbes & Walker Colombo Auction Data 2026
-CS3121 Research Project
-
-Run: python preprocess_tea.py
-Input:  reduced_master_tea_prices.csv  (must be in same directory)
-Output: tea_preprocessed.csv
-"""
 
 import pandas as pd
 import numpy as np
@@ -23,15 +14,7 @@ def _first_existing(columns: list[str], candidates: list[str]) -> str | None:
 
 
 def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, str]]:
-    """
-    Add market-structure features using only past observations:
-      - supply_pressure_index
-      - demand_intensity_ratio
-      - market_tightness_indicator
-
-    Historical baselines are built from shifted expanding means so the current
-    sale never contributes to its own denominator.
-    """
+   
     df_local = frame.copy()
 
     if "sale_id" not in df_local.columns:
@@ -162,22 +145,13 @@ def add_market_structure_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, di
 # LOAD
 # ──────────────────────────────────────────────────────────
 _ROOT = Path(__file__).parent.parent.parent
-INPUT_FILE = _ROOT / "data" / "processed-2024" / "reduced_master_tea_prices.csv"
-OUTPUT_FILE = _ROOT / "data" / "processed-2024" / "tea_preprocessed.csv"
+INPUT_FILE = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
+OUTPUT_FILE = _ROOT / "data" / "processed" / "tea_preprocessed.csv"
 
 df = pd.read_csv(INPUT_FILE)
 print(f"Loaded: {df.shape[0]} rows x {df.shape[1]} cols")
 
-# ══════════════════════════════════════════════════════════
-# CRITICAL FIXES (C1–C3)
-# ══════════════════════════════════════════════════════════
 
-# ── C1: Price leakage ─────────────────────────────────────
-# price_lo_lkr and price_hi_lkr are the two inputs that
-# compute price_mid_lkr (the target). Correlation ~0.97–0.99.
-# They are RETAINED in the file for reference, but must be
-# EXCLUDED from any feature matrix used for modelling.
-# See: LEAKAGE_COLS list at bottom of this file.
 LEAKAGE_COLS = ["price_lo_lkr", "price_hi_lkr", "price_range_lkr"]
 print("\n[C1] Leakage cols identified — exclude from model features:", LEAKAGE_COLS)
 
