@@ -47,8 +47,8 @@ warnings.filterwarnings("ignore", category=pd.errors.DtypeWarning)
 # ---------------------------------------------------------------------------
 
 _ROOT            = Path(__file__).parent.parent.parent
-DEFAULT_DATA_DIR = _ROOT / "data" / "Interim" / "interim_2024_oldpl"
-DEFAULT_OUT      = _ROOT / "data" / "processed-2024" / "master_tea_prices.csv"
+DEFAULT_DATA_DIR = _ROOT / "data" / "interim"
+DEFAULT_OUT      = _ROOT / "data" / "processed" / "master_tea_prices.csv"
 
 # Columns from 01_sales_index we want as sale-level context.
 # Excludes: source_file, extracted_at (pipeline metadata), raw commentary text (too long),

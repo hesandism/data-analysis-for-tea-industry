@@ -65,8 +65,8 @@ warnings.filterwarnings("ignore", category=pd.errors.DtypeWarning)
 # PATHS
 # ---------------------------------------------------------------------------
 _ROOT            = Path(__file__).parent.parent.parent
-DEFAULT_DATA_DIR = _ROOT / "data" / "Interim" / "interim_2024_oldpl"
-DEFAULT_OUT      = _ROOT / "data" / "processed-2024" / "reduced_master_tea_prices.csv"
+DEFAULT_DATA_DIR = _ROOT / "data" / "interim"
+DEFAULT_OUT      = _ROOT / "data" / "processed" / "reduced_master_tea_prices.csv"
 
 # ---------------------------------------------------------------------------
 # STAGE 1 CONFIG  (identical to build_master_table.py)
