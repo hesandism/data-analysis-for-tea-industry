@@ -1,0 +1,13 @@
+Catalogue,Weather Var,Lag 1,Lag 2,Lag 3
+High Grown,Precipitation,1.90 [0.172],0.89 [0.414],1.47 [0.229]
+High Grown,Temperature,1.72 [0.194],0.91 [0.408],0.56 [0.641]
+High Grown,Sunshine,N/A,N/A,N/A
+Low Grown,Precipitation,5.28 [0.024]**,4.41 [0.015]**,3.22 [0.026]**
+Low Grown,Temperature,1.28 [0.260],0.95 [0.392],0.56 [0.641]
+Low Grown,Sunshine,5.61 [0.020]**,3.70 [0.028]**,2.40 [0.073]*
+Off-Grade,Precipitation,0.58 [0.448],0.35 [0.705],0.43 [0.735]
+Off-Grade,Temperature,6.10 [0.015]**,3.57 [0.032]**,2.96 [0.036]**
+Off-Grade,Sunshine,2.58 [0.111](t),1.41 [0.249],1.08 [0.362]
+Dust,Precipitation,0.00 [0.969],0.30 [0.741],0.80 [0.496]
+Dust,Temperature,1.55 [0.216],3.77 [0.026]**,3.58 [0.017]**
+Dust,Sunshine,0.50 [0.479],2.27 [0.109](t),2.66 [0.053]*

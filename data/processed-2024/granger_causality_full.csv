@@ -1,0 +1,37 @@
+catalogue,cat_display,weather_var,lag,F_stat,p_value,sig,price_diff,w_diff
+high_grown,High Grown,Precipitation,1,1.899,0.1718,,False,False
+high_grown,High Grown,Precipitation,2,0.892,0.4137,,False,False
+high_grown,High Grown,Precipitation,3,1.471,0.2289,,False,False
+high_grown,High Grown,Temperature,1,1.717,0.1936,,False,False
+high_grown,High Grown,Temperature,2,0.906,0.4083,,False,False
+high_grown,High Grown,Temperature,3,0.563,0.6409,,False,False
+high_grown,High Grown,Sunshine,1,,,N/A,False,True
+high_grown,High Grown,Sunshine,2,,,N/A,False,True
+high_grown,High Grown,Sunshine,3,,,N/A,False,True
+low_grown,Low Grown,Precipitation,1,5.275,0.0238,**,True,False
+low_grown,Low Grown,Precipitation,2,4.414,0.0147,**,True,False
+low_grown,Low Grown,Precipitation,3,3.222,0.0263,**,True,False
+low_grown,Low Grown,Temperature,1,1.283,0.26,,True,False
+low_grown,Low Grown,Temperature,2,0.947,0.3916,,True,False
+low_grown,Low Grown,Temperature,3,0.563,0.6406,,True,False
+low_grown,Low Grown,Sunshine,1,5.607,0.0199,**,True,False
+low_grown,Low Grown,Sunshine,2,3.704,0.0283,**,True,False
+low_grown,Low Grown,Sunshine,3,2.399,0.073,*,True,False
+off_grade,Off-Grade,Precipitation,1,0.579,0.4483,,False,False
+off_grade,Off-Grade,Precipitation,2,0.351,0.7051,,False,False
+off_grade,Off-Grade,Precipitation,3,0.426,0.7349,,False,False
+off_grade,Off-Grade,Temperature,1,6.097,0.0152,**,False,False
+off_grade,Off-Grade,Temperature,2,3.572,0.0318,**,False,False
+off_grade,Off-Grade,Temperature,3,2.957,0.0363,**,False,False
+off_grade,Off-Grade,Sunshine,1,2.585,0.111,(t),False,False
+off_grade,Off-Grade,Sunshine,2,1.409,0.2494,,False,False
+off_grade,Off-Grade,Sunshine,3,1.079,0.3619,,False,False
+dust,Dust,Precipitation,1,0.001,0.9694,,False,False
+dust,Dust,Precipitation,2,0.301,0.7408,,False,False
+dust,Dust,Precipitation,3,0.802,0.4957,,False,False
+dust,Dust,Temperature,1,1.552,0.2157,,False,False
+dust,Dust,Temperature,2,3.769,0.0265,**,False,False
+dust,Dust,Temperature,3,3.583,0.0167,**,False,False
+dust,Dust,Sunshine,1,0.504,0.4795,,False,False
+dust,Dust,Sunshine,2,2.265,0.1093,(t),False,False
+dust,Dust,Sunshine,3,2.659,0.0527,*,False,False
