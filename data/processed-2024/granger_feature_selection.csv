@@ -1,0 +1,13 @@
+Catalogue,Variable,ADF Action,Sig. Lags,Rec. Columns,Best Lag p
+High Grown,Precipitation,levels,none,none significant,0.1718
+High Grown,Temperature,levels,none,none significant,0.1936
+High Grown,Sunshine,levels,none,none significant,
+Low Grown,Precipitation,1st-diff,"[1, 2, 3]","precipitation_sum_total_lag1, precipitation_sum_total_lag2, precipitation_sum_total_lag3",0.0147
+Low Grown,Temperature,1st-diff,none,none significant,0.26
+Low Grown,Sunshine,1st-diff,"[1, 2, 3]","sunshine_duration_total_lag1, sunshine_duration_total_lag2, sunshine_duration_total_lag3",0.0199
+Off-Grade,Precipitation,levels,none,none significant,0.4483
+Off-Grade,Temperature,levels,"[1, 2, 3]","temperature_2m_mean_mean_lag1, temperature_2m_mean_mean_lag2, temperature_2m_mean_mean_lag3",0.0152
+Off-Grade,Sunshine,levels,none,none significant,0.111
+Dust,Precipitation,levels,none,none significant,0.4957
+Dust,Temperature,levels,"[2, 3]","temperature_2m_mean_mean_lag2, temperature_2m_mean_mean_lag3",0.0167
+Dust,Sunshine,levels,[3],sunshine_duration_total_lag3,0.0527
