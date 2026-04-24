@@ -40,7 +40,7 @@ python -c "import pandas, numpy, pdfplumber, requests, sklearn; print('All depen
 ## Project Structure
 
 ```
-DS-Research/
+data-analysis-for-tea-industry/
 ├── data/
 │   ├── Raw/              # Raw PDF reports
 │   ├── Interim/          # Extracted structured CSVs
