@@ -11,5 +11,5 @@ openpyxl>=3.1.0
 python-dotenv>=0.21.0
 xgboost>=2.0
 lightgbm>=4.0
-shap>=0.44
+shap>=0.51.0
 statsmodels
