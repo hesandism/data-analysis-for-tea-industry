@@ -215,8 +215,11 @@ def evaluate_block(block, feature_cols, label):
     y = block[TARGET].to_numpy(dtype=float)
 
     # Predictor columns the trivial baselines need.
-    cur_price = block[TARGET_BASE].to_numpy(dtype=float)   # persistence prediction
-    lag1 = block["price_lag1"].to_numpy(dtype=float)        # AR(1) single regressor
+    cur_price = block[TARGET_BASE].to_numpy(dtype=float)
+
+    # Proper AR(1): use current week's observed price (p_t)
+    # to forecast next week's price (p_t+1).
+    ar1_input = cur_price.copy()
 
     X = block[feature_cols].copy()
 
@@ -233,19 +236,21 @@ def evaluate_block(block, feature_cols, label):
         # 1. Naive persistence: prediction is just the current price. No fit.
         oof_persist[te_idx] = cur_price[te_idx]
 
-        # 2. AR(1): fit y ~ a + b * previous price on the TRAIN portion only,
-        #    predict on the TEST portion. Single predictor, no other features.
+        # 2. AR(1): fit y ~ a + b * current-week price on the TRAIN portion only,
+        # predict on the TEST portion.
         ar = LinearRegression()
-        tr_l1, tr_y = lag1[tr_idx], y[tr_idx]
-        ok = ~np.isnan(tr_l1)
+        tr_x, tr_y = ar1_input[tr_idx], y[tr_idx]
+        ok = ~np.isnan(tr_x)
+
         if ok.sum() >= 2:
-            ar.fit(tr_l1[ok].reshape(-1, 1), tr_y[ok])
-            te_l1 = lag1[te_idx]
+            ar.fit(tr_x[ok].reshape(-1, 1), tr_y[ok])
+
+            te_x = ar1_input[te_idx]
             # Where the lag is missing (first obs of a stream), fall back to persistence.
             pred = np.where(
-                np.isnan(te_l1),
-                cur_price[te_idx],
-                ar.predict(np.nan_to_num(te_l1, nan=0.0).reshape(-1, 1)),
+            np.isnan(te_x),
+            cur_price[te_idx],
+            ar.predict(np.nan_to_num(te_x, nan=0.0).reshape(-1, 1)),
             )
             oof_ar1[te_idx] = pred
         else:
