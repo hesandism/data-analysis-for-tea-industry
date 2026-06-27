@@ -1,0 +1,47 @@
+% Auto-generated: per-catalogue results with naive baselines.
+% RMSE/MAE in LKR; MAPE in %; metrics on OOF 5-fold TimeSeriesSplit predictions.
+\begin{table}[t]
+\caption{One-Week-Ahead Forecast: ML Models vs.\ Naive Baselines}
+\label{tab:baselines}
+\centering
+\begin{tabular}{llrrrr}
+\hline
+Catalogue & Method & RMSE & MAE & MAPE & $R^2$ \\
+\hline
+High Grown & Naive Persistence & 250.44 & 169.93 & 14.48 & -0.2411 \\
+ & AR(1) & 226.05 & 164.58 & 14.26 & -0.0112 \\
+ & XGBoost & 170.76 & 100.75 & 8.38 & 0.4230 \\
+ & \textbf{LightGBM} & \textbf{163.99} & 99.23 & 8.30 & \textbf{0.4679} \\
+ & Gradient Boosting & 171.51 & 102.60 & 8.52 & 0.4179 \\
+ & Random Forest & 177.23 & 103.12 & 8.57 & 0.3784 \\
+\hline
+Low Grown & Naive Persistence & 79.76 & 34.80 & 1.91 & 0.9896 \\
+ & AR(1) & 114.37 & 61.46 & 3.56 & 0.9785 \\
+ & XGBoost & 153.09 & 77.90 & 4.15 & 0.9616 \\
+ & \textbf{LightGBM} & \textbf{147.74} & 76.21 & 4.17 & \textbf{0.9642} \\
+ & Gradient Boosting & 149.24 & 76.48 & 4.19 & 0.9635 \\
+ & Random Forest & 152.00 & 77.32 & 4.21 & 0.9621 \\
+\hline
+Off-Grade & Naive Persistence & 188.39 & 140.64 & 16.76 & -0.6636 \\
+ & AR(1) & 145.24 & 122.14 & 15.07 & 0.0112 \\
+ & XGBoost & 103.47 & 80.25 & 9.98 & 0.4982 \\
+ & \textbf{LightGBM} & \textbf{102.46} & 77.82 & 9.58 & \textbf{0.5079} \\
+ & Gradient Boosting & 107.33 & 82.17 & 10.18 & 0.4600 \\
+ & Random Forest & 104.74 & 81.22 & 10.12 & 0.4857 \\
+\hline
+Dust & Naive Persistence & 241.29 & 187.78 & 18.90 & -0.6214 \\
+ & AR(1) & 194.30 & 153.57 & 15.53 & -0.0513 \\
+ & \textbf{XGBoost} & \textbf{115.58} & 76.38 & 7.45 & \textbf{0.6280} \\
+ & LightGBM & 116.75 & 77.97 & 7.65 & 0.6204 \\
+ & Gradient Boosting & 119.87 & 85.08 & 8.38 & 0.5999 \\
+ & Random Forest & 116.18 & 75.37 & 7.36 & 0.6241 \\
+\hline
+Pooled (Unified) & Naive Persistence & 176.98 & 106.44 & 9.98 & 0.9217 \\
+ & AR(1) & 215.46 & 142.09 & 13.43 & 0.8840 \\
+ & XGBoost & 142.76 & 83.01 & 6.73 & 0.9491 \\
+ & \textbf{LightGBM} & \textbf{138.16} & 83.31 & 6.89 & \textbf{0.9523} \\
+ & Gradient Boosting & 141.36 & 89.72 & 7.50 & 0.9501 \\
+ & Random Forest & 144.96 & 83.09 & 6.74 & 0.9475 \\
+\hline
+\end{tabular}
+\end{table}

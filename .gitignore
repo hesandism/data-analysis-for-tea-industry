@@ -95,6 +95,7 @@ data/processed/*.csv
 reports/figures/*.png
 reports/figures/*.jpg
 reports/figures/*.jpeg
+data/*.csv
 
 # -----------------------------
 # Optional: local database / temp files
