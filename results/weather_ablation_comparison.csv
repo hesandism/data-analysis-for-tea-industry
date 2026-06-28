@@ -1,0 +1,5 @@
+Catalogue,Model,Full_RMSE,No_Lagged_Weather_RMSE,Lagged_Weather_RMSE_Gain,No_Explicit_Weather_RMSE,Explicit_Weather_RMSE_Gain,Full_Fold_RMSE_SD,No_Lagged_Fold_RMSE_SD
+High Grown,LightGBM,167.02,168.12,1.1,161.24,-5.78,49.78,49.69
+Low Grown,LightGBM,145.43,150.47,5.03,149.9,4.46,32.58,35.33
+Off-Grade,LightGBM,102.15,104.33,2.19,105.07,2.92,17.97,16.29
+Dust,XGBoost,114.82,119.6,4.78,116.16,1.34,43.16,45.89
