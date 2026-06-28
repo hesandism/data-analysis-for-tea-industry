@@ -1,0 +1,97 @@
+catalogue,catalogue_display,weather_variable,lag_weeks,F_statistic,p_value,n_observations,price_first_differenced,weather_first_differenced,error_reason,p_value_fdr_bh,nominal_p_lt_0_05,fdr_significant_0_05
+high_grown,High Grown,Precipitation,1,1.8991001559191163,0.1717960448254448,89,False,False,,0.3853803167705924,False,False
+high_grown,High Grown,Precipitation,2,0.8922864099908336,0.4136580676301185,89,False,False,,0.6602619156403814,False,False
+high_grown,High Grown,Precipitation,3,1.4708346499974172,0.22886253054244565,89,False,False,,0.4522759532148331,False,False
+high_grown,High Grown,Precipitation,4,,,89,False,False,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Precipitation,5,,,89,False,False,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Precipitation,6,,,89,False,False,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Precipitation,7,,,89,False,False,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Precipitation,8,,,89,False,False,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Temperature,1,1.71650375149733,0.1936323506749352,90,False,False,,0.4201543753504652,False,False
+high_grown,High Grown,Temperature,2,0.9055510649011852,0.40827566524623576,90,False,False,,0.6602619156403814,False,False
+high_grown,High Grown,Temperature,3,0.5630877392543655,0.6409316116016491,90,False,False,,0.7939899069095055,False,False
+high_grown,High Grown,Temperature,4,0.294527625976164,0.8806838211499938,90,False,False,,0.9252754070310062,False,False
+high_grown,High Grown,Temperature,5,0.5385818830840182,0.7464074171261104,90,False,False,,0.8260242082862288,False,False
+high_grown,High Grown,Temperature,6,0.5388746610561488,0.7769156864087748,90,False,False,,0.837454571064004,False,False
+high_grown,High Grown,Temperature,7,0.3736583871652923,0.9146061758791907,90,False,False,,0.9489039074746604,False,False
+high_grown,High Grown,Temperature,8,0.35796428564436483,0.938690427827344,90,False,False,,0.9501378720691409,False,False
+high_grown,High Grown,Sunshine,1,,,88,False,True,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Sunshine,2,,,88,False,True,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Sunshine,3,,,88,False,True,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Sunshine,4,,,88,False,True,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Sunshine,5,,,88,False,True,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Sunshine,6,,,88,False,True,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Sunshine,7,,,88,False,True,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+high_grown,High Grown,Sunshine,8,,,88,False,True,InfeasibleTestError: The x values include a column with constant values and so the test statistic cannot be computed.,,False,False
+low_grown,Low Grown,Precipitation,1,5.275002568404101,0.023762283915449867,102,True,False,,0.18980372432995168,True,False
+low_grown,Low Grown,Precipitation,2,4.413777390894323,0.014689990274445362,102,True,False,,0.18980372432995168,True,False
+low_grown,Low Grown,Precipitation,3,3.2219263441517625,0.026260703720810925,102,True,False,,0.18980372432995168,True,False
+low_grown,Low Grown,Precipitation,4,2.234302309920218,0.07159831925977567,102,True,False,,0.2490825596891113,False,False
+low_grown,Low Grown,Precipitation,5,1.6728400976607596,0.1497842163809978,102,True,False,,0.36564970469478875,False,False
+low_grown,Low Grown,Precipitation,6,1.1028908012200718,0.36772491004009905,102,True,False,,0.6358576569443379,False,False
+low_grown,Low Grown,Precipitation,7,1.073363870209732,0.3882509404223823,102,True,False,,0.6500998510194534,False,False
+low_grown,Low Grown,Precipitation,8,1.0198273526757868,0.42849138525127034,102,True,False,,0.6644877045658115,False,False
+low_grown,Low Grown,Temperature,1,1.2833480255603051,0.26001361592440736,103,True,False,,0.48769694549403064,False,False
+low_grown,Low Grown,Temperature,2,0.946661036555647,0.39162641627677924,103,True,False,,0.6500998510194534,False,False
+low_grown,Low Grown,Temperature,3,0.5632080736989363,0.6406288729650584,103,True,False,,0.7939899069095055,False,False
+low_grown,Low Grown,Temperature,4,0.6896562525239154,0.6009911309408513,103,True,False,,0.7939899069095055,False,False
+low_grown,Low Grown,Temperature,5,0.7844836402257428,0.5636049428845337,103,True,False,,0.7796535043236049,False,False
+low_grown,Low Grown,Temperature,6,0.6268351607648006,0.7083282926130244,103,True,False,,0.8260242082862288,False,False
+low_grown,Low Grown,Temperature,7,0.5915851559967514,0.7609724083546613,103,True,False,,0.8310619722820644,False,False
+low_grown,Low Grown,Temperature,8,0.8014068732164408,0.6031490487816193,103,True,False,,0.7939899069095055,False,False
+low_grown,Low Grown,Sunshine,1,5.60715031892193,0.019850550651126536,102,True,False,,0.18980372432995168,True,False
+low_grown,Low Grown,Sunshine,2,3.7036651658739053,0.028258339076444195,102,True,False,,0.18980372432995168,True,False
+low_grown,Low Grown,Sunshine,3,2.3992108808123036,0.07295029601967974,102,True,False,,0.2490825596891113,False,False
+low_grown,Low Grown,Sunshine,4,2.6813888538218067,0.03658866975035213,102,True,False,,0.18980372432995168,True,False
+low_grown,Low Grown,Sunshine,5,2.227620737557537,0.05870557320760928,102,True,False,,0.24362812881157853,False,False
+low_grown,Low Grown,Sunshine,6,1.95031856190575,0.08221502367010411,102,True,False,,0.2624556524853323,False,False
+low_grown,Low Grown,Sunshine,7,1.7186132690699754,0.11635338548285805,102,True,False,,0.3305830114816476,False,False
+low_grown,Low Grown,Sunshine,8,1.912064551596285,0.07003082083435469,102,True,False,,0.2490825596891113,False,False
+off_grade,Off-Grade,Precipitation,1,0.5794251600481017,0.4483290536829571,104,False,False,,0.6644877045658115,False,False
+off_grade,Off-Grade,Precipitation,2,0.3507396558469917,0.705056380337031,104,False,False,,0.8260242082862288,False,False
+off_grade,Off-Grade,Precipitation,3,0.4258200845101904,0.7349423159183821,104,False,False,,0.8260242082862288,False,False
+off_grade,Off-Grade,Precipitation,4,0.3372828100804602,0.8521756454525462,104,False,False,,0.906802289391812,False,False
+off_grade,Off-Grade,Precipitation,5,0.2638201749047708,0.9316617615409793,104,False,False,,0.9501378720691409,False,False
+off_grade,Off-Grade,Precipitation,6,0.7162300734362093,0.637528234967899,104,False,False,,0.7939899069095055,False,False
+off_grade,Off-Grade,Precipitation,7,0.6746546304860359,0.692911353300389,104,False,False,,0.8260242082862288,False,False
+off_grade,Off-Grade,Precipitation,8,0.8195323025575083,0.5876902588951284,104,False,False,,0.7939899069095055,False,False
+off_grade,Off-Grade,Temperature,1,6.096742943906257,0.015220816134308797,105,False,False,,0.18980372432995168,True,False
+off_grade,Off-Grade,Temperature,2,3.5715547711428735,0.03182861072462102,105,False,False,,0.18980372432995168,True,False
+off_grade,Off-Grade,Temperature,3,2.9573403595957823,0.03630472005835348,105,False,False,,0.18980372432995168,True,False
+off_grade,Off-Grade,Temperature,4,2.2493337359895325,0.06972293906515266,105,False,False,,0.2490825596891113,False,False
+off_grade,Off-Grade,Temperature,5,1.8072607793018172,0.11948783547529432,105,False,False,,0.3305830114816476,False,False
+off_grade,Off-Grade,Temperature,6,1.6678592926659515,0.1386543503808748,105,False,False,,0.36317240415839924,False,False
+off_grade,Off-Grade,Temperature,7,1.4481214524050847,0.19742193540564026,105,False,False,,0.4201543753504652,False,False
+off_grade,Off-Grade,Temperature,8,2.0701810428740393,0.04844127514351711,105,False,False,,0.23023859815127926,True,False
+off_grade,Off-Grade,Sunshine,1,2.5849293916879934,0.11103812243898097,104,False,False,,0.3291487200869793,False,False
+off_grade,Off-Grade,Sunshine,2,1.4085850453024895,0.2494447333158308,104,False,False,,0.48148634570265014,False,False
+off_grade,Off-Grade,Sunshine,3,1.0790167794069632,0.3618962120493893,104,False,False,,0.6358576569443379,False,False
+off_grade,Off-Grade,Sunshine,4,0.9471680808243785,0.44055676285273226,104,False,False,,0.6644877045658115,False,False
+off_grade,Off-Grade,Sunshine,5,0.8172624983933617,0.5405731650828134,104,False,False,,0.7604673339300596,False,False
+off_grade,Off-Grade,Sunshine,6,1.580542259532726,0.162711987377188,104,False,False,,0.3751415264529612,False,False
+off_grade,Off-Grade,Sunshine,7,1.2924655322125216,0.2644140065931491,104,False,False,,0.48769694549403064,False,False
+off_grade,Off-Grade,Sunshine,8,1.5402708803663068,0.15682851717143514,104,False,False,,0.3719076264351176,False,False
+dust,Dust,Precipitation,1,0.0014815974949170213,0.9693725275304113,104,False,False,,0.9693725275304113,False,False
+dust,Dust,Precipitation,2,0.30095208734218304,0.7408017757920521,104,False,False,,0.8260242082862288,False,False
+dust,Dust,Precipitation,3,0.8022008155021775,0.4957100435338553,104,False,False,,0.7093781657467239,False,False
+dust,Dust,Precipitation,4,0.663994032878712,0.6186086617977058,104,False,False,,0.7939899069095055,False,False
+dust,Dust,Precipitation,5,0.639869885731904,0.669855892310417,104,False,False,,0.8176182214965384,False,False
+dust,Dust,Precipitation,6,0.9859684601701016,0.4399941192325866,104,False,False,,0.6644877045658115,False,False
+dust,Dust,Precipitation,7,0.637676833860941,0.7234569681001977,104,False,False,,0.8260242082862288,False,False
+dust,Dust,Precipitation,8,1.1375001188489535,0.34791739718388276,104,False,False,,0.627763999266571,False,False
+dust,Dust,Temperature,1,1.5524938265145392,0.21565012644709422,105,False,False,,0.4474740123777205,False,False
+dust,Dust,Temperature,2,3.768701146337392,0.02649501066847152,105,False,False,,0.18980372432995168,True,False
+dust,Dust,Temperature,3,3.582842271823855,0.016665692869193074,105,False,False,,0.18980372432995168,True,False
+dust,Dust,Temperature,4,5.842781642461914,0.00031001547557677557,105,False,False,,0.02573128447287237,True,True
+dust,Dust,Temperature,5,4.000123698216554,0.002550423886106988,105,False,False,,0.10584259127344,True,False
+dust,Dust,Temperature,6,3.281607794003517,0.005911018285334148,105,False,False,,0.16353817256091144,True,False
+dust,Dust,Temperature,7,2.5348153258385753,0.020520175233626512,105,False,False,,0.18980372432995168,True,False
+dust,Dust,Temperature,8,2.2120914579491817,0.03490137456803688,105,False,False,,0.18980372432995168,True,False
+dust,Dust,Sunshine,1,0.5038019246687203,0.479486163558765,104,False,False,,0.6981991504452192,False,False
+dust,Dust,Sunshine,2,2.264725132839462,0.10932397884764128,104,False,False,,0.3291487200869793,False,False
+dust,Dust,Sunshine,3,2.659033914645131,0.052709318231507846,104,False,False,,0.2302564954323764,False,False
+dust,Dust,Sunshine,4,2.201160051577089,0.07502486737623835,104,False,False,,0.2490825596891113,False,False
+dust,Dust,Sunshine,5,1.693955239636851,0.144393847436472,104,False,False,,0.36317240415839924,False,False
+dust,Dust,Sunshine,6,1.65549439061957,0.1419954438349239,104,False,False,,0.36317240415839924,False,False
+dust,Dust,Sunshine,7,1.3849058542791426,0.22277998809391716,104,False,False,,0.45099363443402746,False,False
+dust,Dust,Sunshine,8,2.0585035928184663,0.04993126224967502,104,False,False,,0.23023859815127926,True,False

@@ -1,0 +1,17 @@
+catalogue,series,adf_p_value,stationary_at_level,action
+High Grown,Price,0.0006510963390786001,True,levels
+High Grown,Precipitation,1.2910274969353196e-29,True,levels
+High Grown,Temperature,0.04533153852891146,True,levels
+High Grown,Sunshine,,False,first_difference
+Low Grown,Price,0.10867413319941621,False,first_difference
+Low Grown,Precipitation,4.405686261247132e-09,True,levels
+Low Grown,Temperature,0.045949449048015,True,levels
+Low Grown,Sunshine,2.1502659740648924e-09,True,levels
+Off-Grade,Price,0.03252379966250952,True,levels
+Off-Grade,Precipitation,4.787022926135578e-11,True,levels
+Off-Grade,Temperature,8.57292418443167e-15,True,levels
+Off-Grade,Sunshine,3.661256359372466e-11,True,levels
+Dust,Price,0.0023610055952342905,True,levels
+Dust,Precipitation,4.586851681731275e-09,True,levels
+Dust,Temperature,0.029961831959777484,True,levels
+Dust,Sunshine,1.6731958614160481e-09,True,levels
