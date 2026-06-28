@@ -54,7 +54,7 @@ N_SPLITS = 5
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-DATA_PATH = ROOT / "data" / "colombo_tea_auction_dataset.csv"
+DATA_PATH = ROOT / "data" / "processed" / "final_clean_dataset_long.csv"
 OUTPUT_DIR = ROOT / "results"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -208,7 +208,9 @@ def evaluate_block(block, feature_cols, label):
 
     All methods use the *same* TimeSeriesSplit(n_splits=5) folds on the block,
     so every reported number is computed on identical OOF test rows.
-    Returns a list of result dicts (one per method) for this `label`.
+    Returns a tuple of:
+      - list of result dicts (one per method) for this `label`
+      - list of per-fold RMSE dicts (catalogue, model, fold, rmse)
     """
     block = block.reset_index(drop=True)
     n = len(block)
@@ -229,8 +231,9 @@ def evaluate_block(block, feature_cols, label):
     oof_ar1 = np.full(n, np.nan)
     oof_ml = {name: np.full(n, np.nan) for name in MODELS}
     test_mask = np.zeros(n, dtype=bool)  # rows that are ever in a test fold
+    fold_rows = []  # per-fold RMSE records
 
-    for tr_idx, te_idx in tscv.split(X):
+    for fold_num, (tr_idx, te_idx) in enumerate(tscv.split(X), start=1):
         test_mask[te_idx] = True
 
         # 1. Naive persistence: prediction is just the current price. No fit.
@@ -261,7 +264,11 @@ def evaluate_block(block, feature_cols, label):
             pipe = Pipeline([("impute", SimpleImputer(strategy="median")),
                              ("model", clone(model))])
             pipe.fit(X.iloc[tr_idx], y[tr_idx])
-            oof_ml[name][te_idx] = pipe.predict(X.iloc[te_idx])
+            fold_preds = pipe.predict(X.iloc[te_idx])
+            oof_ml[name][te_idx] = fold_preds
+            fold_rmse = float(np.sqrt(mean_squared_error(y[te_idx], fold_preds)))
+            fold_rows.append(dict(catalogue=PRETTY.get(label, label),
+                                  model=name, fold=fold_num, rmse=fold_rmse))
 
     yt = y[test_mask]
     rows = []
@@ -275,7 +282,7 @@ def evaluate_block(block, feature_cols, label):
         rmse, mae, mape, r2 = metrics(yt, oof_ml[name][test_mask])
         rows.append(dict(block=label, method=name, kind="ml",
                          rmse=rmse, mae=mae, mape=mape, r2=r2, n_oof=int(test_mask.sum())))
-    return rows
+    return rows, fold_rows
 
 
 # ---------------------------------------------------------------------------
@@ -295,6 +302,7 @@ def main():
     print()
 
     all_rows = []
+    all_fold_rows = []
 
     # Per-catalogue blocks (already globally date-sorted; subset preserves order).
     for cat in CATALOGUE_ORDER:
@@ -302,16 +310,26 @@ def main():
         if len(block) < 50:
             print(f"  Skipping {cat}: only {len(block)} rows.")
             continue
-        all_rows.extend(evaluate_block(block, feature_cols, cat))
+        oof_rows, fold_rows = evaluate_block(block, feature_cols, cat)
+        all_rows.extend(oof_rows)
+        all_fold_rows.extend(fold_rows)
         print(f"  [{PRETTY[cat]:<16}] evaluated  (n={len(block):,})")
 
     # Pooled / unified block (all catalogues, single global date order).
-    all_rows.extend(evaluate_block(df.copy(), feature_cols, "__pooled__"))
+    oof_rows, fold_rows = evaluate_block(df.copy(), feature_cols, "__pooled__")
+    all_rows.extend(oof_rows)
+    all_fold_rows.extend(fold_rows)
     print(f"  [{PRETTY['__pooled__']:<16}] evaluated  (n={len(df):,})")
     print()
 
     res = pd.DataFrame(all_rows)
     res.to_csv(OUTPUT_DIR / "baseline_vs_ml_oof_results.csv", index=False)
+
+    fold_df = pd.DataFrame(all_fold_rows)
+    # Exclude pooled from the per-catalogue file; keep only the 4 catalogues
+    fold_cat = fold_df[fold_df["catalogue"] != PRETTY["__pooled__"]].copy()
+    fold_cat.to_csv(OUTPUT_DIR / "baseline_fold_rmse.csv", index=False)
+    print(f"  Saved: {OUTPUT_DIR / 'baseline_fold_rmse.csv'}")
 
     build_augmented_tables(res)
     sanity_summary(res)
