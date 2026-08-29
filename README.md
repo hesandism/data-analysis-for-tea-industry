@@ -1,78 +1,38 @@
-# Data Analysis For Tea Industry
+# Sri Lankan Tea Market & Weather Dataset
 
-Forecasting and analysis pipeline for Sri Lankan tea auction prices using report extraction, weather enrichment, and time-series machine learning.
+This repository contains the dataset and supporting resources created for our research on **forecasting weather-driven price dynamics across Sri Lankan tea market catalogues**.
 
-## Research Domain
-Sri Lanka's tea auction market is segmented by product type and quality band (for example high grown, low grown, off-grade, and dust). Prices move with a combination of:
-- weather conditions in tea-growing regions,
-- supply and demand pressure in weekly auctions,
-- product quality mix (grade and tier),
-- and temporal effects such as lagged price momentum.
+## About
 
-This repository studies those dynamics and compares pooled forecasting against segment-specific forecasting.
+The dataset was created by collecting, integrating, cleaning, and aligning **Sri Lankan tea market price data with weather information**. The resulting dataset is prepared for analysing the relationship between weather conditions and tea prices and for developing machine learning models for price forecasting.
 
-## What This Project Does
-1. Extract structured data from weekly PDF market reports.
-2. Build normalized interim tables (sales context, offerings, quantities, prices, weather, top prices).
-3. Construct master and reduced analytical datasets.
-4. Preprocess and engineer time-aware features.
-5. Run notebook-based experiments for:
-- exploratory/event analysis,
-- segment-specific forecasting,
-- unified pooled forecasting,
-- Granger causality for weather-lag feature selection.
+## Dataset
 
-## Repository Workflow
+The dataset includes processed tea market and weather data prepared for research and machine learning applications.
 
-### Ingestion (`src/ingestion`)
-- `tea_pipeline_v2.py`: parses weekly PDF reports into multiple structured CSV tables.
-- `weather_pipeline.py`: extracts weather text, fetches historical weather API data, and creates region-level weather features with lags.
+The dataset is also available on **Hugging Face**:
 
-### Processing (`src/processing`)
-- `build_master_table.py`: joins interim sources into `master_tea_prices.csv`.
-- `build_reduced_master.py`: removes redundant/sparse columns to produce a compact modeling table.
-- `preprocess_tea.py`: fixes anomalies, normalizes fields, derives target helpers, and applies encodings.
-- `feature_engineering.py`: adds interactions, rolling statistics, and polynomial terms.
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Dataset-yellow?logo=huggingface)](https://huggingface.co/datasets/colombo-tea-auction-prices/cta-price-prediction)
 
-### Notebooks (`notebooks`)
-- `visualization_eda.ipynb`: exploratory and event-window analysis.
-- `segment-specific.ipynb`: per-catalogue time-series CV benchmarking.
-- `unified_pooled.ipynb`: pooled benchmark and unified-vs-segment comparison.
-- `granger_causality.ipynb`: ADF stationarity and Granger causality tests for lag feature relevance.
+## Research Paper
 
-## Key Data Outputs
-- `data/Interim/*.csv`: extracted report tables.
-- `data/processed/master_tea_prices.csv`: full feature table.
-- `data/processed/reduced_master_tea_prices.csv`: reduced table for modeling.
-- `data/processed/tea_preprocessed.csv`: cleaned modeling base.
-- `data/processed/final_clean_dataset_long.csv`: primary notebook dataset.
-- `results/*.csv`: model CV summaries, comparison outputs, and causality results.
+This dataset accompanies the following research paper:
 
-## Setup
-Use the steps in `Setup.md` or run:
+**Forecasting Weather-Driven Price Dynamics Across Sri Lankan Tea Market Catalogues**
 
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
+[![Paper](https://img.shields.io/badge/Paper-arXiv%3A2608.24894-b31b1b.svg)](https://arxiv.org/abs/2608.24894)
 
-## Typical Run Order
-```bash
-python src/ingestion/tea_pipeline_v2.py
-python src/processing/build_master_table.py
-python src/processing/build_reduced_master.py
-python src/processing/preprocess_tea.py
-python src/processing/feature_engineering.py
-```
+**Authors:** Hesandi Mallawarachchi, Senilka Madurapperumage, Nadil Kulathunge, Thilokya Angeesa, Nethsith Gunaweera, Sandeepa Weerasekara, Patalee Narasinghe, Nisansa de Silva, and Sandareka Wickramanayake.
 
-Then open notebooks in `notebooks/` to reproduce EDA, forecasting benchmarks, and causality analysis.
+## Citation
 
-## Models and Evaluation
-- Models: LightGBM, XGBoost, Random Forest, Gradient Boosting.
-- Validation: time-aware splits (`TimeSeriesSplit`).
-- Metrics: RMSE, MAE, MAPE, R2.
+If you use this dataset or repository in your research, please cite:
 
-## Notes
-- The project is designed so new weekly sales can be added by updating raw reports and re-running the pipeline.
-- Feature relevance can differ by catalogue; both pooled and segment-specific views are kept in the workflow.
+```bibtex
+@article{cta2026forecasting,
+  title={Forecasting Weather-Driven Price Dynamics Across Sri Lankan Tea Market Catalogues},
+  author={Mallawarachchi, Hesandi and Madurapperumage, Senilka and Kulathunge, Nadil and Angeesa, Thilokya and Gunaweera, Nethsith and Weerasekara, Sandeepa and Narasinghe, Patalee and de Silva, Nisansa and Wickramanayake, Sandareka},
+  journal={arXiv preprint arXiv:2608.24894},
+  year={2026},
+  doi={10.48550/arXiv.2608.24894}
+}
